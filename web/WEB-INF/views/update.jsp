@@ -1,16 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: yuri
-  Date: 06.11.16
-  Time: 23:34
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Update employees</title>
 </head>
 <body>
-
+<h1>Update employees status is: </h1>
+<p>${update}</p>
 </body>
 </html>
