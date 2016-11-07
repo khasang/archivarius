@@ -25,4 +25,10 @@ public class AppController {
         model.addAttribute("create", queryExample.tableCreation());
         return "create";
     }
+
+    @RequestMapping("/admin/page")
+    public String secure(Model model){
+        model.addAttribute("secure", "This is very secure page");
+        return "secure";
+    }
 }
