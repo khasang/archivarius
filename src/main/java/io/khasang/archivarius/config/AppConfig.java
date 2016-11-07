@@ -9,16 +9,28 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 
 @Configuration
 @PropertySource(value = {"classpath:util.properties"})
+@PropertySource(value = {"classpath:auth.properties"})
 public class AppConfig {
     @Autowired
     Environment environment;
 
     @Bean
+    public UserDetailsService userDetailsService() {
+        JdbcDaoImpl jdbcImpl = new JdbcDaoImpl();
+        jdbcImpl.setDataSource(dataSource());
+        jdbcImpl.setUsersByUsernameQuery(environment.getRequiredProperty("usersByQuery"));
+        jdbcImpl.setAuthoritiesByUsernameQuery(environment.getRequiredProperty("rolesByQuery"));
+        return jdbcImpl;
+    }
+
+    @Bean
     public Message message(){
-        return new Message("Welcome to archivarius app!");
+        return new Message("Welc`ome to archivarius app!");
     }
 
     @Bean
@@ -39,7 +51,8 @@ public class AppConfig {
     }
 
     @Bean
-    public QueryExample queryExample() {
+    public QueryExample queryExample(){
         return new QueryExample(jdbcTemplate());
     }
+    
 }
