@@ -26,4 +26,13 @@ public class QueryExample {
             return "Error: "  + e;
         }
     }
+
+    public String tableUpdate(){
+        try {
+            jdbcTemplate.execute(("UPDATE COMPANY SET SALARY = 90000 WHERE id = 1"));
+            return "table updated";
+        } catch (Exception e) {
+            return "Error: " + e;
+        }
+    }
 }

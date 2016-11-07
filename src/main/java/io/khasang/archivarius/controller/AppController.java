@@ -30,6 +30,12 @@ public class AppController {
         return "create";
     }
 
+    @RequestMapping("/update")
+    public String update(Model model) {
+        model.addAttribute("update", queryExample.tableUpdate());
+        return "update";
+    }
+
     @RequestMapping("/admin/page")
     public String secure(Model model){
         model.addAttribute("secure", "This is very secure page");
