@@ -49,7 +49,7 @@ public class AppController {
     }
     @RequestMapping("/select")
     public String select(Model model) {
-        model.addAttribute("select", queryExample.tableSelect());
+        model.addAttribute("list", queryExample.tableSelect());
         return "select";
     }
 

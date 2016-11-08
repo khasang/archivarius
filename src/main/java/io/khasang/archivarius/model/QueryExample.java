@@ -2,6 +2,7 @@ package io.khasang.archivarius.model;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -62,18 +63,24 @@ public class QueryExample {
         }
     }
 
-    public String tableSelect(){
+    public List<Employee> tableSelect(){
         try {
             String sql = "SELECT * FROM COMPANY";
             List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-            String result = "";
+            List<Employee> list = new ArrayList<>();
             for(Map row : rows) {
-                result += "\r\n" + row.get("NAME") + " " + row.get("AGE") + " " + row.get("address") +
-                        " " + row.get("SALARY");
+                Employee employee = new Employee((int)row.get("id"),
+                        (int)row.get("age"),
+                        (String)row.get("name"),
+                        (String)row.get("address"),
+                        (Float)row.get("salary")
+                );
+                list.add(employee);
             }
-            return result;
+            return list;
         } catch (Exception e) {
-            return "Error: " + e;
+            e.printStackTrace();
+            return null;
         }
     }
 }
