@@ -36,6 +36,18 @@ public class AppController {
         return "update";
     }
 
+    @RequestMapping("/insert")
+    public String insert(Model model) {
+        model.addAttribute("insert", queryExample.tableInsert());
+        return "insert";
+    }
+
+    @RequestMapping("/delete")
+    public String delete(Model model) {
+        model.addAttribute("delete", queryExample.tableDelete());
+        return "delete";
+    }
+
     @RequestMapping("/admin/page")
     public String secure(Model model){
         model.addAttribute("secure", "This is very secure page");
