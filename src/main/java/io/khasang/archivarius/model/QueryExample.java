@@ -2,6 +2,9 @@ package io.khasang.archivarius.model;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.List;
+import java.util.Map;
+
 public class QueryExample {
     private JdbcTemplate jdbcTemplate;
 
@@ -54,6 +57,21 @@ public class QueryExample {
         try {
             jdbcTemplate.execute(("DELETE FROM COMPANY WHERE id = 1"));
             return "row deleted";
+        } catch (Exception e) {
+            return "Error: " + e;
+        }
+    }
+
+    public String tableSelect(){
+        try {
+            String sql = "SELECT * FROM COMPANY";
+            List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+            String result = "";
+            for(Map row : rows) {
+                result += "\r\n" + row.get("NAME") + " " + row.get("AGE") + " " + row.get("address") +
+                        " " + row.get("SALARY");
+            }
+            return result;
         } catch (Exception e) {
             return "Error: " + e;
         }

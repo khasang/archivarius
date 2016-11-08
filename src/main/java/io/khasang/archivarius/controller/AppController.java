@@ -47,6 +47,11 @@ public class AppController {
         model.addAttribute("delete", queryExample.tableDelete());
         return "delete";
     }
+    @RequestMapping("/select")
+    public String select(Model model) {
+        model.addAttribute("select", queryExample.tableSelect());
+        return "select";
+    }
 
     @RequestMapping("/admin/page")
     public String secure(Model model){
