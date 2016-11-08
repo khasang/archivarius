@@ -31,6 +31,19 @@ public class QueryExample {
         }
     }
 
+    public String tableTaskCreation() {
+        try {
+            jdbcTemplate.execute("CREATE TABLE TASK(\n" +
+                    "   ID INT PRIMARY KEY NOT NULL,\n" +
+                    "   COMPANY_ID INT NOT NULL,\n" +
+                    "   TASK_NAME TEXT NOT NULL\n" +
+                    ");");
+            return "table created";
+        } catch (Exception e) {
+            return "Error: "  + e;
+        }
+    }
+
     public String tableUpdate(){
         try {
             jdbcTemplate.execute(("UPDATE COMPANY SET SALARY = 90000 WHERE id = 1"));
@@ -54,6 +67,20 @@ public class QueryExample {
         }
     }
 
+    public String tableTaskInsert() {
+        try {
+            jdbcTemplate.execute("INSERT INTO TASK (ID, COMPANY_ID, TASK_NAME) VALUES\n" +
+                    "(1, 1, 'Insert в таблицу'),\n" +
+                    "(2, 2, 'Backup - сделать backup базы из Java. '),\n" +
+                    "(3, 3, 'Backup - сделать backup базы из Java. '),\n" +
+                    "(4, 4, 'вложенный select'),\n" +
+                    "(5, 5, 'insert в таблицу(можно через pgadmin), Delete (Spring JDBC)')");
+            return "rows inserted";
+        } catch (Exception e) {
+            return "Error: " + e;
+        }
+    }
+
     public String tableDelete(){
         try {
             jdbcTemplate.execute(("DELETE FROM COMPANY WHERE id = 1"));
@@ -69,13 +96,46 @@ public class QueryExample {
             List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
             List<Employee> list = new ArrayList<>();
             for(Map row : rows) {
-                Employee employee = new Employee((int)row.get("id"),
+                final Employee employee = new Employee((int)row.get("id"),
                         (int)row.get("age"),
                         (String)row.get("name"),
                         (String)row.get("address"),
                         (Float)row.get("salary")
                 );
                 list.add(employee);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<String> tableAllSelect(){
+        try {
+            String sql = "SELECT c.name, t.task_name FROM COMPANY c JOIN TASK t ON t.company_id = c.id";
+            List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+            List<String> list = new ArrayList<>();
+            for(Map row : rows) {
+                final String str = row.get("name") + " " + row.get("task_name");
+                list.add(str);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<String> tableInnerSelect(){
+        try {
+            String sql = "SELECT name FROM COMPANY WHERE id in (" +
+                    "SELECT company_id FROM task where id = 3)";
+            List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+            List<String> list = new ArrayList<>();
+            for(Map row : rows) {
+                final String str = (String)row.get("name");
+                list.add(str);
             }
             return list;
         } catch (Exception e) {

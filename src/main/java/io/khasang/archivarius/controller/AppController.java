@@ -30,6 +30,12 @@ public class AppController {
         return "create";
     }
 
+    @RequestMapping("/task_table_create")
+    public String taskTableCreate(Model model){
+        model.addAttribute("task_table_create", queryExample.tableTaskCreation());
+        return "task_table_create";
+    }
+
     @RequestMapping("/update")
     public String update(Model model) {
         model.addAttribute("update", queryExample.tableUpdate());
@@ -42,6 +48,11 @@ public class AppController {
         return "insert";
     }
 
+    @RequestMapping("/insert_task_table")
+    public String insertTaskTable(Model model) {
+        model.addAttribute("insert", queryExample.tableTaskInsert());
+        return "insert_task_table";
+    }
     @RequestMapping("/delete")
     public String delete(Model model) {
         model.addAttribute("delete", queryExample.tableDelete());
@@ -50,6 +61,18 @@ public class AppController {
     @RequestMapping("/select")
     public String select(Model model) {
         model.addAttribute("list", queryExample.tableSelect());
+        return "select";
+    }
+
+    @RequestMapping("/select_all")
+    public String selectAll(Model model) {
+        model.addAttribute("list", queryExample.tableAllSelect());
+        return "select";
+    }
+
+    @RequestMapping("/select_inner")
+    public String selectInner(Model model) {
+        model.addAttribute("list", queryExample.tableInnerSelect());
         return "select";
     }
 
