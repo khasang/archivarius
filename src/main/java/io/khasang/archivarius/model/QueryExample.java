@@ -143,4 +143,20 @@ public class QueryExample {
             return null;
         }
     }
+
+    public String tableGetSchema() {
+        try {
+            String sql = "SELECT column_name, data_type, character_maximum_length " +
+                    "FROM INFORMATION_SCHEMA.COLUMNS where table_name = 'company'";
+            List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+            String str = "";
+            for(Map row : rows) {
+                str += row.get("column_name") + " " + row.get("data_type") + " " +
+                        row.get("character_maximum_length");
+            }
+            return str;
+        } catch (Exception e) {
+            return "Error: " + e;
+        }
+    }
 }
