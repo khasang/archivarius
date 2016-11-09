@@ -42,5 +42,4 @@ public class AppConfig {
     public QueryExample queryExample(){
         return new QueryExample(jdbcTemplate());
     }
-    
 }
