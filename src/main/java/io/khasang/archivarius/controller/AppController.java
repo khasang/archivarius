@@ -2,6 +2,7 @@ package io.khasang.archivarius.controller;
 
 import io.khasang.archivarius.model.Message;
 import io.khasang.archivarius.model.QueryExample;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AppController {
+    private static final Logger log = Logger.getLogger(AppController.class);
     @Autowired
     Message message;
     @Autowired
@@ -21,11 +23,12 @@ public class AppController {
     @RequestMapping("/")
     public String hello(Model model) {
         model.addAttribute("hello", message.getHelloMessage());
+        log.debug("We receive following message: " + message.getHelloMessage());
         return "hello";
     }
 
     @RequestMapping("/create")
-    public String create(Model model){
+    public String create(Model model) {
         model.addAttribute("create", queryExample.tableCreation());
         return "create";
     }
@@ -82,13 +85,13 @@ public class AppController {
     }
 
     @RequestMapping("/admin/page")
-    public String secure(Model model){
+    public String secure(Model model) {
         model.addAttribute("secure", "This is very secure page");
         return "secure";
     }
 
     @RequestMapping("/user/api")
-    public String userApi(Model model){
+    public String userApi(Model model) {
         model.addAttribute("api", "ты не сможешь сюда попасть");
         return "api";
     }
