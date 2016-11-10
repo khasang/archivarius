@@ -1,5 +1,8 @@
 package io.khasang.archivarius.model;
 
+import io.khasang.archivarius.controller.AppController;
+import org.apache.log4j.Logger;
+
 /**
  * Created by Eugene NeocortexF on 08.11.2016.
  * Class provides backup service of PostgerSQL database
@@ -15,6 +18,7 @@ package io.khasang.archivarius.model;
 потому что необходимо обладать правами superuser*/
 
 public class DatabaseBackup {
+    private static final Logger log = Logger.getLogger(DatabaseBackup.class);
     String nameOfDB = "archivarius";
     String hostName = "localhost";
     String userName = "root";
@@ -36,6 +40,7 @@ public class DatabaseBackup {
             return "Backup of database performed successfully";
         } catch (Exception e) {
             e.printStackTrace();
+            log.error("Backup failed: " + e);
             return "Something goes wrong:" + e;
         }
     }
@@ -50,8 +55,9 @@ public class DatabaseBackup {
             runtime.exec(command, environment);
             return "Backup of database performed successfully";
         } catch (Exception e) {
-            e.printStackTrace();
-            return "Something goes wrong:" + e;
+            System.err.println("asdasdasds");
+            log.error("code error" + e);
+            return "Something goes wrong at backupWindowsPostgreSQL:" + e;
         }
     }
 }
