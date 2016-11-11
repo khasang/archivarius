@@ -1,5 +1,6 @@
 package io.khasang.archivarius.model;
 
+import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.ArrayList;
@@ -7,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public class QueryExample {
+    private static final Logger log = Logger.getLogger(QueryExample.class);
+
     private JdbcTemplate jdbcTemplate;
 
     public QueryExample(JdbcTemplate jdbcTemplate) {
@@ -25,8 +28,10 @@ public class QueryExample {
                     "   ADDRESS        CHAR(50),\n" +
                     "   SALARY         REAL\n" +
                     ");");
+            log.debug("TableCreation company");
             return "table created";
         } catch (Exception e) {
+            log.error("TableCreation company Error " + e);
             return "Error: "  + e;
         }
     }
@@ -38,8 +43,10 @@ public class QueryExample {
                     "   COMPANY_ID INT NOT NULL,\n" +
                     "   TASK_NAME TEXT NOT NULL\n" +
                     ");");
+            log.debug("TableCreation task");
             return "table created";
         } catch (Exception e) {
+            log.error("TableCreation task Error " + e);
             return "Error: "  + e;
         }
     }
@@ -47,8 +54,10 @@ public class QueryExample {
     public String tableUpdate(){
         try {
             jdbcTemplate.execute(("UPDATE COMPANY SET SALARY = 90000 WHERE id = 1"));
+            log.debug("Update company set salary");
             return "table updated";
         } catch (Exception e) {
+            log.error("Error Update company " + e);
             return "Error: " + e;
         }
     }
@@ -61,8 +70,10 @@ public class QueryExample {
                     "(3,'Kanunnikov Viktor',27,'Moscow',59590),\n" +
                     "(4,'Vorobyeva Tatyana',18,'Moscow',51000),\n" +
                     "(5,'Stankevich Peter',34,'Moscow',57000)");
+            log.debug("Insert into company 5 values");
             return "rows inserted";
         } catch (Exception e) {
+            log.error("Error in insert into table compaye " + e);
             return "Error: " + e;
         }
     }
@@ -75,8 +86,10 @@ public class QueryExample {
                     "(3, 3, 'Backup - сделать backup базы из Java. '),\n" +
                     "(4, 4, 'вложенный select'),\n" +
                     "(5, 5, 'insert в таблицу(можно через pgadmin), Delete (Spring JDBC)')");
+            log.debug("Insert into table task 5 values");
             return "rows inserted";
         } catch (Exception e) {
+            log.error("Error in insert of table task" + e);
             return "Error: " + e;
         }
     }
@@ -84,8 +97,10 @@ public class QueryExample {
     public String tableDelete(){
         try {
             jdbcTemplate.execute(("DELETE FROM COMPANY WHERE id = 1"));
+            log.debug("delete from table company");
             return "row deleted";
         } catch (Exception e) {
+            log.error("Error in delete table company " + e);
             return "Error: " + e;
         }
     }
@@ -104,9 +119,10 @@ public class QueryExample {
                 );
                 list.add(employee);
             }
+            log.debug("Select all rows and columns in table company ");
             return list;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error in select rows and columns in table company " + e);
             return null;
         }
     }
@@ -120,9 +136,10 @@ public class QueryExample {
                 final String str = row.get("name") + " " + row.get("task_name");
                 list.add(str);
             }
+            log.debug("Concatenate tasks and company employees");
             return list;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error in join of company table and task table " + e);
             return null;
         }
     }
@@ -137,26 +154,11 @@ public class QueryExample {
                 final String str = (String)row.get("name");
                 list.add(str);
             }
+            log.debug("Inner select in company table to task table");
             return list;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error in inner select company table to task table " + e);
             return null;
-        }
-    }
-
-    public String tableGetSchema() {
-        try {
-            String sql = "SELECT column_name, data_type, character_maximum_length " +
-                    "FROM INFORMATION_SCHEMA.COLUMNS where table_name = 'company'";
-            List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-            String str = "";
-            for(Map row : rows) {
-                str += row.get("column_name") + " " + row.get("data_type") + " " +
-                        row.get("character_maximum_length");
-            }
-            return str;
-        } catch (Exception e) {
-            return "Error: " + e;
         }
     }
 }
