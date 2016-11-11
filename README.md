@@ -1,7 +1,9 @@
 # archivarius
 
 The goal of Web-project is organize company documentation
+
 Idea of [artifiner](https://github.com/artifiner)
+
 Copyright: [khasang](http://khasang.io)
 
 ## Contents 
