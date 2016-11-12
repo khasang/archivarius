@@ -72,11 +72,6 @@ public class AppController {
         model.addAttribute("list", queryExample.tableAllSelect());
         return "select";
     }
-    @RequestMapping("/schema")
-    public String selectSchema(Model model) {
-        model.addAttribute("schema", queryExample.tableGetSchema());
-        return "schema";
-    }
 
     @RequestMapping("/select_inner")
     public String selectInner(Model model) {
