@@ -38,7 +38,7 @@ public class QueryExample {
 	 * @param address Address of employee.
 	 * @param salary  Monthly salary of employee.
 	 */
-	public String insertValuesToDatabase(int id, String name, int age, String address, int salary) {
+	public String tableInsert(int id, String name, int age, String address, int salary) {
 		try {
 			jdbcTemplate.update(
 					"INSERT INTO COMPANY(ID, NAME, AGE, ADDRESS, SALARY) VALUES (?, ?, ?, ?, ?);",
