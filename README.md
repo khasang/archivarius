@@ -1,9 +1,8 @@
-# Archivarius - Document Workflow System
-### OpenSource Training Project
+# Archivarius - Documents Workflow System
 
 ![picture](https://github.com/khasang-incubator/archivarius/blob/development/src/main/resources/ArchivariusLogo.png)
 
-
+## OpenSource Training Project
 
 
 ###*artifiner*
@@ -14,8 +13,6 @@
 
 ### Database insert example
 Добавил пример вставки в базу данных. Сразу с подключенными логами.
-
-
 
 
 
