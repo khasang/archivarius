@@ -1,4 +1,4 @@
-# Archivarius - Document Workflow System
+# Archivarius - Documents Workflow System
 
 ![picture](https://github.com/khasang-incubator/archivarius/blob/development/src/main/resources/ArchivariusLogo.png)
 
