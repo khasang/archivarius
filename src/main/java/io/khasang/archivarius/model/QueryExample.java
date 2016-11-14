@@ -1,8 +1,10 @@
 package io.khasang.archivarius.model;
 
+import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class QueryExample {
+    private static final Logger log = Logger.getLogger(QueryExample.class);
     private JdbcTemplate jdbcTemplate;
 
     public QueryExample(JdbcTemplate jdbcTemplate) {
@@ -23,11 +25,34 @@ public class QueryExample {
                     ");");
             return "table created";
         } catch (Exception e) {
-            return "Error: "  + e;
+            return "Error: " + e;
         }
     }
 
-    public String tableUpdate(){
+    /**
+     * Example method which can insert new employee into company database.
+     *
+     * @param id      Employee id.
+     * @param name    Name of employee.
+     * @param age     Age of employee.
+     * @param address Address of employee.
+     * @param salary  Monthly salary of employee.
+     */
+    public String tableInsert(int id, String name, int age, String address, int salary) {
+        try {
+            jdbcTemplate.update(
+                    "INSERT INTO COMPANY(ID, NAME, AGE, ADDRESS, SALARY) VALUES (?, ?, ?, ?, ?);",
+                    id, name, age, address, salary
+            );
+            log.debug("Inserted record: ID=" + id + ", NAME=" + name + ", AGE=" + age + ", ADDRESS=" + address + ", SALARY=" + salary);
+            return "Insert successful.";
+        } catch (Exception e) {
+            log.error("Insert failed. Error: " + e);
+            return "Insert failed.";
+        }
+    }
+
+    public String tableUpdate() {
         try {
             jdbcTemplate.execute(("UPDATE COMPANY SET SALARY = 90000 WHERE id = 1"));
             return "table updated";
