@@ -4,6 +4,8 @@
 ![picture](https://github.com/khasang-incubator/archivarius/blob/development/src/main/resources/ArchivariusLogo.png)
 
 
+
+
 ###*artifiner*
 -------------
 ## Как заливать картинки на GitHub
@@ -12,6 +14,8 @@
 
 ### Database insert example
 Добавил пример вставки в базу данных. Сразу с подключенными логами.
+
+
 
 
 
@@ -58,4 +62,3 @@ The possibility to backup your files at Linux opearting system is represented by
 ```Something goes wrong:``` with log error for tracing root couses.
 
 After usage method will put dumped copy of database at ```c:\backup\``` folder.
--------------
