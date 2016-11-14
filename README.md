@@ -4,7 +4,7 @@
 ![picture](https://github.com/khasang-incubator/archivarius/blob/development/src/main/resources/ArchivariusLogo.png)
 
 
-###artifiner
+###*artifiner*
 -------------
 ## Как заливать картинки на GitHub
 Загрузка картинок для документации непосредственно в ресурсы проекта приведёт к замусориванию репозитория ненужными файлами и коммитами.
@@ -15,7 +15,7 @@
 
 
 
-###Eugene NeocortexF
+###*Eugene NeocortexF*
 -------------
 Backup your PostrgeSQL database using Archivarius!
 =================== 
