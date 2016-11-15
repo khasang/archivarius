@@ -24,13 +24,14 @@ public class DatabaseBackup {
     String userName = "root";
     String password = "root";
     String pathForBackupFile = "C:\\backup\\backup_archivarius.sql";
+    String pathForBackupLinux = "home\\backup\\backup_archivarius.sql";
 
     public String backupLinuxPostgreSQL() {
         String loginAsSuperuser = "su – postgres";
         String changeDirectory = "cd /opt/PostgresSQL/9.4/bin";
         String path = "./pg_dump";
         String command = path + " -d " + nameOfDB + " -h " + hostName + " -U " + userName + " -w " +
-                " -f " + pathForBackupFile;
+                " -f " + pathForBackupLinux;
         String[] environment = {"PGPASSWORD=" + password};
         try {
             Runtime runtime = Runtime.getRuntime();
@@ -41,7 +42,7 @@ public class DatabaseBackup {
         } catch (Exception e) {
             e.printStackTrace();
             log.error("Backup failed: " + e);
-            return "Something goes wrong:" + e;
+            return "Something goes wrong: " + e;
         }
     }
 
@@ -55,9 +56,9 @@ public class DatabaseBackup {
             runtime.exec(command, environment);
             return "Backup of database performed successfully";
         } catch (Exception e) {
-            System.err.println("asdasdasds");
+            e.printStackTrace();
             log.error("code error" + e);
-            return "Something goes wrong at backupWindowsPostgreSQL:" + e;
+            return "Something goes wrong: " + e;
         }
     }
 }
