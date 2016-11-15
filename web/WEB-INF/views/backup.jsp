@@ -5,6 +5,6 @@
 </head>
 <body>
 <h1>Status of Database backup is: </h1>
-<p>${backupMsg}</p>
+<p>${backup}</p>
 </body>
 </html>

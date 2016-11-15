@@ -70,7 +70,7 @@ public class AppController {
 
     @RequestMapping("/backup")
     public String backup(Model model) {
-        model.addAttribute("backupMsg", databaseBackup.backup());
+        model.addAttribute("backup", databaseBackup.backup());
         return "backup";
     }
 }
