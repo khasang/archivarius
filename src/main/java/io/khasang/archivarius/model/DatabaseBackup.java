@@ -23,7 +23,6 @@ public class DatabaseBackup {
     @Autowired
     Environment environment;
 
-
     public String backup() {
         String pgDump = environment.getProperty("jdbc.postgresql.dumpAppPath");
         String dumpFile = environment.getProperty("jdbc.postgresql.dumpFolder") + getBackupFileName();
@@ -47,7 +46,6 @@ public class DatabaseBackup {
         baseCmds.add(dumpFile);
         //Base name
         baseCmds.add("archivarius");
-        System.out.println(baseCmds);
         final ProcessBuilder processBuilder = new ProcessBuilder(baseCmds);
         //Password for PostgreSQL user
         final Map<String, String> env = processBuilder.environment();
