@@ -1,64 +1,82 @@
 package io.khasang.archivarius.model;
 
-import io.khasang.archivarius.controller.AppController;
-import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
-/**
- * Created by Eugene NeocortexF on 08.11.2016.
- * Class provides backup service of PostgerSQL database
- */
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-/*Комментарий к домашнему заданию:
-В wiki.postgresql написано, что для решения задачи бэкапа на разной архитектуре,
-используются script файлы, которые являются обычными текстовыми файлами (ASCII text)
-и содержат в себе SQL команды, позволяющие вернуть базу в необходимое состояние
-на машинах любой архитекруты.
-Однако, лаконичного решения ни какого не нашел, за основу взял и модифицировал код из UTask
-Так же вызывает сомнение работоспособность кода (нет возможности проверить) под Linux,
-потому что необходимо обладать правами superuser*/
-
+/*  Изучив вопрос, пришел к выводу:
+*   нет смысла делать несколько реализаций под разные ОС
+*   сервер на ставится одновременно на Linux, Windows и iOS.
+*   Реализация позаимстована у SNet, потому что является самой оптимальной
+*   из того, что нашел в Интернете.
+*   Путь до утилиты pg_dump для выполения резервной копии базы и папки сохранения
+*   инкапсулированны в backup.properties и позволяют гибко работать под любой ОС
+*/
 public class DatabaseBackup {
-    private static final Logger log = Logger.getLogger(DatabaseBackup.class);
-    String nameOfDB = "archivarius";
-    String hostName = "localhost";
-    String userName = "root";
-    String password = "root";
-    String pathForBackupFile = "C:\\backup\\backup_archivarius.sql";
-    String pathForBackupLinux = "home\\backup\\backup_archivarius.sql";
+    @Autowired
+    Environment environment;
 
-    public String backupLinuxPostgreSQL() {
-        String loginAsSuperuser = "su – postgres";
-        String changeDirectory = "cd /opt/PostgresSQL/9.4/bin";
-        String path = "./pg_dump";
-        String command = path + " -d " + nameOfDB + " -h " + hostName + " -U " + userName + " -w " +
-                " -f " + pathForBackupLinux;
-        String[] environment = {"PGPASSWORD=" + password};
+
+    public String backup() {
+        String pgDump = environment.getProperty("jdbc.postgresql.dumpAppPath");
+        String dumpFile = environment.getProperty("jdbc.postgresql.dumpFolder") + getBackupFileName();
+        //Add commands to start pg_dump
+        final List<String> baseCmds = new ArrayList<>();
+        //Path to pg_dump
+        baseCmds.add(pgDump);
+        baseCmds.add("-h");
+        baseCmds.add("localhost");
+        //Port
+        baseCmds.add("-p");
+        baseCmds.add("5432");
+        //User
+        baseCmds.add("-U");
+        baseCmds.add(environment.getProperty("jdbc.postgresql.username"));
+        //Add BLOB object into dump file
+        baseCmds.add("-b");
+        baseCmds.add("-v");
+        //Path to dump file
+        baseCmds.add("-f");
+        baseCmds.add(dumpFile);
+        //Base name
+        baseCmds.add("archivarius");
+        System.out.println(baseCmds);
+        final ProcessBuilder processBuilder = new ProcessBuilder(baseCmds);
+        //Password for PostgreSQL user
+        final Map<String, String> env = processBuilder.environment();
+        env.put("PGPASSWORD", environment.getProperty("jdbc.postgresql.password"));
         try {
-            Runtime runtime = Runtime.getRuntime();
-            runtime.exec(loginAsSuperuser);
-            runtime.exec(changeDirectory);
-            runtime.exec(command, environment);
-            return "Backup of database performed successfully";
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error("Backup failed: " + e);
-            return "Something goes wrong: " + e;
+            final Process process = processBuilder.start();
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+            String line = reader.readLine();
+            while (line != null) {
+                System.err.println(line);
+                line = reader.readLine();
+            }
+            reader.close();
+
+            final int dcertExitCode = process.waitFor();
+            if (dcertExitCode == 0) {
+                return "Backup complete " + dumpFile;
+            } else {
+                return "Backup failed";
+            }
+        } catch (IOException | InterruptedException e) {
+            return e.toString();
         }
     }
 
-    public String backupWindowsPostgreSQL() {
-        String pathToPgdump = "\"C:\\Program Files\\PostgreSQL\\9.4\\bin\\pg_dump.exe\"";
-        String command = pathToPgdump + " -d " + nameOfDB + " -h " + hostName + " -U " + userName + " -w " +
-                " -f " + pathForBackupFile;
-        String[] environment = {"PGPASSWORD=" + password};
-        try {
-            Runtime runtime = Runtime.getRuntime();
-            runtime.exec(command, environment);
-            return "Backup of database performed successfully";
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error("code error" + e);
-            return "Something goes wrong: " + e;
-        }
+    private String getBackupFileName() {
+        long currentTime = System.currentTimeMillis();
+        String currentStringDate = new SimpleDateFormat("yyyy_MM_dd_HH-mm").format(currentTime);
+        return "archivarius_" + currentStringDate + ".backup";
     }
+
 }
