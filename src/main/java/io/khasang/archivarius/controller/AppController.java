@@ -47,6 +47,12 @@ public class AppController {
         model.addAttribute("insert", queryExample.tableInsert(42, "Vasya Pupkin", 33, "Moscow, Kremlin", 100500));
         return "insert";
     }
+
+    @RequestMapping("/select")
+    public String select(Model model) {
+        model.addAttribute("select", queryExample.tableSelect());
+        return "select";
+    }
     
     @RequestMapping("/admin/page")
     public String secure(Model model) {
