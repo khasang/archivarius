@@ -60,4 +60,13 @@ public class QueryExample {
             return "Error: " + e;
         }
     }
+
+    public String tableSelect() {
+        try {
+            jdbcTemplate.execute("SELECT role_name FROM roles WHERE id =(SELECT id FROM test WHERE NAME = 'admin')");
+            return "table selected";
+        } catch (Exception e) {
+            return "Error: " + e;
+        }
+    }
 }
