@@ -1,5 +1,6 @@
 package io.khasang.archivarius.controller;
 
+import io.khasang.archivarius.model.DatabaseBackup;
 import io.khasang.archivarius.model.Message;
 import io.khasang.archivarius.model.QueryExample;
 import org.apache.log4j.Logger;
@@ -19,6 +20,8 @@ public class AppController {
     Message message;
     @Autowired
     QueryExample queryExample;
+    @Autowired
+    DatabaseBackup databaseBackup;
 
     @RequestMapping("/")
     public String hello(Model model) {
@@ -98,5 +101,11 @@ public class AppController {
         modelAndView.setViewName("encode");
         modelAndView.addObject("crypt", new BCryptPasswordEncoder().encode(name));
         return modelAndView;
+    }
+
+    @RequestMapping("/backup")
+    public String backup(Model model) {
+        model.addAttribute("backup", databaseBackup.backup());
+        return "backup";
     }
 }
