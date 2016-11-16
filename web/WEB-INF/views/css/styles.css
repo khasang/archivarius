@@ -1,0 +1,316 @@
+body {
+	background: #C8DEEF;
+	margin:0;
+	padding:0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #555555;
+	border-top: 5px solid #C8DEEF;
+}
+
+* {
+	margin:0;
+	padding:0;
+}
+
+/** element defaults **/
+table {
+	width: 100%;
+	text-align: left;
+}
+
+th, td {
+	padding: 10px 10px;
+}
+
+th {
+	color: #fff;
+	background-color: #033E6B;
+}
+
+td {
+	background: #fff;
+	border-bottom: 1px solid #d0d0d0;
+}
+
+code, blockquote {
+	display: block;
+	border-left: 5px solid #ddd;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+bl
+ockquote {
+	border-left: 5px solid #6F516F;
+}
+
+blockquote p {
+	font-style: italic;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	margin: 0;
+	color: #999;
+	height: 1%;
+}
+
+p {
+	line-height: 1.9em;
+	margin-bottom: 20px;
+}
+
+a {
+	color: #25567B;
+}
+
+a:hover {
+	color: #333333;
+}
+
+a:focus {
+	outline: none;
+}
+
+fieldset {
+	display: block;
+	border: none;
+	border-top: 1px solid #e0e0e0;
+}
+
+fieldset legend {
+	font-weight: bold;
+	font-size: 13px;
+	padding-right: 10px;
+	color: #222;
+}
+
+fieldset form {
+	padding-top: 15px;
+}
+
+fieldset p label {
+	float: left;
+	width: 150px;
+}
+
+form input, form select, form textarea {
+	padding: 5px;
+	color: #333333;
+	border: 1px solid #ddd;
+}
+
+form input.formbutton {
+	border: none;
+	background-color: #033E6B;
+	color: #ffffff;
+	font-weight: bold;
+	padding: 6px 10px;
+	font-size: 12px;
+	font-family: Tahoma, Geneva, sans-serif;
+	letter-spacing: 1px;
+	width: auto;
+	overflow: visible;
+}
+
+span.required {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #ff0000;
+}
+
+h1 {
+	color: #999;
+	font-size: 35px;
+}
+
+h2 {
+	color: #666666;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 33px;
+	font-weight: normal;
+	letter-spacing: -2px;
+	padding: 0 0 5px;
+	margin: 0;
+}
+
+h3 {
+	color: #444444;
+	font-weight: normal;
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+h4 {
+	padding-bottom: 10px;
+	font-size: 15px;
+	color: #555555;
+}
+
+h5 {
+	padding-bottom: 10px;
+	font-size: 13px;
+	color: #666666;
+}
+
+ul, ol {
+	margin: 0 0 35px 35px;
+}
+
+li {
+	padding-bottom: 5px;
+}
+
+li ol, li ul {
+	font-size: 1.0em;
+	margin-bottom: 0;
+	padding-top: 5px;
+}
+
+
+#container {
+	width: 980px;
+	margin:0 auto;
+	padding: 0;
+}
+
+#header {
+	padding: 40px 15px;
+}
+
+#header h1 a {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	color: #fff;
+	font-size: 60px;
+	font-weight: normal;
+	text-decoration: none;
+	letter-spacing: -3px;
+}
+
+#header h2 {
+	color: #25567B;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	letter-spacing: 5px;
+}
+
+#navigation {
+	background: #033E6B none no-repeat scroll top left;
+	height: 45px;
+}
+
+#navigation ul {
+	list-style: none;
+	margin: 0 0 0 15px;
+	padding:9px 0 0;
+}
+
+#navigation ul li {
+	float: left;
+	padding: 0;
+	display: block;
+}
+
+#navigation ul li a {
+	float: left;
+	display: block;
+	color: #ffffff;
+	padding: 5px 15px;
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#navigation ul li.selected a, #navigation ul li.selected a:hover {
+	background-color: #25567B;
+	color: #fff;
+	text-decoration: none;
+}
+
+#navigation ul li a:hover {
+	text-decoration: underline;
+}
+
+#body {
+	background: #fff;
+	padding: 0 10px; 
+}
+
+#content {
+	float: left;
+	width: 480px;
+	padding: 10px;
+	background-color: #f0f0f0;
+	margin:0 10px;
+}
+
+.sidebar {
+	width: 220px;
+	padding: 20px 0;
+}
+
+.sidebar-left {
+	float: left;
+}
+
+.sidebar-right {
+	float: right;
+}
+
+.sidebar ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sidebar ul li {
+	margin-bottom: 20px;
+	line-height: 1.9em;
+}
+
+.sidebar li ul {
+}
+
+.sidebar li ul li {
+	display: block;
+	border-top: none;
+	padding: 6px 7px;
+	color: #777;
+	margin: 0;
+	line-height: 1.5em;
+}
+
+.sidebar li ul li a {
+	font-size: 12px;
+	font-weight: normal;
+	color: #555;
+	text-decoration: underline;
+}
+
+.sidebar li ul li a:hover {
+	color: #222;
+}
+
+.sidebar h4 {
+	color: #FF7640;
+	font-size: 22px;
+	letter-spacing:-1px;
+	margin: 0;
+	font-weight: normal;
+}
+
+.clear {
+	clear: both;
+}
+
+#footer {
+	background-color: #033E6B;
+	padding: 20px;
+}
+
+#footer p {
+	text-align: center;
+	margin-top: 15px;
+	color: #fff;
+	font-size: 11px;
+}
+
+#footer p a {
+	color: #fff;
+}
