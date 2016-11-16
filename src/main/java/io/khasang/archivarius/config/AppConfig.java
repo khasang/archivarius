@@ -1,5 +1,6 @@
 package io.khasang.archivarius.config;
 
+import io.khasang.archivarius.model.DatabaseBackup;
 import io.khasang.archivarius.model.Message;
 import io.khasang.archivarius.model.QueryExample;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 @Configuration
 @PropertySource(value = {"classpath:util.properties"})
 @PropertySource(value = {"classpath:auth.properties"})
+@PropertySource(value = {"classpath:backup.properties"})
 public class AppConfig {
     @Autowired
     Environment environment;
@@ -54,5 +56,10 @@ public class AppConfig {
     public QueryExample queryExample(){
         return new QueryExample(jdbcTemplate());
     }
-    
+
+    @Bean
+    public DatabaseBackup databaseBackup(){
+        return new DatabaseBackup();
+    }
+
 }
