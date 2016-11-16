@@ -1,34 +1,23 @@
 package io.khasang.archivarius.controller;
 
-import io.khasang.archivarius.model.DatabaseBackup;
 import io.khasang.archivarius.model.Message;
-import io.khasang.archivarius.model.QueryExample;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AppController {
-    private static final Logger log = Logger.getLogger(AppController.class);
     @Autowired
     Message message;
-    @Autowired
-    QueryExample queryExample;
-    @Autowired
-    DatabaseBackup databaseBackup;
 
     @RequestMapping("/")
     public String hello(Model model) {
         model.addAttribute("hello", message.getHelloMessage());
-        log.debug("We receive following message: " + message.getHelloMessage());
         return "hello";
     }
+<<<<<<< Updated upstream
+=======
 
     @RequestMapping("/create")
     public String create(Model model) {
@@ -79,4 +68,5 @@ public class AppController {
         model.addAttribute("backup", databaseBackup.backup());
         return "backup";
     }
+>>>>>>> Stashed changes
 }

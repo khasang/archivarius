@@ -31,13 +31,12 @@ public class QueryExample {
 
     public String tableDelete() {
         try {
-            jdbcTemplate.update("DELETE FROM COMPANY WHERE id=?", 42);
+            jdbcTemplate.update("DELETE FROM COMPANY WHERE id=?", 1);
             return "table deleted";
         } catch (Exception e) {
             return "Error: " + e;
         }
     }
-
 
     /**
      * Example method which can insert new employee into company database.

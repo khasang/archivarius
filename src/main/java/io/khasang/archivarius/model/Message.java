@@ -17,5 +17,4 @@ public class Message {
     public void setHelloMessage(String helloMessage) {
         this.helloMessage = helloMessage;
     }
-
 }
