@@ -66,7 +66,7 @@ public class QueryExample {
     /**
      * Example method which can insert new employee into company database.
      *
-     * @param id      Employee id.
+     * @param id      EmployeeDAO id.
      * @param name    Name of employee.
      * @param age     Age of employee.
      * @param address Address of employee.
