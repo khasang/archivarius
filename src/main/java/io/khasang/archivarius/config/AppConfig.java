@@ -1,5 +1,6 @@
 package io.khasang.archivarius.config;
 
+import io.khasang.archivarius.model.JoinResponse;
 import io.khasang.archivarius.model.Message;
 import io.khasang.archivarius.model.QueryExample;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,4 +43,5 @@ public class AppConfig {
     public QueryExample queryExample(){
         return new QueryExample(jdbcTemplate());
     }
+
 }

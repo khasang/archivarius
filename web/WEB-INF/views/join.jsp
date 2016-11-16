@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: VKanunnikov
@@ -12,19 +13,20 @@
 </head>
 <body>
 <h1>Join Table</h1>
-<div class="container">
-    <div th:if="${not #list.isEmpty(employers)}">
-        <table class="table table-striped">
+<c:if test="${not empty joinResponses}">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Company</th>
+        </tr>
+        <c:forEach var="j" items="${joinResponses}">
             <tr>
-                <th>Name</th>
-                <th>Company</th>
+                <td>${j.workerName}</td>
+                <td>${j.companyName}</td>
             </tr>
-            <tr th:each="employer : ${employers}">
-                <td th:text="${employer.employerName}"></td>
-                <td th:text="${employer.companyName}"></td>
-            </tr>
-        </table>
-    </div>
+        </c:forEach>
+    </table>
+</c:if>
 </div>
 </body>
 </html>
