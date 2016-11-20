@@ -18,8 +18,12 @@ public class EmployeeService {
         employeeDAO.addEmployee(employee);
     }
 
-    public Employee getEmployeeById(int id) {
+    public Employee getEmployeeById(long id) {
         return employeeDAO.getEmployeeById(id);
+    }
+
+    public Employee getEmplyeeByName(String name) {
+        return employeeDAO.getEmployeeByName(name);
     }
 
     public List<Employee> getEmployeeList() {

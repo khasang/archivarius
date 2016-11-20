@@ -23,7 +23,7 @@ public class EmployeeRestController {
     @ResponseBody
     public Object getOneEmployee(@PathVariable(value = "id") String inputId, HttpServletResponse response) {
         try {
-            int employeeId = Integer.valueOf(inputId);
+            long employeeId = Integer.valueOf(inputId);
             Employee employee = employeeService.getEmployeeById(employeeId);
             if (employee != null) {
                 logger.debug("Found employee by id " + employeeId + ": " + employee);
@@ -38,6 +38,28 @@ public class EmployeeRestController {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             final String message = "Bad employee id format: " + inputId;
             logger.error(message);
+            return message;
+        }
+    }
+
+    @RequestMapping(value = "/name/{name}", method = RequestMethod.GET, produces = "application/json; encoding=UTF-8")
+    @ResponseBody
+    public Object getEmployeeByName(@PathVariable(value = "name") String inputId, HttpServletResponse response) {
+        try {
+            Employee employee = employeeService.getEmplyeeByName(inputId);
+            if (employee != null) {
+                logger.debug("Found employee by name " + inputId + ": " + employee);
+                return employee;
+            } else {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                final String message = "Employee not found by name " + inputId;
+                logger.info(message);
+                return message;
+            }
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            final String message = "Something wrong: " + inputId;
+            logger.error(message + " " + e);
             return message;
         }
     }
@@ -66,8 +88,8 @@ public class EmployeeRestController {
             return employee;
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            final String message = "Error adding employee: " + e.getMessage();
-            logger.error(message);
+            final String message = "Error adding employee: ";
+            logger.error(message + e);
             return message;
         }
     }
@@ -81,8 +103,8 @@ public class EmployeeRestController {
             return employee;
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            final String message = "Error updating employee: " + e.getMessage();
-            logger.error(message);
+            final String message = "Error updating employee: " + employee;
+            logger.error(message + e);
             return message;
         }
     }

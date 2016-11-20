@@ -8,7 +8,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
@@ -41,7 +40,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public Employee getEmployeeById(int id) {
+    public Employee getEmployeeById(long id) {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Employee.class);
         criteria.add(Restrictions.eq("id", id));
         return (Employee) criteria.uniqueResult();
@@ -52,7 +51,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         Criteria criteria = sessionFactory.
                 getCurrentSession().
                 createCriteria(Employee.class);
-        criteria.add(Restrictions.eq("name", name));
+        criteria.add(Restrictions.eq("fullName", name));
         return (Employee) criteria.uniqueResult();
     }
 

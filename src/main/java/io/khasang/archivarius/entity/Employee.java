@@ -1,52 +1,33 @@
 package io.khasang.archivarius.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
 public class Employee {
     @Id
-    private int id;
-    private int age;
+    @GeneratedValue
+    private long id;
     private String fullName;
-    private String workPhone;
     private String mobilePhone;
+    private String workPhone;
+
+    @Column
+    @Temporal(TemporalType.DATE)
+    private Date birthday;
+
     private String email;
 
     public Employee() {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getWorkPhone() {
-        return workPhone;
-    }
-
-    public void setWorkPhone(String workPhone) {
-        this.workPhone = workPhone;
     }
 
     public String getMobilePhone() {
@@ -57,6 +38,14 @@ public class Employee {
         this.mobilePhone = mobilePhone;
     }
 
+    public String getWorkPhone() {
+        return workPhone;
+    }
+
+    public void setWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -65,16 +54,20 @@ public class Employee {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", age=" + age +
-                ", fullName='" + fullName + '\'' +
-                ", workPhone='" + workPhone + '\'' +
-                ", mobilePhone='" + mobilePhone + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     @Override
@@ -82,17 +75,12 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return id == employee.id &&
-                age == employee.age &&
-                Objects.equals(fullName, employee.fullName) &&
-                Objects.equals(workPhone, employee.workPhone) &&
-                Objects.equals(mobilePhone, employee.mobilePhone) &&
-                Objects.equals(email, employee.email);
+        return Objects.equals(id, employee.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, fullName);
+        return Objects.hash(id);
     }
 
 

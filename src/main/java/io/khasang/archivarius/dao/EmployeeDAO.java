@@ -12,7 +12,7 @@ public interface EmployeeDAO {
 
     void deleteEmployee(Employee employee);
 
-    Employee getEmployeeById(int id);
+    Employee getEmployeeById(long id);
 
     Employee getEmployeeByName(String name);
 
