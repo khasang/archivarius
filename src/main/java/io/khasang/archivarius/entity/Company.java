@@ -10,7 +10,6 @@ public class Company {
     private String name;
 
     public Company() {
-
     }
 
     public int getId() {

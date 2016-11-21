@@ -5,15 +5,18 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import io.khasang.archivarius.entity.Company;
 import io.khasang.archivarius.service.CompanyService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.Response;
 import java.util.List;
 
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/company")
 public class RestController {
+    private static final Logger log = Logger.getLogger(RestController.class);
     @Autowired
     CompanyService companyService;
 
@@ -21,13 +24,13 @@ public class RestController {
     @ResponseBody
     public Object getQuestion(@PathVariable(value = "id") String inputId, HttpServletResponse response) {
         try {
-            int questionId = Integer.valueOf(inputId);
-            Company company = companyService.getCompanyById(questionId);
+            int companyId = Integer.valueOf(inputId);
+            Company company = companyService.getCompanyById(companyId);
             if (company != null) {
                 return company;
             } else {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                return "User with id: " + questionId + " not found.";
+                return "Company with id: " + companyId + " not found.";
             }
         } catch (NumberFormatException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -45,20 +48,11 @@ public class RestController {
     public Object addQuestion(@RequestBody Company company, HttpServletResponse response) {
         try {
             companyService.addCompany(company);
-
-            JsonFactory factory = new JsonFactory();
-            JsonParser parser = factory.createParser(response.toString());
-
-            while (!parser.isClosed()) {
-                JsonToken jsonToken = parser.nextToken();
-
-                System.out.println("jsonToken = " + jsonToken);
-            }
-
-            return company;
+            response.setStatus(1);
+            return response.getStatus();
         } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            return "Error adding question: " + e.getMessage();
+            response.setStatus(-1);
+            return response.getStatus();
         }
     }
 

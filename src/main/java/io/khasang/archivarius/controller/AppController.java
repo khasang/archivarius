@@ -41,6 +41,11 @@ public class AppController {
         model.addAttribute("update", queryExample.tableUpdate());
         return "update";
     }
+
+    @RequestMapping("/rest")
+    public String rest(){
+        return "rest";
+    }
     
     @RequestMapping("/insert")
     public String insert(Model model) {
