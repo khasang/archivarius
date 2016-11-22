@@ -48,11 +48,11 @@ public class RestController {
     public Object addQuestion(@RequestBody Company company, HttpServletResponse response) {
         try {
             companyService.addCompany(company);
-            response.setStatus(1);
-            return response.getStatus();
+            response.setStatus(HttpServletResponse.SC_ACCEPTED);
+            return "{\"id\": " + company.getId() + ", \"name\": \"" + company.getName() + "\"}";
         } catch (Exception e) {
-            response.setStatus(-1);
-            return response.getStatus();
+            response.setStatus(HttpServletResponse.SC_BAD_GATEWAY);
+            return "Company not added " + company + e;
         }
     }
 

@@ -2,8 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<%--<jsp:include page="inc/header.jsp"/>--%>
-
+<html>
+<head>
+    <title>Company API</title>
+</head>
+<body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script type="text/javascript">
     var service = '/api/company';
     var RestGet = function (id) {
@@ -16,19 +20,14 @@
                 $('#response').html(JSON.stringify(result));
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                $('#response').html(JSON.stringify(jqXHR));
+                console.log(JSON.stringify(jqXHR));
             }
         });
     };
     var RestPost = function () {
         var JSONObject = {
-            'question': $('#postQuestion').val(),
-            'answer1': $('#postAnswer1').val(),
-            'answer2': $('#postAnswer2').val(),
-            'answer3': $('#postAnswer3').val(),
-            'answer4': $('#postAnswer4').val(),
-            'correectAnswers': $('#postCorrectAnswer').val(),
-
+            'id': $('#post_id').val(),
+            'name': $('#post_name').val()
         };
         $.ajax({
             type: 'POST',
@@ -37,22 +36,18 @@
             data: JSON.stringify(JSONObject),
             dataType: 'json',
             async: false,
-            success: function (result) {
+            success: function(result) {
                 $('#response').html(JSON.stringify(result));
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                $('#response').html(JSON.stringify(jqXHR));
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(JSON.stringify(jqXHR));
             }
         });
     };
     var RestPut = function () {
         var JSONObject = {
-            'id': $('#putId').val(),
-            'answer1': $('#putAnswer1').val(),
-            'answer2': $('#putAnswer2').val(),
-            'answer3': $('#putAnswer3').val(),
-            'answer4': $('#putAnswer4').val(),
-            'correectAnswers': $('#putCorrectAnswer').val(),
+            'id': $('#put_id').val(),
+            'name': $('#put_name').val()
         };
         $.ajax({
             type: 'PUT',
@@ -65,7 +60,7 @@
                 $('#response').html(JSON.stringify(result));
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                $('#response').html(JSON.stringify(jqXHR));
+                console.log(JSON.stringify(jqXHR));
             }
         });
     };
@@ -79,7 +74,7 @@
                 $('#response').html(JSON.stringify(result));
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                $('#response').html(JSON.stringify(jqXHR));
+                console.log(JSON.stringify(jqXHR));
             }
         });
     };
@@ -90,44 +85,41 @@
     </div>
     <div class="panel-body">
 
-        <table class="table">
+        <table class="table" border="1">
             <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>&nbsp;</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td>Get all question</td>
+                <td>Get all companies</td>
                 <td><code><strong>GET</strong> /api/company/all</code></td>
                 <td>
-                    <button type="button" onclick="RestGet('all')">Try</button>
+                    <button type="button" onclick="RestGet('all')">GET ALL</button>
                 </td>
             </tr>
             <tr>
-                <td>Get question by id</td>
+                <td>Get company by id</td>
                 <td><code><strong>GET</strong> /api/company/{id}</code></td>
                 <td>
-                    Id: <input id="getCompanyID" value="3">
-                    <button type="button" onclick="RestGet($('#getCompanyID').val())">Try</button>
+                    Id: <input type="number" required id="getCompanyID">
+                    <br/>
+                    <button type="button" onclick="RestGet($('#getCompanyID').val())">GET</button>
                 </td>
             </tr>
             <tr>
-                <td>Add question</td>
-                <td><code><strong>POST</strong> /api/question</code></td>
+                <td>Add company</td>
+                <td><code><strong>POST</strong> /api/company</code></td>
                 <td>
                     <form class="form-inline">
-                        question: <input type="text" value="question" id="postQuestion">
+                        id: <input type="number" required id="post_id">
                         <br>
-                        answer1: <input type="text" id="postAnswer1" value="answer1">
-                        answer2: <input type="text" id="postAnswer2" value="answer2">
-                        <br>
-                        answer3: <input type="text" id="postAnswer3" value="answer3">
-                        answer4: <input type="text" id="postAnswer4" value="answer4">
-                        <br>
-                        CorrectAnswers: <input type="text" id="postCorrectAnswer" value="answer1">
-                        <button type="button" onclick="RestPost()">Try</button>
+                        name: <input type="text" id="post_name">
+                        <br/>
+                        <button type="button" onclick="RestPost()">POST</button>
                     </form>
                 </td>
             </tr>
@@ -136,25 +128,21 @@
                 <td><code><strong>PUT</strong> /api/question</code></td>
                 <td>
                     <form class="form-inline">
-                        Id: <input type="text" value="3" id="putId">
+                        Id: <input type="number" required id="put_id">
                         <br>
-                        answer1: <input type="text" id="putAnswer1" value="another answer1">
-                        answer2: <input type="text" id="putAnswer2" value="another answer2">
-                        <br>
-                        answer3: <input type="text" id="putAnswer3" value="another answer3">
-                        answer4: <input type="text" id="putAnswer4" value="another answer4">
-                        <br>
-                        CorrectAnswers: <input type="text" id="putCorrectAnswer" value="another answer1">
-                        <button type="button" onclick="RestPut()">Try</button>
+                        name: <input type="text" id="put_name" required>
+                        <br/>
+                        <button type="button" onclick="RestPut()">PUT</button>
                     </form>
                 </td>
             </tr>
             <tr>
                 <td>Delete question by id</td>
-                <td><code><strong>DELETE</strong> /api/question/{id}</code></td>
+                <td><code><strong>DELETE</strong> /api/company/{id}</code></td>
                 <td>
-                    Id: <input id="deleteQuestionId" value="4">
-                    <button type="button" onclick="RestDelete()">Try</button>
+                    Id: <input type="number" required id="deleteQuestionId">
+                    <br/>
+                    <button type="button" onclick="RestDelete()">DELETE</button>
                 </td>
             </tr>
             </tbody>
@@ -169,3 +157,5 @@
     <div class="panel-body" id="response">
     </div>
 </div>
+</body>
+</html>
