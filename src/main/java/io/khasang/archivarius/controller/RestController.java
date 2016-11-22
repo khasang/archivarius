@@ -76,10 +76,10 @@ public class RestController {
             Company company = companyService.getCompanyById(companyId);
             if (company != null) {
                 companyService.deleteCompany(company);
-                return "Company #" + companyId + " successfully deleted.";
+                return "{\"id\": null, \"name\": null}";
             } else {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                return "Company with id: " + companyId + " not found.";
+                return "{\"id\": " + company.getId() + ", \"name\": \"not found this id\"}";
             }
         } catch (NumberFormatException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

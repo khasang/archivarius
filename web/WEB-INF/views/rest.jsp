@@ -5,6 +5,7 @@
 <html>
 <head>
     <title>Company API</title>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/css/bootstrap.css" />"/>
 </head>
 <body>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -36,10 +37,10 @@
             data: JSON.stringify(JSONObject),
             dataType: 'json',
             async: false,
-            success: function(result) {
+            success: function (result) {
                 $('#response').html(JSON.stringify(result));
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {
                 console.log(JSON.stringify(jqXHR));
             }
         });
@@ -79,76 +80,99 @@
         });
     };
 </script>
-<div class="panel panel-default">
-    <div class="panel-heading">
-        REST API
+<h1>REST API</h1>
+<div class="panel-body">
+    <div class="form-group">
+        <label class="control-label col-lg-2">Get all companies</label>
+        <div class="col-lg-10">
+            <div class="row">
+                <div class="col-xs-1">GET</div>
+                <div class="col-xs-2"> /api/company/all</div>
+                <form class="form-inline">
+                    <div class="col-xs-5">
+                    </div>
+                    <div class="col-xs-4">
+                        <button class="btn btn-primary" type="button" onclick="RestGet('all')">
+                            GET ALL
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="panel-body">
-
-        <table class="table" border="1">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>&nbsp;</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>Get all companies</td>
-                <td><code><strong>GET</strong> /api/company/all</code></td>
-                <td>
-                    <button type="button" onclick="RestGet('all')">GET ALL</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Get company by id</td>
-                <td><code><strong>GET</strong> /api/company/{id}</code></td>
-                <td>
-                    Id: <input type="number" required id="getCompanyID">
-                    <br/>
-                    <button type="button" onclick="RestGet($('#getCompanyID').val())">GET</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Add company</td>
-                <td><code><strong>POST</strong> /api/company</code></td>
-                <td>
-                    <form class="form-inline">
-                        id: <input type="number" required id="post_id">
-                        <br>
-                        name: <input type="text" id="post_name">
-                        <br/>
-                        <button type="button" onclick="RestPost()">POST</button>
-                    </form>
-                </td>
-            </tr>
-            <tr>
-                <td>Update question</td>
-                <td><code><strong>PUT</strong> /api/question</code></td>
-                <td>
-                    <form class="form-inline">
-                        Id: <input type="number" required id="put_id">
-                        <br>
-                        name: <input type="text" id="put_name" required>
-                        <br/>
-                        <button type="button" onclick="RestPut()">PUT</button>
-                    </form>
-                </td>
-            </tr>
-            <tr>
-                <td>Delete question by id</td>
-                <td><code><strong>DELETE</strong> /api/company/{id}</code></td>
-                <td>
-                    Id: <input type="number" required id="deleteQuestionId">
-                    <br/>
-                    <button type="button" onclick="RestDelete()">DELETE</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
+    <div class="form-group">
+        <label class="control-label col-lg-2">Get company by id</label>
+        <div class="col-lg-10">
+            <div class="row">
+                <div class="col-xs-1">GET</div>
+                <div class="col-xs-2"> /api/company/{id}</div>
+                <form class="form-inline">
+                    <div class="col-xs-5">
+                        <input type="number" class="form-control" placeholder="Id" required id="getCompanyID">
+                    </div>
+                    <div class="col-xs-4">
+                        <button class="btn btn-primary" type="button" onclick="RestGet($('#getCompanyID').val())">
+                            GET
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+    <div class="form-group">
+        <label class="control-label col-lg-2">Add company</label>
+        <div class="col-lg-10">
+            <div class="row">
+                <div class="col-xs-1">POST</div>
+                <div class="col-xs-2"> /api/company</div>
+                <form class="form-inline">
+                    <div class="col-xs-5">
+                        <input type="number" class="form-control" placeholder="Id" required id="post_id">
+                        <input type="text" id="post_name" class="form-control" placeholder="Enter name" required>
+                    </div>
+                    <div class="col-xs-4">
+                        <button class="btn btn-primary" type="button" onclick="RestPost()">POST</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-lg-2">Update company</label>
+        <div class="col-lg-10">
+            <div class="row">
+                <div class="col-xs-1">PUT</div>
+                <div class="col-xs-2"> /api/company</div>
+                <form class="form-inline">
+                    <div class="col-xs-5">
+                        <input type="number" class="form-control" placeholder="Id" required id="put_id">
+                        <input type="text" id="put_name" class="form-control" placeholder="Enter name" required>
+                    </div>
+                    <div class="col-xs-4">
+                        <button class="btn btn-primary" type="button" onclick="RestPut()">PUT</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-lg-2">Delete company by id</label>
+        <div class="col-lg-10">
+            <div class="row">
+                <div class="col-xs-1">DELETE</div>
+                <div class="col-xs-2">/api/company/{id}</div>
+                <form class="form-inline">
+                    <div class="col-xs-5">
+                        <input type="number" class="form-control" placeholder="Id" required id="deleteQuestionId">
+                    </div>
+                    <div class="col-xs-4">
+                        <button class="btn btn-primary" type="button" onclick="RestDelete()">DELETE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading">
