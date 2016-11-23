@@ -32,7 +32,7 @@ public class AppConfig {
 
     @Bean
     public Message message(){
-        return new Message("Welc`ome to archivarius app!");
+        return new Message("Welcome to archivarius app!");
     }
 
     @Bean
