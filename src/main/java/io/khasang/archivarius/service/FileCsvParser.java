@@ -4,8 +4,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.util.stream.Stream;
 
 /**
  * Tanya on 27.11.2016.
@@ -113,5 +114,19 @@ public class FileCsvParser {
             System.err.println("This file does not exist");
             return false;
         }
+    }
+
+
+    public int countNumberRows(File file) {
+        int lines = 0;
+        if(checkFiles(file)) {
+            try(BufferedReader reader = new BufferedReader((new FileReader(file)))) {
+                while (reader.readLine() != null)
+                    lines++;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return lines;
     }
 }

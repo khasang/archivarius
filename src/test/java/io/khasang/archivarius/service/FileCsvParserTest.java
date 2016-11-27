@@ -12,50 +12,58 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {AppConfig.class, WebConfig.class, HibernateConfig.class})
-
 public class FileCsvParserTest {
     @Autowired
     FileCsvParser fileCsvParser;
+
     @Ignore
     @Test
-    public void testEntityIsAlive(){
+    public void testEntityIsAlive() {
 //        Assert.assertNotNull(new Report());
     }
 
     @Test
-    public void testFilesExist(){
-        Assert.assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile1()));
-        Assert.assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile2()));
-        Assert.assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile3()));
-        Assert.assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile4()));
-        Assert.assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile5()));
-        Assert.assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile6()));
-        Assert.assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile7()));
-        Assert.assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile8()));
-        Assert.assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile9()));
-        Assert.assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile10()));
-            }
+    public void testFilesExist() {
+        assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile1()));
+        assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile2()));
+        assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile3()));
+        assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile4()));
+        assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile5()));
+        assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile6()));
+        assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile7()));
+        assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile8()));
+        assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile9()));
+        assertEquals(true, fileCsvParser.checkFiles(fileCsvParser.getFile10()));
+    }
 
     @Test
     public void testContentsFile() {
-        Assert.assertEquals(true, fileCsvParser.countNumderRows(fileCsvParser.getFile1()));
-        Assert.assertEquals(true, fileCsvParser.countNumderRows(fileCsvParser.getFile2()));
-        Assert.assertEquals(true, fileCsvParser.countNumderRows(fileCsvParser.getFile3()));
-        Assert.assertEquals(true, fileCsvParser.countNumderRows(fileCsvParser.getFile4()));
-        Assert.assertEquals(true, fileCsvParser.countNumderRows(fileCsvParser.getFile5()));
-        Assert.assertEquals(true, fileCsvParser.countNumderRows(fileCsvParser.getFile6()));
-        Assert.assertEquals(true, fileCsvParser.countNumderRows(fileCsvParser.getFile7()));
-        Assert.assertEquals(true, fileCsvParser.countNumderRows(fileCsvParser.getFile8()));
-        Assert.assertEquals(true, fileCsvParser.countNumderRows(fileCsvParser.getFile9()));
-        Assert.assertEquals(true, fileCsvParser.countNumderRows(fileCsvParser.getFile10()));
-
+        assertTrue(fileCsvParser.countNumberRows(fileCsvParser.getFile1()) >= 10);
+        assertTrue(fileCsvParser.countNumberRows(fileCsvParser.getFile2()) >= 10);
+        assertTrue(fileCsvParser.countNumberRows(fileCsvParser.getFile3()) >= 10);
+        assertTrue(fileCsvParser.countNumberRows(fileCsvParser.getFile4()) >= 10);
+        assertTrue(fileCsvParser.countNumberRows(fileCsvParser.getFile5()) >= 10);
+        assertTrue(fileCsvParser.countNumberRows(fileCsvParser.getFile6()) >= 10);
+        assertTrue(fileCsvParser.countNumberRows(fileCsvParser.getFile7()) >= 10);
+        assertTrue(fileCsvParser.countNumberRows(fileCsvParser.getFile8()) >= 10);
+        assertTrue(fileCsvParser.countNumberRows(fileCsvParser.getFile9()) >= 10);
+        assertTrue(fileCsvParser.countNumberRows(fileCsvParser.getFile10()) >= 10);
     }
+
+    @Test
+    public void testNumberFiles() {
+        assertTrue(fileCsvParser.numberOfFiles() >= 10);
+    }
+
     @Ignore
     @Test
-    public void testSomeOneAtVk(){
+    public void testSomeOneAtVk() {
 //        Assert.assertEquals(true, fileCheckService.someoneAtVk());
     }
 }
