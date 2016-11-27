@@ -1,6 +1,7 @@
 package io.khasang.archivarius.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 public class Report {
 
     @Id
+    @GeneratedValue()
     private int id;
     private String site;
     private String nameUser;
@@ -15,10 +17,6 @@ public class Report {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getSite() {

@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvParser;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import io.khasang.archivarius.entity.Report;
 import org.hibernate.annotations.SourceType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Component;
 import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -31,6 +34,9 @@ public class FileCsvParser {
 
     File folder = new ClassPathResource("examples").getFile();
     File[] files = folder.listFiles();
+
+    @Autowired
+    ReportService reportService;
 
     public File getFile1() {
         return file1;
@@ -113,7 +119,6 @@ public class FileCsvParser {
     }
 
 
-
     private File file1 = new ClassPathResource("examples/source001.csv").getFile();
     private File file2 = new ClassPathResource("examples/source002.csv").getFile();
     private File file3 = new ClassPathResource("examples/source003.csv").getFile();
@@ -158,10 +163,11 @@ public class FileCsvParser {
     /**
      * Использована библиотека парсера CSV. rowAsMap тут - список строки, разделенный на колонки
      * name, site, timespent
+     *
      * @return есть ли кто-нибудь вконтакте
      */
     public boolean someoneAtVk() {
-        for(File csvFile: files) {
+        for (File csvFile : files) {
             try {
                 MappingIterator<Map<String, String>> it = mapper.readerFor(Map.class)
                         .with(csvSchema)
@@ -176,5 +182,26 @@ public class FileCsvParser {
             }
         }
         return false;
+    }
+
+    public List<Report> newReportFromCsvFile(File file) {
+        List<Report> list = new ArrayList<>();
+        try {
+            MappingIterator<Map<String, String>> it = mapper.readerFor(Map.class)
+                    .with(csvSchema)
+                    .readValues(file);
+            while (it.hasNext()) {
+                Map<String, String> rowAsMap = it.next();
+                Report report = new Report();
+                report.setNameUser(rowAsMap.get("name"));
+                report.setSite(rowAsMap.get("site"));
+                report.setTimeInSecond(Integer.valueOf(rowAsMap.get("timespent")));
+                list.add(report);
+                reportService.addReport(report);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

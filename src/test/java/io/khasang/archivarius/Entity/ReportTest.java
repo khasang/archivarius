@@ -5,6 +5,7 @@ import io.khasang.archivarius.config.AppConfig;
 import io.khasang.archivarius.config.HibernateConfig;
 import io.khasang.archivarius.config.application.WebConfig;
 import io.khasang.archivarius.entity.Report;
+import io.khasang.archivarius.service.FileCsvParser;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {AppConfig.class, WebConfig.class, HibernateConfig.class})
-
 public class ReportTest {
     /**
      * TODO: Создать таблицу в базе данных Report c нужными нам по заданию столбцами и связать
@@ -26,11 +26,6 @@ public class ReportTest {
     @Test
     public void testEntityIsAlive() {
         assertNotNull(new Report());
-    }
-
-    @Test
-    public void addLineToTheTable() {
-        assertTrue(getReportList.size() > 0));
     }
 }
 
