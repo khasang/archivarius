@@ -105,7 +105,9 @@ public class FileCsvParser {
     private File file10 = new ClassPathResource("examples/source010.csv").getFile();
 
     public FileCsvParser() throws IOException {
-    };
+    }
+
+    ;
 
     public boolean checkFiles(File file) {
         if (file.exists()) {
@@ -116,11 +118,10 @@ public class FileCsvParser {
         }
     }
 
-
     public int countNumberRows(File file) {
         int lines = 0;
-        if(checkFiles(file)) {
-            try(BufferedReader reader = new BufferedReader((new FileReader(file)))) {
+        if (checkFiles(file)) {
+            try (BufferedReader reader = new BufferedReader((new FileReader(file)))) {
                 while (reader.readLine() != null)
                     lines++;
             } catch (IOException e) {
@@ -129,4 +130,15 @@ public class FileCsvParser {
         }
         return lines;
     }
+
+    public int numberOfFiles() {
+        File folder = null;
+        try {
+            folder = new ClassPathResource("examples").getFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return folder.listFiles().length;
+    }
+
 }

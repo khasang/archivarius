@@ -61,9 +61,9 @@ public class FileCsvParserTest {
         assertTrue(fileCsvParser.numberOfFiles() >= 10);
     }
 
-    @Ignore
+
     @Test
     public void testSomeOneAtVk() {
-//        Assert.assertEquals(true, fileCheckService.someoneAtVk());
+        Assert.assertEquals(true, fileCheckService.someoneAtVk());
     }
 }
