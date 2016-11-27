@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -110,6 +111,8 @@ public class FileCsvParser {
     public void setFile10(File file10) {
         this.file10 = file10;
     }
+
+
 
     private File file1 = new ClassPathResource("examples/source001.csv").getFile();
     private File file2 = new ClassPathResource("examples/source002.csv").getFile();

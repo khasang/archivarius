@@ -3,6 +3,7 @@ package io.khasang.archivarius.service;
 import io.khasang.archivarius.config.AppConfig;
 import io.khasang.archivarius.config.HibernateConfig;
 import io.khasang.archivarius.config.application.WebConfig;
+import io.khasang.archivarius.entity.Report;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -22,6 +23,7 @@ import static org.junit.Assert.assertTrue;
 public class FileCsvParserTest {
     @Autowired
     FileCsvParser fileCsvParser;
+    Report report;
 
     @Test
     public void testFilesExist() {
@@ -61,12 +63,5 @@ public class FileCsvParserTest {
         assertEquals(true, fileCsvParser.someoneAtVk());
     }
 
-    /**
-     * TODO: Создать таблицу в базе данных Report c нужными нам по заданию столбцами и связать
-     * ее с Entity
-     */
-    @Test
-    public void testEntityIsAlive() {
-        assertNotNull(new Report());
-    }
+
 }
