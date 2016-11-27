@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -21,12 +22,6 @@ import static org.junit.Assert.assertTrue;
 public class FileCsvParserTest {
     @Autowired
     FileCsvParser fileCsvParser;
-
-    @Ignore
-    @Test
-    public void testEntityIsAlive() {
-//        Assert.assertNotNull(new Report());
-    }
 
     @Test
     public void testFilesExist() {
@@ -61,9 +56,17 @@ public class FileCsvParserTest {
         assertTrue(fileCsvParser.numberOfFiles() >= 10);
     }
 
-
     @Test
     public void testSomeOneAtVk() {
-        Assert.assertEquals(true, fileCheckService.someoneAtVk());
+        assertEquals(true, fileCsvParser.someoneAtVk());
+    }
+
+    /**
+     * TODO: Создать таблицу в базе данных Report c нужными нам по заданию столбцами и связать
+     * ее с Entity
+     */
+    @Test
+    public void testEntityIsAlive() {
+        assertNotNull(new Report());
     }
 }

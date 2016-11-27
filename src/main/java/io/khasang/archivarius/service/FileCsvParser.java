@@ -1,11 +1,18 @@
 package io.khasang.archivarius.service;
 
+import com.fasterxml.jackson.databind.MappingIterator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvParser;
+import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import org.hibernate.annotations.SourceType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.util.Map;
 import java.util.stream.Stream;
 
 /**
@@ -13,6 +20,17 @@ import java.util.stream.Stream;
  */
 @Component
 public class FileCsvParser {
+
+    CsvMapper mapper = new CsvMapper().enable(CsvParser.Feature.WRAP_AS_ARRAY);
+    CsvSchema csvSchema = CsvSchema.builder()
+            .addColumn("name")
+            .addColumn("site")
+            .addColumn("timespent", CsvSchema.ColumnType.NUMBER)
+            .build().withColumnSeparator(';');
+
+    File folder = new ClassPathResource("examples").getFile();
+    File[] files = folder.listFiles();
+
     public File getFile1() {
         return file1;
     }
@@ -122,8 +140,7 @@ public class FileCsvParser {
         int lines = 0;
         if (checkFiles(file)) {
             try (BufferedReader reader = new BufferedReader((new FileReader(file)))) {
-                while (reader.readLine() != null)
-                    lines++;
+                lines = (int) reader.lines().count();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -132,13 +149,29 @@ public class FileCsvParser {
     }
 
     public int numberOfFiles() {
-        File folder = null;
-        try {
-            folder = new ClassPathResource("examples").getFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return folder.listFiles().length;
+        return files.length;
     }
 
+    /**
+     * Использована библиотека парсера CSV. rowAsMap тут - список строки, разделенный на колонки
+     * name, site, timespent
+     * @return есть ли кто-нибудь вконтакте
+     */
+    public boolean someoneAtVk() {
+        for(File csvFile: files) {
+            try {
+                MappingIterator<Map<String, String>> it = mapper.readerFor(Map.class)
+                        .with(csvSchema)
+                        .readValues(csvFile);
+                while (it.hasNext()) {
+                    Map<String, String> rowAsMap = it.next();
+                    if (rowAsMap.get("site").equals("http://vk.com"))
+                        return true;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
 }
