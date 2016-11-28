@@ -5,6 +5,7 @@ import io.khasang.archivarius.model.Message;
 import io.khasang.archivarius.model.QueryExample;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +24,7 @@ public class AppController {
     @Autowired
     DatabaseBackup databaseBackup;
 
-    @RequestMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello(Model model) {
         model.addAttribute("hello", message.getHelloMessage());
         log.debug("We receive following message: " + message.getHelloMessage());
@@ -77,5 +78,14 @@ public class AppController {
     public String backup(Model model) {
         model.addAttribute("backup", databaseBackup.backup());
         return "backup";
+    }
+
+    /**
+    *  Get information about current active session
+    * */
+    @RequestMapping(value = "currentUser", method = RequestMethod.GET)
+    public String getCurrentUser(Model model){
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getName());
+        return "curuser";
     }
 }
