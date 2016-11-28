@@ -10,7 +10,7 @@
 </head>
 <body>
 <table class="simple-little-table" >
-    <tr >
+    <tr>
         <td>ID</td>
         <td>Name</td>
         <td>Address</td>
