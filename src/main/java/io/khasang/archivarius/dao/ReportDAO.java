@@ -14,4 +14,6 @@ public interface ReportDAO {
     Report getReportById(int id);
 
     List<Report> getReportList();
+
+    List<Report> getVkontakteReportList();
 }

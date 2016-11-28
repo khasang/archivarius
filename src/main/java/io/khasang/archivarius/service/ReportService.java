@@ -35,4 +35,8 @@ public class ReportService {
     public void deleteReport(Report report) {
         reportDAO.deleteReport(report);
     }
+
+    public List<Report> getReportVkontakteList() {
+        return reportDAO.getVkontakteReportList();
+    }
 }

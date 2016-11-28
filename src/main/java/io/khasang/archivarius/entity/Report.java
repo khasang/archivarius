@@ -45,4 +45,14 @@ public class Report {
 
     public Report() {
     }
+
+    @Override
+    public String toString() {
+        return "Report{" +
+                "id=" + id +
+                ", site='" + site + '\'' +
+                ", nameUser='" + nameUser + '\'' +
+                ", timeInSecond=" + timeInSecond +
+                '}';
+    }
 }

@@ -3,6 +3,7 @@ package io.khasang.archivarius.controller;
 import io.khasang.archivarius.model.DatabaseBackup;
 import io.khasang.archivarius.model.Message;
 import io.khasang.archivarius.model.QueryExample;
+import io.khasang.archivarius.service.ReportService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,6 +23,8 @@ public class AppController {
     QueryExample queryExample;
     @Autowired
     DatabaseBackup databaseBackup;
+    @Autowired
+    ReportService reportService;
 
     @RequestMapping("/")
     public String hello(Model model) {
@@ -77,5 +80,11 @@ public class AppController {
     public String backup(Model model) {
         model.addAttribute("backup", databaseBackup.backup());
         return "backup";
+    }
+
+    @RequestMapping("/report/vkontakte")
+    public String vkontakteList(Model model) {
+        model.addAttribute("vklist", reportService.getReportVkontakteList());
+        return "vklist";
     }
 }

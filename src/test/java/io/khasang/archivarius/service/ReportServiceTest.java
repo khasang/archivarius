@@ -3,6 +3,7 @@ package io.khasang.archivarius.service;
 import io.khasang.archivarius.config.AppConfig;
 import io.khasang.archivarius.config.HibernateConfig;
 import io.khasang.archivarius.config.application.WebConfig;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,11 +31,10 @@ public class ReportServiceTest {
         }
     }
 
-    // создать отчет по всем пользователям, которые ходили в vk.com - пока без сортировки и суммирования
-    @Ignore
+    // создать отчет по всем пользователям, которые ходили в vk.com
     @Test
     public void testGetVkUsersFromDB() {
-       // assertNotNull(reportService.getReportVkontakteList().size);
+        Assert.assertNotNull(reportService.getReportVkontakteList());
     }
 
 }

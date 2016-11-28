@@ -6,6 +6,9 @@ import io.khasang.archivarius.entity.Report;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,7 +21,7 @@ public class ReportDAOImpl implements ReportDAO {
     SessionFactory sessionFactory;
 
     @Override
-    public void addReport(Report report){
+    public void addReport(Report report) {
         sessionFactory.getCurrentSession().save(report);
     }
 
@@ -54,7 +57,21 @@ public class ReportDAOImpl implements ReportDAO {
     public List<Report> getReportList() {
         Criteria criteria = sessionFactory.
                 getCurrentSession().
-                createCriteria(Company.class);
+                createCriteria(Report.class);
+        return (List<Report>) criteria.list();
+    }
+
+    @Override
+    public List<Report> getVkontakteReportList() {
+        Criteria criteria = sessionFactory.getCurrentSession()
+                .createCriteria(Report.class)
+                .add(Restrictions.like("site", "%vk.com%"))
+                .setProjection( Projections.projectionList()
+                        .add(Projections.sum("timeInSecond"), "sumvk")
+                        .add(Projections.groupProperty("nameUser"))
+                )
+                .addOrder(Order.desc("sumvk"));
+
         return (List<Report>) criteria.list();
     }
 }
