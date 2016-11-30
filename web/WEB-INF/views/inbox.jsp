@@ -72,6 +72,7 @@
             </tr>
             <!-- удалить ДОСЮДА =))) -->
         </table>
+        <h2><a href="/report/vkontakte">Нарушители режима</a></h2>
     </div>
     <!-- Include RIGHT SIDEBAR-->
     <jsp:include page="include/right_sidebar.jsp"/>

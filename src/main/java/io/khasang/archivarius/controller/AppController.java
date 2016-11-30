@@ -120,7 +120,7 @@ public class AppController {
         return "curuser";
         }
 
-     * Get list of 'bad' users, who spent more time in site 'vk.com'
+     /** Get list of 'bad' users, who spent more time in site 'vk.com'
      * @param model
      * @return
      */
