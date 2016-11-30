@@ -1,95 +1,90 @@
 <!-- Include HEADER-->
-<jsp:include page="inc/header.jsp"/>
+<jsp:include page="include/header.jsp"/>
 <!--PAGE CONTENT -->
-<div class="page-content">
-  <div class="row">
-    <!-- Include leff menu-->
-    <jsp:include page="inc/left_menu.jsp"/>
-    <!--Main Content of page -->
-    <div class="col-md-10">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="content-box-large">
-            <div class="panel-heading">
-              <div class="panel-title">New vs Returning Visitors</div>
+<div id="body">
 
-              <div class="panel-options">
-                <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
-                <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
-              </div>
-            </div>
-            <div class="panel-body">
-              Ut tristique adipiscing mauris, sit amet suscipit metus porta quis. Donec dictum tincidunt erat, eu blandit ligula. Nam sit amet dolor sapien. Quisque velit erat, congue sed suscipit vel, feugiat sit amet enim. Suspendisse interdum enim at mi tempor commodo. Sed tincidunt sed tortor eu scelerisque. Donec luctus malesuada vulputate. Nunc vel auctor metus, vel adipiscing odio. Aliquam aliquet rhoncus libero, at varius nisi pulvinar nec. Aliquam erat volutpat. Donec ut neque mi. Praesent enim nisl, bibendum vitae ante et, placerat pharetra magna. Donec facilisis nisl turpis, eget facilisis turpis semper non. Maecenas luctus ligula tincidunt iasdsd vitae ante et,
-              <br /><br />
-              Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque sed consectetur erat. Maecenas in elementum libero. Sed consequat pellentesque ultricies. Ut laoreet vehicula nisl sed placerat. Duis posuere lectus n, eros et hendrerit pellentesque, ante magna condimentum sapien, eget ultrices eros libero non orci. Etiam varius diam lectus.
-              <br /><br />
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="content-box-header">
-                <div class="panel-title">New vs Returning Visitors</div>
-
-                <div class="panel-options">
-                  <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
-                  <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
-                </div>
-              </div>
-              <div class="content-box-large box-with-header">
-
-                Pellentesque luctus quam quis consequat vulputate. Sed sit amet diam ipsum. Praesent in pellentesque diam, sit amet dignissim erat. Aliquam erat volutpat. Aenean laoreet metus leo, laoreet feugiat enim suscipit quis. Praesent mauris mauris, ornare vitae tincidunt sed, hendrerit eget augue. Nam nec vestibulum nisi, eu dignissim nulla.
-                <br /><br />
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="content-box-header">
-                <div class="panel-title">New vs Returning Visitors</div>
-
-                <div class="panel-options">
-                  <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
-                  <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
-                </div>
-              </div>
-              <div class="content-box-large box-with-header">
-
-                Pellentesque luctus quam quis consequat vulputate. Sed sit amet diam ipsum. Praesent in pellentesque diam, sit amet dignissim erat. Aliquam erat volutpat. Aenean laoreet metus leo, laoreet feugiat enim suscipit quis. Praesent mauris mauris, ornare vitae tincidunt sed, hendrerit eget augue. Nam nec vestibulum nisi, eu dignissim nulla.
-                <br /><br />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12 panel-warning">
-          <div class="content-box-header panel-heading">
-            <div class="panel-title ">New vs Returning Visitors</div>
-
-            <div class="panel-options">
-              <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
-              <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
-            </div>
-          </div>
-          <div class="content-box-large box-with-header">
-            Pellentesque luctus quam quis consequat vulputate. Sed sit amet diam ipsum. Praesent in pellentesque diam, sit amet dignissim erat. Aliquam erat volutpat. Aenean laoreet metus leo, laoreet feugiat enim suscipit quis. Praesent mauris mauris, ornare vitae tincidunt sed, hendrerit eget augue. Nam nec vestibulum nisi, eu dignissim nulla.
-            <br /><br />
-          </div>
-        </div>
-      </div>
-
-      <div class="content-box-large">
-        Vivamus suscipit dui id tristique venenatis. Integer vitae dui egestas, ultrices augue et, luctus arcu. Sed pharetra lectus eget velit consequat, in dictum felis fringilla. Suspendisse vitae rutrum urna, quis malesuada tellus. Praesent consectetur gravida feugiat. In mi orci, malesuada sit amet lectus quis, tempor sollicitudin nibh. Nam ut nibh sit amet lorem facilisis adipiscing. Mauris condimentum ornare enim ut aliquet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus molestie massa at accumsan luctus. Aenean ultricies elementum posuere. Praesent ut felis id metus auctor egestas at id augue.
-        <br /><br />
-        Sed gravida augue risus, in lacinia augue euismod at. Vestibulum pharetra sem nibh. Mauris a enim vel sapien dignissim commodo. Ut tristique fringilla diam, vel pulvinar ligula laoreet euismod. Curabitur sit amet pretium tortor. Nullam tincidunt ultrices metus, a cursus nulla mattis in. Ut risus lorem, fringilla vitae risus quis, ullamcorper elementum nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut lobortis risus at convallis dictum. Cras luctus, leo ac vestibulum ultrices, justo mi iaculis libero, non gravida arcu erat ut augue. Ut facilisis mollis quam, ut vestibulum magna placerat eu. Integer vulputate odio a lectus tincidunt placerat viverra vel est.
-
-      </div>
-    </div>
+  <div class="sidebar sidebar-left">
+    <ul>
+      <li>
+        <h4>О программе</h4>
+        <p><strong>Archivarius</strong> - это учебный OpenSource проект, который написали студенты Khasang GeekTeams во время обучения командной разработке Java Web: Евгений Шамкин, Юрий Корниенко, Татьяна Ворбьева, Артур Ковин, Петр Станкевич и Виктор Канунников, под руководством Сергея Кузнецова.</p>
+      </li>
+    </ul>
   </div>
-</div>
+
+  <div id="content">
+    <h2>Archivarius</h2>
+    <p>Система <strong>Archivarius</strong> - позволяет автоматизировать документооборот на предприятии.
+      Автоматизация делопроизводства позволяет быстро узнать, на каком этапе обработки находится тот или иной документ, кто является исполнителем и какие резолюции были вынесены по документу.
+      <br>
+      <br>
+      <strong>Входящие документы</strong> - здесь Вы можете получить и определить дальнейшие действия с входящей документацей организации:
+    <ul>
+      <li>ввод документа в систему;</li>
+      <li>вынесение резолюции;</li>
+      <li>распределение задач по исполнителям;</li>
+      <li>исполнение резолюции;</li>
+      <li>контроль исполнения резолюции.</li>
+    </ul>
+    <strong>Исходящие документы</strong> -  здесь Вы можете обработать исходящие документы организации, включая ответы на входящие письма, инициативные и информационные документы фирмы (предложения, заявки, письма, справки, обзоры, договоры и т. п.).
+    <br>
+    <br>
+    <ul>
+      <li>подготовка проекта исходящего документа;</li>
+      <li>согласование исходящего документа;</li>
+      <li>утверждение исходящего документа;</li>
+      <li>оформление исходящего документа;</li>
+      <li>отправка исходящего документа</li>
+    </ul>
+    <strong>Распоряжения</strong> -  здесь Вы можете обработать внутренние распорядительные документы компании, такие как: приказы по основной деятельности и личному составу, распоряжения, указания, решения, правила, положения, инструкции, регламенты, штатное расписание и т. п.
+    <br>
+    <br>
+    <ul>
+      <li>подготовка проекта распоряжения;</li>
+      <li>согласование распоряжения с заинтересованными лицами, в части их касающейся;</li>
+      <li>утверждение распоряжения;</li>
+      <li>рассылка распоряжения по департаментам.</li>
+    </ul>
+    <strong>Контроль исполнений</strong> -  здесь Вы можете отследить сроки и качество выполнения поручений. Для этого необходимо разбить исполнение документа на этапы и назначенить сотрудникам задачи. По окончанию выполения каждого пункта задачи отмечается статус выполнения и дата.
+    <br>
+    <br>
+    <br>
+    <strong>Добровольные сообщения</strong> -  здесь любой сотрудник может отправить добровольное сообщение, поставив галочку "анонимное" и остаться неизвестным, если того пожелает. Цель данного модуля получение информации руководством о трудностях в исполнении или имплементации поставленных задач и распоряжений.
+    </p>
+
+  </div>
+
+  <div class="sidebar sidebar-right">
+    <ul>
+      <li>
+        <h4>Перейти</h4>
+        <ul>
+          <li><a href="#">Входящие документы</a></li>
+          <li><a href="#">Исходящие документы</a></li>
+          <li><a href="#">Обработка распоряжений</a></li>
+          <li><a href="#">Контроль исполнений</a></li>
+          <li><a href="#">Служебные записки</a></li>
+        </ul>
+      </li>
+      <li>
+        <h4>Ссылки</h4>
+        <ul>
+          <li><a href="http://khasang.io/" title="Khasang GeekTeams">Khasang</a></li>
+          <li><a href="https://vk.com/khasang" title="Khasang группа в ВК">Группа Khasang в VK</a></li>
+        </ul>
+      </li>
+      <li>
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="mailto:eugeneshamkin@mail.ru" title="Написать письмо Евгению Шамкину">Евгений Шамкин</a></li>
+          <li><a href="mailto:dynamost@dynamost.ru" title="Написать письмо Юрию Корниенко">Юрий Корниенко</a></li>
+          <li><a href="mailto:sliver449@gmail.com" title="Написать письмо Петру Станкевичу">Петр Станкевич</a></li>
+          <li><a href="mailto:askovin@yandex.ru" title="Написать письмо Артуру Ковину">Артур Ковин</a></li>
+          <li><a href="mailto:dabeatfan@gmail.com" title="Написать письмо Виктору Канунникову">Виктор Канунников</a></li>
+          <li><a href="mailto:t.tianav2@gmail.com" title="Написать письмо Воробьевой Татьяне">Воробьева Татьяна</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 <!-- Include FOOTER-->
-<jsp:include page="inc/footer.jsp"/>
+<jsp:include page="include/footer.jsp"/>

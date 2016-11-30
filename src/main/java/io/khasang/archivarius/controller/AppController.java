@@ -28,7 +28,7 @@ public class AppController {
     public String hello(Model model) {
         model.addAttribute("hello", message.getHelloMessage());
         log.debug("We receive following message: " + message.getHelloMessage());
-        return "hello";
+        return "index";
     }
 
     @RequestMapping("/create")
