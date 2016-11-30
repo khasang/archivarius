@@ -8,7 +8,9 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import io.khasang.archivarius.entity.Report;
 import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +26,7 @@ import java.util.stream.Stream;
  * Tanya on 27.11.2016.
  */
 @Component
-public class FileCsvParser {
+public class FileCsvParser implements ApplicationListener<ContextRefreshedEvent> {
 
     CsvMapper mapper = new CsvMapper().enable(CsvParser.Feature.WRAP_AS_ARRAY);
     CsvSchema csvSchema = CsvSchema.builder()
@@ -111,5 +113,12 @@ public class FileCsvParser {
             e.printStackTrace();
         }
         return list;
+    }
+
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        for (File csvFile : files) {
+            newReportFromCsvFile(csvFile);
+        }
     }
 }
