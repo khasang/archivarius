@@ -37,8 +37,7 @@ code, blockquote {
 	padding: 10px;
 	margin-bottom: 20px;
 }
-bl
-ockquote {
+blockquote {
 	border-left: 5px solid #6F516F;
 }
 
@@ -367,15 +366,15 @@ li ol, li ul {
 
 /* === HTML5 validation styles === */	
 .contact_form input:required, .contact_form textarea:required, .contact_form select:required {
-	background: #fff url(images/red_asterisk.png) no-repeat 98% center;
+	background: #fff no-repeat 98% center;
 }
 .contact_form input:required:valid, .contact_form textarea:required:valid, .contact_form select:required:valid {
-	background: #fff url(images/valid.png) no-repeat 98% center;
+	background: #fff no-repeat 98% center;
 	box-shadow: 0 0 5px #5cd053;
 	border-color: #28921f;
 }
 .contact_form input:focus:invalid, .contact_form textarea:focus:invalid, .contact_form select:focus:invalid {
-	background: #fff url(images/invalid.png) no-repeat 98% center;
+	background: #fff no-repeat 98% center;
 	box-shadow: 0 0 5px #d45252;
 	border-color: #b03535
 }

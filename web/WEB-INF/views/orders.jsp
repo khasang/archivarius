@@ -14,6 +14,7 @@
             <br>
             <br>
             <br>
+            <br>
             <label for="documentType">Тип распорядительного документа:</label>
             <select name="documentType" id="documentType" >
                 <option value="A">Распоряжение</option>
