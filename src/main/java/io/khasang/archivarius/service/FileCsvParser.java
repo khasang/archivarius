@@ -148,8 +148,8 @@ public class FileCsvParser implements ApplicationListener<ContextRefreshedEvent>
      */
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        for (File csvFile : files) {
-            newReportFromCsvFile(csvFile);
-        }
+//        for (File csvFile : files) {
+//            newReportFromCsvFile(csvFile);
+//        }
     }
 }
