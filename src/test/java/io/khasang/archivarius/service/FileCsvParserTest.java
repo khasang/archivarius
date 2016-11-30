@@ -1,25 +1,61 @@
 package io.khasang.archivarius.service;
 
-import org.junit.Assert;
-import org.junit.Ignore;
+import io.khasang.archivarius.config.AppConfig;
+import io.khasang.archivarius.config.HibernateConfig;
+import io.khasang.archivarius.config.application.WebConfig;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.io.File;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
+@ContextConfiguration(classes = {AppConfig.class, WebConfig.class, HibernateConfig.class})
 public class FileCsvParserTest {
-    @Ignore
+    @Autowired
+    FileCsvParser fileCsvParser;
+
+    /**
+     * testing method that checks the existence of the file
+     */
     @Test
-    public void testEntityIsAlive(){
-//        Assert.assertNotNull(new Report());
+    public void testFilesExist() {
+        for (File file : fileCsvParser.files) {
+            assertEquals(true, fileCsvParser.checkFiles(file));
+        }
     }
 
-    @Ignore
+    /**
+     * testing method that checks the number of lines in the file
+     * (for the correct operation of the program should be more than 10)
+     */
     @Test
-    public void testFilesExist(){
-//        Assert.assertEquals(true, fileCheckService.checkFiles());
+    public void testContentsFile() {
+        for (File file : fileCsvParser.files) {
+            assertTrue(fileCsvParser.countNumberRows(file) >= 10);
+        }
     }
 
-    @Ignore
+    /** testing method, which returns the number of files are in a directory
+     * (for the correct operation of the program should be more than 10)
+     */
     @Test
-    public void testSomeOneAtVk(){
-//        Assert.assertEquals(true, fileCheckService.someoneAtVk());
+    public void testNumberFiles() {
+        assertTrue(fileCsvParser.numberOfFiles() >= 10);
+    }
+
+    /**
+     * testing method that will check there is someone on site vk.com
+     */
+    @Test 
+    public void testSomeOneAtVk() {
+        assertEquals(true, fileCsvParser.someoneAtVk());
     }
 }

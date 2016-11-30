@@ -3,6 +3,7 @@ package io.khasang.archivarius.controller;
 import io.khasang.archivarius.model.DatabaseBackup;
 import io.khasang.archivarius.model.Message;
 import io.khasang.archivarius.model.QueryExample;
+import io.khasang.archivarius.service.ReportService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +24,8 @@ public class AppController {
     QueryExample queryExample;
     @Autowired
     DatabaseBackup databaseBackup;
+    @Autowired
+    ReportService reportService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model) {
@@ -72,16 +75,16 @@ public class AppController {
     }
 
     @RequestMapping("/rest")
-    public String rest(){
+    public String rest() {
         return "rest";
     }
-    
+
     @RequestMapping("/insert")
     public String insert(Model model) {
         model.addAttribute("insert", queryExample.tableInsert(42, "Vasya Pupkin", 33, "Moscow, Kremlin", 100500));
         return "insert";
     }
-    
+
     @RequestMapping("/admin/page")
     public String secure(Model model) {
         model.addAttribute("secure", "This is very secure page");
@@ -115,5 +118,16 @@ public class AppController {
     public String getCurrentUser(Model model){
         model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getName());
         return "curuser";
+        }
+
+     * Get list of 'bad' users, who spent more time in site 'vk.com'
+     * @param model
+     * @return
+     */
+    @RequestMapping("/report/vkontakte")
+    public String vkontakteList(Model model) {
+        model.addAttribute("vklist", reportService.getReportVkontakteList());
+        return "vklist";
+
     }
 }

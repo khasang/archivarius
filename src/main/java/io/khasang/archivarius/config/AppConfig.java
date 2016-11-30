@@ -31,7 +31,7 @@ public class AppConfig {
     }
 
     @Bean
-    public Message message(){
+    public Message message() {
         return new Message("Welcome to archivarius app!");
     }
 
@@ -53,13 +53,12 @@ public class AppConfig {
     }
 
     @Bean
-    public QueryExample queryExample(){
+    public QueryExample queryExample() {
         return new QueryExample(jdbcTemplate());
     }
 
     @Bean
-    public DatabaseBackup databaseBackup(){
+    public DatabaseBackup databaseBackup() {
         return new DatabaseBackup();
     }
-
 }
