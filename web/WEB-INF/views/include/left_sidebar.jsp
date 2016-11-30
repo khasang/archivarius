@@ -1,8 +1,13 @@
 <div class="sidebar sidebar-left">
     <ul>
         <li>
-            <h4>О программе</h4>
-            <p><strong>Archivarius</strong> - это учебный OpenSource проект, который написали студенты Khasang GeekTeams во время обучения командной разработке Java Web: Евгений Шамкин, Юрий Корниенко, Татьяна Ворбьева, Артур Ковин, Петр Станкевич и Виктор Канунников, под руководством Сергея Кузнецова.</p>
+            <h4>Поиск документа</h4>
+            <form id="searchform" method="get" action="NOT IMPELEMNETED!!">
+                <div>
+                    <input type="text" name="s" id="s" size="15"/>
+                    <input type="submit" value="Найти" class="formbutton"/>
+                </div>
+            </form>
         </li>
     </ul>
 </div>

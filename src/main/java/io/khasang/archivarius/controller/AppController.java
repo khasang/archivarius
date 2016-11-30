@@ -25,10 +25,38 @@ public class AppController {
     DatabaseBackup databaseBackup;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index(Model model) {
+        return "index";
+    }
+
+    @RequestMapping(value = "/inbox", method = RequestMethod.GET)
+    public String inbox(Model model) {
+        return "inbox";
+    }
+
+    @RequestMapping(value = "/outbox", method = RequestMethod.GET)
+    public String outbox(Model model) {
+        return "outbox";
+    }
+
+    @RequestMapping(value = "/orders", method = RequestMethod.GET)
+    public String orders(Model model) {
+        return "orders";
+    }
+    @RequestMapping(value = "/control", method = RequestMethod.GET)
+    public String control(Model model) {
+        return "control";
+    }
+    @RequestMapping(value = "/help", method = RequestMethod.GET)
+    public String help(Model model) {
+        return "index";
+    }
+
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello(Model model) {
         model.addAttribute("hello", message.getHelloMessage());
         log.debug("We receive following message: " + message.getHelloMessage());
-        return "index";
+        return "hello";
     }
 
     @RequestMapping("/create")
