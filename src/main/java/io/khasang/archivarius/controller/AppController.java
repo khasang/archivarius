@@ -82,6 +82,11 @@ public class AppController {
         return "backup";
     }
 
+    /**
+     * Get list of 'bad' users, who spent more time in site 'vk.com'
+     * @param model
+     * @return
+     */
     @RequestMapping("/report/vkontakte")
     public String vkontakteList(Model model) {
         model.addAttribute("vklist", reportService.getReportVkontakteList());

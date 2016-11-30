@@ -1,33 +1,36 @@
 package io.khasang.archivarius.service;
 
 import com.fasterxml.jackson.databind.MappingIterator;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvParser;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import io.khasang.archivarius.entity.Report;
-import org.hibernate.annotations.SourceType;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
-
 import java.io.*;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 /**
- * Tanya on 27.11.2016.
+ * Parse csv files from resourse directory
+ * Strings are divided by semicolon
+ * We are use CsvParser jackson-dataformat-csv, which is most popular and fasted parser
  */
 @Component
 public class FileCsvParser implements ApplicationListener<ContextRefreshedEvent> {
+    @Autowired
+    ReportService reportService;
 
+    private static final org.apache.log4j.Logger log = Logger.getLogger(FileCsvParser.class);
+    /**
+     * Mapper for parser - read schema and make column model
+      */
     CsvMapper mapper = new CsvMapper().enable(CsvParser.Feature.WRAP_AS_ARRAY);
     CsvSchema csvSchema = CsvSchema.builder()
             .addColumn("name")
@@ -35,34 +38,45 @@ public class FileCsvParser implements ApplicationListener<ContextRefreshedEvent>
             .addColumn("timespent", CsvSchema.ColumnType.NUMBER)
             .build().withColumnSeparator(';');
 
+    /**
+     * Use class-path resourse folder and make list of files
+     */
     File folder = new ClassPathResource("examples").getFile();
     List<File> files = new ArrayList<>(Arrays.asList(folder.listFiles()));
-
-    @Autowired
-    ReportService reportService;
-
 
     public FileCsvParser() throws IOException {
     }
 
+    /**
+     * Check exist of our files
+     * @param file - checked file in resource dir
+     * @return true if file exist, false if don't exist
+     */
     public boolean checkFiles(File file) {
         if (file.exists()) {
+            log.debug("File " + file.getName() + " is exist!");
             return true;
         } else {
-            System.err.println("This file does not exist");
+            log.error("This file does not exist");
             return false;
         }
     }
 
+    /**
+     * Our task was work with files, which contains 10 or more strings
+     * @param file
+     * @return count rows in File
+     */
     public int countNumberRows(File file) {
         int lines = 0;
         if (checkFiles(file)) {
             try (BufferedReader reader = new BufferedReader((new FileReader(file)))) {
                 lines = (int) reader.lines().count();
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("Can't read from file " + e);
             }
         }
+        log.debug("File " + file.getName() + " contains " + lines + " strings");
         return lines;
     }
 
@@ -71,10 +85,9 @@ public class FileCsvParser implements ApplicationListener<ContextRefreshedEvent>
     }
 
     /**
-     * Использована библиотека парсера CSV. rowAsMap тут - список строки, разделенный на колонки
-     * name, site, timespent
-     *
-     * @return есть ли кто-нибудь вконтакте
+     * Check bad workers, who spent more of working time for social networking
+     * TODO: rewrite method, which check 'vk.com' in database, not file!     *
+     * @return true, if somebody was in 'vkontakte'
      */
     public boolean someoneAtVk() {
         for (File csvFile : files) {
@@ -84,16 +97,24 @@ public class FileCsvParser implements ApplicationListener<ContextRefreshedEvent>
                         .readValues(csvFile);
                 while (it.hasNext()) {
                     Map<String, String> rowAsMap = it.next();
-                    if (rowAsMap.get("site").equals("http://vk.com"))
+                    if (rowAsMap.get("site").equals("http://vk.com")) {
+                        log.debug("We found site vk.com in file " + csvFile.getName());
                         return true;
+                    }
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("Reading file + " + csvFile.getName() + "... " + e);
             }
         }
+        log.debug("We can't find site vk.com in files ");
         return false;
     }
 
+    /**
+     * Make new Report for our database
+     * @param file in source database
+     * @return List of reports from file
+     */
     public List<Report> newReportFromCsvFile(File file) {
         List<Report> list = new ArrayList<>();
         try {
@@ -110,11 +131,17 @@ public class FileCsvParser implements ApplicationListener<ContextRefreshedEvent>
                 reportService.addReport(report);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("List of file parser contains " + e);
         }
+        log.debug("Get list of parsed files and load it into database");
         return list;
     }
 
+    /**
+     * This method makes autoload our csv parser at start of working application
+     * TODO: check for dublicate counts, may be we must delete file after autoload
+     * @param contextRefreshedEvent
+     */
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         for (File csvFile : files) {

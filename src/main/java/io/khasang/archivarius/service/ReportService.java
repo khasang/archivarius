@@ -1,8 +1,6 @@
 package io.khasang.archivarius.service;
 
-import io.khasang.archivarius.dao.CompanyDAO;
 import io.khasang.archivarius.dao.ReportDAO;
-import io.khasang.archivarius.entity.Company;
 import io.khasang.archivarius.entity.Report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

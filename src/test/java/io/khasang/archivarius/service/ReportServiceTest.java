@@ -4,7 +4,6 @@ import io.khasang.archivarius.config.AppConfig;
 import io.khasang.archivarius.config.HibernateConfig;
 import io.khasang.archivarius.config.application.WebConfig;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,9 @@ public class ReportServiceTest {
     @Autowired
     FileCsvParser fileCsvParser;
 
+    /**
+     * Parser test. It loads strings into database
+     */
     @Test
     public void testAddReport() {
         for(File file: fileCsvParser.files) {
@@ -31,7 +33,9 @@ public class ReportServiceTest {
         }
     }
 
-    // создать отчет по всем пользователям, которые ходили в vk.com
+    /**
+     * Report about users, who spent time in vkontakte
+     */
     @Test
     public void testGetVkUsersFromDB() {
         Assert.assertNotNull(reportService.getReportVkontakteList());
