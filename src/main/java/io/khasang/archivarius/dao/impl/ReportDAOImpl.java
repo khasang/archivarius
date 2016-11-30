@@ -85,7 +85,6 @@ public class ReportDAOImpl implements ReportDAO {
         return (List<Report>) criteria.list();
     }
 
-<<<<<<< 764eca1c8c186ba5c1ebfeb3b6ad7314a958101a
     /**
      * Report of workers, who spent most time in social network
      * Whe get some users for 'like' pattern and set some special things:

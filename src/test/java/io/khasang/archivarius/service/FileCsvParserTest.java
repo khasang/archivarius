@@ -22,15 +22,20 @@ public class FileCsvParserTest {
     @Autowired
     FileCsvParser fileCsvParser;
 
-    @Test // testing method that checks the existence of the file
+    /**
+     * testing method that checks the existence of the file
+     */
+    @Test
     public void testFilesExist() {
         for (File file : fileCsvParser.files) {
             assertEquals(true, fileCsvParser.checkFiles(file));
         }
     }
 
-    /*testing method that checks the number of lines in the file
-     (for the correct operation of the program should be more than 10)*/
+    /**
+     * testing method that checks the number of lines in the file
+     * (for the correct operation of the program should be more than 10)
+     */
     @Test
     public void testContentsFile() {
         for (File file : fileCsvParser.files) {
@@ -38,14 +43,18 @@ public class FileCsvParserTest {
         }
     }
 
-    /*testing method, which returns the number of files are in a directory
-     (for the correct operation of the program should be more than 10)*/
+    /** testing method, which returns the number of files are in a directory
+     * (for the correct operation of the program should be more than 10)
+     */
     @Test
     public void testNumberFiles() {
         assertTrue(fileCsvParser.numberOfFiles() >= 10);
     }
 
-    @Test // testing method that will check there is someone on site vk.com
+    /**
+     * testing method that will check there is someone on site vk.com
+     */
+    @Test 
     public void testSomeOneAtVk() {
         assertEquals(true, fileCsvParser.someoneAtVk());
     }

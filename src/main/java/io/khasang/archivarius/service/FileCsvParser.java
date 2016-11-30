@@ -5,6 +5,7 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvParser;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import io.khasang.archivarius.entity.Report;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -79,7 +80,10 @@ public class FileCsvParser implements ApplicationListener<ContextRefreshedEvent>
         return lines;
     }
 
-    // returns the number of files in a directory
+    /**
+     *
+     * @return the number of files in a directory
+     */
     public int numberOfFiles() {
         return files.size();
     }
@@ -87,9 +91,8 @@ public class FileCsvParser implements ApplicationListener<ContextRefreshedEvent>
     /**
      * Check bad workers, who spent more of working time for social networking
      * TODO: rewrite method, which check 'vk.com' in database, not file!     *
-     * @return true, if somebody was in 'vkontakte'
+     * @return method returns true if the user was on site http://vk.com
      */
-    // method returns true if the user was on site http://vk.com
     public boolean someoneAtVk() {
         for (File csvFile : files) {
             try {
