@@ -19,7 +19,7 @@ public class ReportTest {
     /**
      * Make table 'Report' in our database
      */
-    @Test
+    @Test // Test Report checks for the table
     public void testEntityIsAlive() {
         assertNotNull(new Report());
     }

@@ -1,8 +1,5 @@
 package io.khasang.archivarius.controller;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
 import io.khasang.archivarius.entity.Company;
 import io.khasang.archivarius.service.CompanyService;
 import org.apache.log4j.Logger;
@@ -10,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.Response;
 import java.util.List;
 
 @org.springframework.web.bind.annotation.RestController

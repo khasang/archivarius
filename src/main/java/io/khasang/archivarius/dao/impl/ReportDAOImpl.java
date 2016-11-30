@@ -85,6 +85,7 @@ public class ReportDAOImpl implements ReportDAO {
         return (List<Report>) criteria.list();
     }
 
+<<<<<<< 764eca1c8c186ba5c1ebfeb3b6ad7314a958101a
     /**
      * Report of workers, who spent most time in social network
      * Whe get some users for 'like' pattern and set some special things:
@@ -93,16 +94,16 @@ public class ReportDAOImpl implements ReportDAO {
      * @return list of reports
      */
     @Override
+
     public List<Report> getVkontakteReportList() {
         Criteria criteria = sessionFactory.getCurrentSession()
                 .createCriteria(Report.class)
                 .add(Restrictions.like("site", "%vk.com%"))
-                .setProjection( Projections.projectionList()
+                .setProjection(Projections.projectionList()
                         .add(Projections.sum("timeInSecond"), "sumvk")
                         .add(Projections.groupProperty("nameUser"))
                 )
                 .addOrder(Order.desc("sumvk"));
-
         return (List<Report>) criteria.list();
     }
 }
