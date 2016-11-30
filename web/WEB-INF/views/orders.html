@@ -1,23 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Archivarius - исходящие документы</title>
-<script type="text/javascript">
-        //Функция проверяет что поля формы заполнены
-        function valid(form) {
-            var fail = false;
-            var documentName = form.documentName.value;
-            var description = form.description.value;
-            if (documentName == "" || documentName == " ")
-                fail = "Пожалуйста, введите название документа";
-            if (description == "" || description == " ")
-                fail = "Пожалуйста, заполните краткое описание документа";
-            if (fail) 
-                alert(fail);
-        }
-    </script>
-<link rel="stylesheet" href="css/styles.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Archivarius - распоряжения</title>
+    <link rel="stylesheet" href="css/styles.css" type="text/css" /> 
+    <script type="text/javascript">
+    
+    </script>   
 </head>
 
 <body>
@@ -30,8 +19,8 @@
     <div id="navigation">
     	<ul>
         	<li><a href="inbox.html">Входящие документы</a></li>
-            <li class="selected"><a href="outbox.html">Исходящие документы</a></li>
-            <li><a href="orders.html">Распоряжения</a></li>
+            <li><a href="outbox.html">Исходящие документы</a></li>
+            <li class="selected"><a href="orders.html">Распоряжения</a></li>
             <li><a href="control.html">Контроль исполнений</a></li>
             <li><a href="help.html">Справка</a></li>
         </ul>
@@ -56,29 +45,27 @@
 
         <div id="content">
     		<form action="" method="post" name="outboxForm" id="form" class="contact_form">
-                <label for="documentName">Название документа:</label>
-                <input type="text" name="documentName" placeholder="Введите название документа" id="documentName" />
+                <label for="orderTheme">Тема распорядительного документа:</label>
+                <input type="text" name="orderTheme" placeholder="Введите название документа" id="orderTheme" />
                 <br>
                 <br>
-                <label for="documentType">Тип документа:</label>
+                <br>
+                <label for="documentType">Тип распорядительного документа:</label>
                 <select name="documentType" id="documentType" >
-                    <option value="A">По умолчанию</option>
-                    <option value="B">Предложение</option>
-                    <option value="C">Заявка</option>
-                    <option value="D">Письмо</option>
-                    <option value="E">Справка</option>
-                    <option value="F">Обзор</option>
-                    <option value="G">Договор</option>
-                    <option value="H">Служебная записка</option>
-                    <option value="I">Добровольное сообщение</option>
+                    <option value="A">Распоряжение</option>
+                    <option value="B">Приказ</option>
+                    <option value="C">Указание</option>
+                    <option value="D">Решение</option>
+                    <option value="E">Постановление</option>                   
                 </select>
                 <br>
                 <br>
-                <label for="description">Краткое описание:</label>
-                <textarea rows="8" cols="50" name="description"  id="description"></textarea>
+                <br>
+                <label for="datepicker">Дата распоряжения:</label>
+                <input type="date" id="datepicker">          
                 <br>
                 <br>
-                <label for="additional">Текст сопровождения (по необходимости):</label>
+                <label for="additional">Текст распоряжения:</label>
                 <textarea rows="8" cols="50" name="additional"  id="additional"></textarea>
                 <br>
                 <br>
@@ -88,18 +75,17 @@
                 <input type="radio" name="send" id="all" value="sendToWholeOrg" /> <label for="all">  - вся организация</label>
                 <br>
                 <br>
-                <input type="radio" name="send" id="management" value="sendToManagement" /> <label for="management">  - руководство</label>
-                <br>
-                <br>
                 <input type="radio" name="send" id="group" value="sendToGroup" /> <label for="group">  - выбранная группа</label>
                 <br>
                 <br>
                 <input type="radio" name="send" id="executor" value="sendToExecutor" /> <label for="executor">  - конкретное лицо</label>
                 <br>
                 <br>
-                <br>               
+                <br>     
+                
             </form>
-                <form action="" method="post" name="submitForm" id="subForm">
+             
+                <form action="" method="post" name="submitForm" id="SubForm">
                     <label for="encloseFile">Прикрепить файл:</label>
                     <br>
                     <br>

@@ -14,23 +14,21 @@ body {
 }
 
 /** element defaults **/
-table {
-	width: 100%;
-	text-align: left;
+table { 
+  margin: 10px 0 30px 0;
 }
 
-th, td {
-	padding: 10px 10px;
+table tr th, table tr td { 
+  background: #4F4F4F;
+  color: #FFF;
+  padding: 7px 4px;
+  text-align: left;
 }
-
-th {
-	color: #fff;
-	background-color: #033E6B;
-}
-
-td {
-	background: #fff;
-	border-bottom: 1px solid #d0d0d0;
+  
+table tr td { 
+  background: #E5E5DB;
+  color: #47433F;
+  border-top: 1px solid #FFF;
 }
 
 code, blockquote {
@@ -165,7 +163,7 @@ li ol, li ul {
 
 
 #container {
-	width: 980px;
+	width: 94%;
 	margin:0 auto;
 	padding: 0;
 }
@@ -234,14 +232,14 @@ li ol, li ul {
 
 #content {
 	float: left;
-	width: 480px;
+	width: 65%;
 	padding: 10px;
 	background-color: #f0f0f0;
 	margin:0 10px;
 }
 
 .sidebar {
-	width: 220px;
+	width: 16%;
 	padding: 20px 0;
 }
 
@@ -250,7 +248,7 @@ li ol, li ul {
 }
 
 .sidebar-right {
-	float: right;
+	float: left;
 }
 
 .sidebar ul {
@@ -297,6 +295,115 @@ li ol, li ul {
 
 .clear {
 	clear: both;
+}
+
+
+.contact_form ul {
+    width:750px;
+    list-style-type:none;
+	list-style-position:outside;
+	margin:0px;
+	padding:0px;
+}
+.contact_form li{
+	padding:12px; 
+	border-bottom:1px solid #eee;
+	position:relative;
+} 
+.contact_form li:first-child, .contact_form li:last-child {
+	border-bottom:1px solid #777;
+}
+
+/* === Form Header === */
+.contact_form h2 {
+	margin:0;
+	display: inline;
+}
+.required_notification {
+	color:#d45252; 
+	margin:5px 0 0 0; 
+	display:inline;
+	float:right;
+}
+
+/* === Form Elements === */
+.contact_form label {
+	width:150px;
+	margin-top: 3px;
+	display:inline-block;
+	float:left;
+	padding:3px;
+}
+.contact_form input {
+	height:20px; 
+	width:220px; 
+	padding:5px 8px;
+}
+.contact_form select {
+	height:30px; 
+	width:220px; 
+	padding:5px 8px;
+}
+.contact_form textarea {padding:8px; width:300px;}
+.contact_form button {margin-left:156px;}
+
+	/* form element visual styles */
+	.contact_form input, .contact_form textarea, .contact_form select { 
+		border:1px solid #aaa;
+		box-shadow: 0px 0px 3px #ccc, 0 10px 15px #eee inset;
+		border-radius:2px;
+		padding-right:30px;
+		-moz-transition: padding .25s; 
+		-webkit-transition: padding .25s; 
+		-o-transition: padding .25s;
+		transition: padding .25s;
+	}
+	.contact_form input:focus, .contact_form textarea:focus, .contact_form select:focus {
+		background: #fff; 
+		border:1px solid #555; 
+		box-shadow: 0 0 3px #aaa; 
+		padding-right:70px;
+	}
+
+/* === HTML5 validation styles === */	
+.contact_form input:required, .contact_form textarea:required, .contact_form select:required {
+	background: #fff url(images/red_asterisk.png) no-repeat 98% center;
+}
+.contact_form input:required:valid, .contact_form textarea:required:valid, .contact_form select:required:valid {
+	background: #fff url(images/valid.png) no-repeat 98% center;
+	box-shadow: 0 0 5px #5cd053;
+	border-color: #28921f;
+}
+.contact_form input:focus:invalid, .contact_form textarea:focus:invalid, .contact_form select:focus:invalid {
+	background: #fff url(images/invalid.png) no-repeat 98% center;
+	box-shadow: 0 0 5px #d45252;
+	border-color: #b03535
+}
+
+/* === Form hints === */
+.form_hint {
+	background: #d45252;
+	border-radius: 3px 3px 3px 3px;
+	color: white;
+	margin-left:8px;
+	padding: 1px 6px;
+	z-index: 999; /* hints stay above all other elements */
+	position: absolute; /* allows proper formatting if hint is two lines */
+	display: none;
+}
+.form_hint::before {
+	content: "\25C0";
+	color:#d45252;
+	position: absolute;
+	top:1px;
+	left:-6px;
+}
+.contact_form input:focus + .form_hint {display: inline;}
+.contact_form input:required:valid + .form_hint {background: #28921f;}
+.contact_form input:required:valid + .form_hint::before {color:#28921f;}
+
+.contact_form li:first-child, .contact_form li:last-child {
+	border-bottom:1px solid #777;
 }
 
 #footer {
