@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"io.khasang.archivarius.config", "io.khasang.archivarius.controller.*", "io.khasang.archivarius.*"})
+@ComponentScan({"io.khasang.archivarius.config", "io.khasang.archivarius.controller.*", "io.khasang.archivarius.service.*", "io.khasang.archivarius.dao.*", "io.khasang.archivarius.*"})
 public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public InternalResourceViewResolver viewResolver() {
@@ -30,5 +30,4 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/views/js/");
         registry.addResourceHandler("/font/**").addResourceLocations("/WEB-INF/views/font/");
     }
-
 }
