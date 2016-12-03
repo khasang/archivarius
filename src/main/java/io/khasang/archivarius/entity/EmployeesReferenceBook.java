@@ -1,19 +1,29 @@
 package io.khasang.archivarius.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
 public class EmployeesReferenceBook {
 
     @Id
+    @GeneratedValue
     private int id;
     private String firstName;
     private String middleName;
     private String lastName;
+
+    @OneToOne
+    @JoinColumn(name = "department_id",
+            foreignKey = @ForeignKey(name = "DEPARTMENT_ID_FK")
+    )
     private Department department;
     private String position;
+
+    @OneToOne
+    @JoinColumn(name = "phone_id",
+            foreignKey = @ForeignKey(name = "PHONE_ID_FK")
+    )
     private Phone phone;
 
     public EmployeesReferenceBook() {
