@@ -39,6 +39,14 @@ public class CompanyDAOImpl implements CompanyDAO {
     }
 
     @Override
+    public void deleteCompanyById(int id) {
+        final Session session = sessionFactory.getCurrentSession();
+        Company company = getCompanyById(id);
+        session.delete(company);
+        session.flush();
+    }
+
+    @Override
     public Company getCompanyById(int id) {
         Criteria criteria = sessionFactory.
                 getCurrentSession().

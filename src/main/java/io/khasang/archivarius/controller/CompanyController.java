@@ -7,6 +7,7 @@ import io.khasang.archivarius.model.QueryExample;
 import io.khasang.archivarius.service.CompanyService;
 import io.khasang.archivarius.service.ReportService;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -68,5 +69,11 @@ public class CompanyController {
         model.addAttribute("innNumber", company.getInnNumber());
         model.addAttribute("address", company.getAddress());
         return "resultCompanyFormEdit";
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST, params = { "delete" })
+    public String deny(@RequestParam int id, @RequestParam String delete, Model model) {
+        companyService.deleteCompanyById(id);
+        return "redirect:/";
     }
 }

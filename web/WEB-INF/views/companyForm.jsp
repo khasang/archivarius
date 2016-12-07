@@ -32,6 +32,9 @@
                 <tr>
                     <td><input type="submit" value="Submit"/></td>
                 </tr>
+                <tr>
+                    <td><input type="submit" name="delete" value="Delete"/></td>
+                </tr>
             </table>
         </form:form>
     </div>
