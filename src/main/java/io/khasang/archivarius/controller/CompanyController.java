@@ -42,10 +42,14 @@ public class CompanyController {
     }
 
     @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.GET)
-    public String companyForm(@PathVariable("id") String id, ModelMap model) {
+    public ModelAndView companyForm(@PathVariable("id") String id) {
         Integer intId = Integer.valueOf(id);
-        model.addAttribute("companyForm", companyService.getCompanyById(intId));
-        return "companyForm";
+        Company company = companyService.getCompanyById(intId);
+        company.setId(company.getId());
+        company.setName(company.getName());
+        company.setAddress(company.getAddress());
+        company.setInnNumber(company.getInnNumber());
+        return new ModelAndView("companyForm", "company", company);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -59,7 +63,7 @@ public class CompanyController {
         if (result.hasErrors()) {
             return "error";
         }
-        companyService.addCompany(company);
+        companyService.updateCompany(company);
         model.addAttribute("name", company.getName());
         model.addAttribute("innNumber", company.getInnNumber());
         model.addAttribute("address", company.getAddress());

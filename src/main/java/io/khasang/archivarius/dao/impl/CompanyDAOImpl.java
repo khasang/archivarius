@@ -2,10 +2,13 @@ package io.khasang.archivarius.dao.impl;
 
 import io.khasang.archivarius.dao.CompanyDAO;
 import io.khasang.archivarius.entity.Company;
+import io.khasang.archivarius.entity.Worker;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,15 +26,9 @@ public class CompanyDAOImpl implements CompanyDAO {
 
     @Override
     public void updateCompany(Company company) {
-        // saving old password if do not provided new
-        final String query = "SELECT name from COMPANY WHERE id=:id";
-        String newName = (String) sessionFactory.
-                getCurrentSession().
-                createSQLQuery(query).
-                setParameter("id", company.getId()).
-                uniqueResult();
-        company.setName(newName);
-        sessionFactory.getCurrentSession().update(company);
+        final Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(company);
+        session.flush();
     }
 
     @Override

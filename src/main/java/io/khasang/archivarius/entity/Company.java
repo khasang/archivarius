@@ -5,8 +5,9 @@ import javax.persistence.*;
 @Entity
 public class Company {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
     private int id;
+
     private String name;
 
     private int innNumber;
