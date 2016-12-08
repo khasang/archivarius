@@ -6,22 +6,20 @@
     <!-- Include NAVBAR-->
     <jsp:include page="include/navbar.jsp"/>
     <!-- Include LEFT SIDEBAR -->
-    <jsp:include page="include/left_sidebar_comp.jsp"/>
+    <jsp:include page="include/left_sidebar_dep.jsp"/>
     <div id="content">
         <h2>Организации</h2>
         <table class="table">
             <tr>
-                <th>ИНН</th>
                 <th>Название</th>
-                <th>Адрес</th>
                 <th>&nbsp;</th>
             </tr>
+            <c:forEach items="${departmentList}" var="item">
                 <tr>
-                    <td>${companygetId.innNumber}</td>
-                    <td>${companygetId.name}</td>
-                    <td>${companygetId.address}</td>
-                    <td><a href="/company/${companygetId.id}/edit">Редактировать</a></td>
+                    <td>${item.name}</td>
+                    <td><a href="/department/${item.id}/edit">Редактировать</a></td>
                 </tr>
+            </c:forEach>
         </table>
     </div>
     <!-- Include RIGHT SIDEBAR-->

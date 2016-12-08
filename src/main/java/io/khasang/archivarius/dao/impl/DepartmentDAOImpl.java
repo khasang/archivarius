@@ -8,9 +8,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class DepartmentDAOImpl implements DepartmentDAO {
     @Autowired
     SessionFactory sessionFactory;
@@ -22,14 +24,9 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
     @Override
     public void updateDepartment(Department department) {
-        final String query = "SELECT name from DEPARTMENT WHERE id=:id";
-        String newName = (String) sessionFactory.
-                getCurrentSession().
-                createSQLQuery(query).
-                setParameter("id", department.getId()).
-                uniqueResult();
-        department.setName(newName);
-        sessionFactory.getCurrentSession().update(department);
+        final Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(department);
+        session.flush();
     }
 
     @Override
@@ -40,10 +37,18 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     }
 
     @Override
+    public void deleteDepartmentById(int id) {
+        final Session session = sessionFactory.getCurrentSession();
+        Department department = getDepartmentById(id);
+        session.delete(department);
+        session.flush();
+    }
+
+    @Override
     public Department getDepartmentById(int id) {
         Criteria criteria = sessionFactory.
                 getCurrentSession().
-                createCriteria(Company.class);
+                createCriteria(Department.class);
         criteria.add(Restrictions.eq("id", id));
         return (Department) criteria.uniqueResult();
     }
@@ -52,7 +57,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     public List<Department> getDepartmentList() {
         Criteria criteria = sessionFactory.
                 getCurrentSession().
-                createCriteria(Company.class);
+                createCriteria(Department.class);
         return (List<Department>) criteria.list();
     }
 }

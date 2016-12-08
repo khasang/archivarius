@@ -6,7 +6,7 @@ import java.util.List;
 @Entity
 public class Department {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
     private int id;
 
     private String name;

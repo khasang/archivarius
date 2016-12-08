@@ -7,13 +7,11 @@
     <!-- Include NAVBAR-->
     <jsp:include page="include/navbar.jsp"/>
     <!-- Include LEFT SIDEBAR -->
-    <jsp:include page="include/left_sidebar_comp.jsp"/>
+    <jsp:include page="include/left_sidebar_dep.jsp"/>
     <div id="content">
-        <h2>Изменение параметров организации</h2>
+        <h2>Изменение параметров департамента</h2>
         <p>Успешно!</p>
         <p>${name}</p>
-        <p>${innNumber}</p>
-        <p>${address}</p>
     </div>
     <!-- Include RIGHT SIDEBAR-->
     <jsp:include page="include/right_sidebar.jsp"/>

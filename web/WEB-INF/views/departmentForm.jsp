@@ -8,23 +8,15 @@
     <!-- Include NAVBAR-->
     <jsp:include page="include/navbar.jsp"/>
     <!-- Include LEFT SIDEBAR -->
-    <jsp:include page="include/left_sidebar_comp.jsp"/>
+    <jsp:include page="include/left_sidebar_dep.jsp"/>
     <div id="content">
         <h2>Изменение параметров организации</h2>
-        <form:form method="POST" action="/company/" modelAttribute="company">
+        <form:form method="POST" action="/department/" modelAttribute="department">
             <form:hidden path="id"/>
             <table>
                 <tr>
                     <td><form:label path="name">Name</form:label></td>
                     <td><form:input path="name"/></td>
-                </tr>
-                <tr>
-                    <td><form:label path="address">Address</form:label></td>
-                    <td><form:input path="address"/></td>
-                </tr>
-                <tr>
-                    <td><form:label path="innNumber">Inn Number</form:label></td>
-                    <td><form:input path="innNumber"/></td>
                 </tr>
                 <tr>
                     <td><input type="submit" value="Submit"/></td>

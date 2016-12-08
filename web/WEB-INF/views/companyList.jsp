@@ -6,7 +6,7 @@
     <!-- Include NAVBAR-->
     <jsp:include page="include/navbar.jsp"/>
     <!-- Include LEFT SIDEBAR -->
-    <jsp:include page="include/left_sidebar.jsp"/>
+    <jsp:include page="include/left_sidebar_comp.jsp"/>
     <div id="content">
         <h2>Организации</h2>
         <table class="table">
@@ -14,12 +14,14 @@
                 <th>ИНН</th>
                 <th>Название</th>
                 <th>Адрес</th>
+                <th>&nbsp;</th>
             </tr>
             <c:forEach items="${companyList}" var="item">
                 <tr>
                     <td>${item.innNumber}</td>
                     <td>${item.name}</td>
                     <td>${item.address}</td>
+                    <td><a href="/company/${item.id}/edit">Редактировать</a></td>
                 </tr>
             </c:forEach>
         </table>

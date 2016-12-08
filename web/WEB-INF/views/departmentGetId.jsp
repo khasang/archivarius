@@ -6,21 +6,17 @@
     <!-- Include NAVBAR-->
     <jsp:include page="include/navbar.jsp"/>
     <!-- Include LEFT SIDEBAR -->
-    <jsp:include page="include/left_sidebar_comp.jsp"/>
+    <jsp:include page="include/left_sidebar_dep.jsp"/>
     <div id="content">
-        <h2>Организации</h2>
+        <h2>Департаменты</h2>
         <table class="table">
             <tr>
-                <th>ИНН</th>
                 <th>Название</th>
-                <th>Адрес</th>
                 <th>&nbsp;</th>
             </tr>
                 <tr>
-                    <td>${companygetId.innNumber}</td>
-                    <td>${companygetId.name}</td>
-                    <td>${companygetId.address}</td>
-                    <td><a href="/company/${companygetId.id}/edit">Редактировать</a></td>
+                    <td>${departmentGetId.name}</td>
+                    <td><a href="/department/${departmentGetId.id}/edit">Редактировать</a></td>
                 </tr>
         </table>
     </div>

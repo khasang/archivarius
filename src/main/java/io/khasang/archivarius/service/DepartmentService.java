@@ -11,7 +11,7 @@ import java.util.List;
 @Component("DepartmentService")
 @Transactional
 public class DepartmentService {
-
+    @Autowired
     DepartmentDAO departmentDAO;
 
     public void addDepartment(Department department) {
@@ -32,5 +32,9 @@ public class DepartmentService {
 
     public void deleteDepartment(Department department) {
         departmentDAO.deleteDepartment(department);
+    }
+
+    public void deleteDepartmentById(int id) {
+        departmentDAO.deleteDepartmentById(id);
     }
 }

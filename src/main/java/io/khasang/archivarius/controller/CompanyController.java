@@ -74,6 +74,6 @@ public class CompanyController {
     @RequestMapping(value = "/", method = RequestMethod.POST, params = { "delete" })
     public String deny(@RequestParam int id, @RequestParam String delete, Model model) {
         companyService.deleteCompanyById(id);
-        return "redirect:/";
+        return "redirect:/company/";
     }
 }

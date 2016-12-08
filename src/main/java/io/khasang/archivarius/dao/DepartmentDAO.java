@@ -10,6 +10,8 @@ public interface DepartmentDAO {
 
     void deleteDepartment(Department department);
 
+    void deleteDepartmentById(int id);
+
     Department getDepartmentById(int id);
 
     List<Department> getDepartmentList();
