@@ -130,4 +130,9 @@ public class AppController {
         return "vklist";
 
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginPage() {
+        return "login";
+    }
 }
