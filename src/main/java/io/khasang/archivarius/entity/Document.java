@@ -1,12 +1,15 @@
 package io.khasang.archivarius.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
 public class Document {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private Date dateOfReceive;
     private String author;
