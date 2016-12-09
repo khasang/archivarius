@@ -66,4 +66,15 @@ public class Department {
     public void setPhoneNumbers(List<Phone> phoneNumbers) {
         this.phoneNumbers = phoneNumbers;
     }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", company=" + company +
+                ", director=" + director +
+                ", phoneNumbers=" + phoneNumbers +
+                '}';
+    }
 }

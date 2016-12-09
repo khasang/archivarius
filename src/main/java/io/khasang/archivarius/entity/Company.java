@@ -61,4 +61,15 @@ public class Company {
     public void setDirector(Worker director) {
         this.director = director;
     }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", innNumber=" + innNumber +
+                ", address='" + address + '\'' +
+                ", director=" + director +
+                '}';
+    }
 }
