@@ -19,13 +19,11 @@
                     <td><form:input path="name"/></td>
                 </tr>
                 <tr>
-                    <td><form:label path="">Company</form:label></td>
+                    <td><form:label path="">Name</form:label></td>
                     <td>
                         <form:select path="company">
                             <form:option value="NONE" label="--- Select ---"/>
-                            <c:forEach items="${companies}" var="c">
-                                <option <c:if test="${c.key eq selectedCompany}">selected="selected"</c:if> value="${c.key}">${c.value}</option>
-                            </c:forEach>
+                            <form:options items="${companies}"/>
                         </form:select>
                     </td>
                 </tr>
