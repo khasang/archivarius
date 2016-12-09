@@ -12,11 +12,15 @@
         <table class="table">
             <tr>
                 <th>Название</th>
+                <th>Организация</th>
+                <th>Начальник</th>
                 <th>&nbsp;</th>
             </tr>
             <c:forEach items="${departmentList}" var="item">
                 <tr>
                     <td>${item.name}</td>
+                    <td>${item.company.name}</td>
+                    <td>${item.director}</td>
                     <td><a href="/department/${item.id}/edit">Редактировать</a></td>
                 </tr>
             </c:forEach>
