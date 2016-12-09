@@ -9,6 +9,8 @@
                 </div>
             </form>
         </li>
+        <li><a href="/company/">Организации</a></li>
+        <li><a href="/department/">Департаменты</a></li>
     </ul>
     <br>
     <ul>
