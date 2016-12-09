@@ -11,6 +11,8 @@ public interface CompanyDAO {
 
     void deleteCompany(Company company);
 
+    void deleteCompanyById(int id);
+
     Company getCompanyById(int id);
 
     Company getCompanyByName(String name);

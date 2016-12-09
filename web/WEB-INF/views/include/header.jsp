@@ -12,6 +12,6 @@
 <body>
 <div id="container">
     <div id="header">
-        <h1><a href="">Archivarius</a></h1>
+        <h1><a href="/">Archivarius</a></h1>
         <h2>Documents Workflow System</h2>
     </div>

@@ -36,7 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").access("hasRole('ADMIN')")
                 .antMatchers("/user/**").access("hasRole('USER')")
 //                .antMatchers("/api/company/**").access("hasRole('ADMIN')")
-                .and().csrf().disable().formLogin().defaultSuccessUrl("/", false);
+                .and().formLogin().loginPage("/login")
+                .usernameParameter("ssoId").passwordParameter("password")
+                .and().csrf().disable();
     }
 
     @Bean
