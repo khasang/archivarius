@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 
 @Entity
-public class EmployeesReferenceBook {
+public class Employee {
 
     @Id
     @GeneratedValue
@@ -26,7 +26,7 @@ public class EmployeesReferenceBook {
     )
     private Phone phone;
 
-    public EmployeesReferenceBook() {
+    public Employee() {
     }
 
     public int getId() {
