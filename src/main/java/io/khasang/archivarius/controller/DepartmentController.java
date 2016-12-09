@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,24 +41,16 @@ public class DepartmentController {
 
     @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.GET)
     public String departmentForm(@PathVariable("id") String id, ModelMap model) {
-        List<Company> companies = companyService.getCompanyList();
-
-        Integer intId = Integer.valueOf(id);
-        Department department = departmentService.getDepartmentById(intId);
-//        department.setId(department.getId());
-//        department.setName(department.getName());
-//        department.setCompany(department.getCompany());
-        model.addAttribute("companies", companies);
+        Department department = departmentService.getDepartmentById(Integer.valueOf(id));
+        model.addAttribute("companies", getDropboxList());
         model.addAttribute("department", department);
         return "departmentForm";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String showDepartmentForm(ModelMap model) {
-        List<Company> companies = companyService.getCompanyList();
-        Department department = new Department();
-        model.addAttribute("companies", companies);
-        model.addAttribute("department", department);
+        model.addAttribute("companies", getDropboxList());
+        model.addAttribute("department", new Department());
         return "departmentForm";
     }
 
@@ -80,5 +74,14 @@ public class DepartmentController {
     public String deny(@RequestParam int id, @RequestParam String delete, Model model) {
         departmentService.deleteDepartmentById(id);
         return "redirect:/department/";
+    }
+
+    public Map<Integer, String> getDropboxList() {
+        List<Company> companiesList = companyService.getCompanyList();
+        Map<Integer, String> companies = new HashMap<>();
+        for(Company comp: companiesList) {
+            companies.put(comp.getId(), comp.getName());
+        }
+        return companies;
     }
 }

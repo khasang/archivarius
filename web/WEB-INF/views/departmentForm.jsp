@@ -20,19 +20,11 @@
                 </tr>
                 <tr>
                     <td><form:label path="">Name</form:label></td>
-                    <td><form:select path="company">
-                        <form:option value="NONE" label="--- Select ---"/>
-                        <c:forEach var="company" items="${companies}">
-                            <c:choose>
-                                <c:when test="${department.company eq true}">
-                                    <option value="${company.id}" selected="selected">${company.name}</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="${company.id}">${company.name}</option>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-                    </form:select>
+                    <td>
+                        <form:select path="company">
+                            <form:option value="NONE" label="--- Select ---"/>
+                            <form:options items="${companies}"/>
+                        </form:select>
                     </td>
                 </tr>
                 <tr>
