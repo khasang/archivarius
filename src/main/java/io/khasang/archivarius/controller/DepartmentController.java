@@ -42,7 +42,9 @@ public class DepartmentController {
     @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.GET)
     public String departmentForm(@PathVariable("id") String id, ModelMap model) {
         Department department = departmentService.getDepartmentById(Integer.valueOf(id));
+        System.out.println("selectedCompany: " + department.getCompany().getId());
         model.addAttribute("companies", getDropboxList());
+        model.addAttribute("selectedCompany", department.getCompany().getId());
         model.addAttribute("department", department);
         return "departmentForm";
     }
