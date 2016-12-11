@@ -1,6 +1,8 @@
 package io.khasang.archivarius.dao.impl;
 
+import io.khasang.archivarius.dao.DocumentDAO;
 import io.khasang.archivarius.dao.DocumentLifeCycleDAO;
+import io.khasang.archivarius.entity.Document;
 import io.khasang.archivarius.entity.DocumentLifeCycle;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -12,46 +14,24 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class DocumentLifeCycleImpl implements DocumentLifeCycleDAO {
+public class DocumentImpl implements DocumentDAO {
     @Autowired
     SessionFactory sessionFactory;
 
     @Override
-    public void updateDocumentLifeCycle(DocumentLifeCycle documentLifeCycle) {
-        final Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(documentLifeCycle);
-        session.flush();
-    }
-
-    @Override
-    public void deleteDocumentLifeCycle(DocumentLifeCycle documentLifeCycle) {
-        final Session session = sessionFactory.getCurrentSession();
-        session.delete(documentLifeCycle);
-        session.flush();
-    }
-
-    @Override
-    public void deleteDocumentLifeCycleById(int id) {
-        final Session session = sessionFactory.getCurrentSession();
-        DocumentLifeCycle documentLifeCycle = getDocumentLifeCycleById(id);
-        session.delete(documentLifeCycle);
-        session.flush();
-    }
-
-    @Override
-    public DocumentLifeCycle getDocumentLifeCycleById(int id) {
+    public Document getDocumentById(int id) {
         Criteria criteria = sessionFactory.
                 getCurrentSession().
-                createCriteria(DocumentLifeCycle.class);
+                createCriteria(Document.class);
         criteria.add(Restrictions.eq("id", id));
-        return (DocumentLifeCycle) criteria.uniqueResult();
+        return (Document) criteria.uniqueResult();
     }
 
     @Override
-    public List<DocumentLifeCycle> getDocumentLifeCycleList() {
+    public List<Document> getDocumentList() {
         Criteria criteria = sessionFactory.
                 getCurrentSession().
                 createCriteria(DocumentLifeCycle.class);
-        return (List<DocumentLifeCycle>) criteria.list();
+        return (List<Document>) criteria.list();
     }
 }

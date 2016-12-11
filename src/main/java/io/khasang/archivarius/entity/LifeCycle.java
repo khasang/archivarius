@@ -1,4 +1,12 @@
 package io.khasang.archivarius.entity;
 
-public class LifeCycle {
+import javax.persistence.Embeddable;
+
+public enum  LifeCycle {
+    RECEIVE,
+    WRITEN,
+    NEED_WRITE,
+    REJECTED,
+    DOC_ERROR,
+    FINISHED
 }

@@ -1,25 +1,36 @@
 package io.khasang.archivarius.entity;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-public class Company {
+public class DocumentLifeCycle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private int id;
 
-    private String name;
-
-    private int innNumber;
-
-    private String address;
+    @Enumerated(EnumType.ORDINAL)
+    private LifeCycle lifeCycle;
 
     @ManyToOne
-    @JoinColumn(name = "director_id",
-            foreignKey = @ForeignKey(name = "DIRECTOR_ID"))
-    private Worker director;
+    @JoinColumn(name = "document_id",
+            foreignKey = @ForeignKey(name = "DOCUMENT_ID"))
+    private Document document;
 
-    public Company() {
+    @ManyToOne
+    @JoinColumn(name = "department_id",
+            foreignKey = @ForeignKey(name = "DEPARTMENT_ID"))
+    private Department department;
+
+    @Type(type = "timestamp")
+    private Date startDate;
+
+    @Type(type = "timestamp")
+    private Date finishDate;
+
+    public DocumentLifeCycle() {
     }
 
     public int getId() {
@@ -30,46 +41,54 @@ public class Company {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public LifeCycle getLifeCycle() {
+        return lifeCycle;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLifeCycle(LifeCycle lifeCycle) {
+        this.lifeCycle = lifeCycle;
     }
 
-    public int getInnNumber() {
-        return innNumber;
+    public Document getDocument() {
+        return document;
     }
 
-    public void setInnNumber(int innNumber) {
-        this.innNumber = innNumber;
+    public void setDocument(Document document) {
+        this.document = document;
     }
 
-    public String getAddress() {
-        return address;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
-    public Worker getDirector() {
-        return director;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setDirector(Worker director) {
-        this.director = director;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(Date finishDate) {
+        this.finishDate = finishDate;
     }
 
     @Override
     public String toString() {
-        return "Company{" +
+        return "DocumentLifeCycle{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", innNumber=" + innNumber +
-                ", address='" + address + '\'' +
-                ", director=" + director +
+                ", document=" + document +
+                ", department=" + department +
+                ", startDate=" + startDate +
+                ", finishDate=" + finishDate +
                 '}';
     }
 }

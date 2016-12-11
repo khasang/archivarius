@@ -8,20 +8,23 @@
     <!-- Include LEFT SIDEBAR -->
     <jsp:include page="include/left_sidebar_comp.jsp"/>
     <div id="content">
-        <h2>Организации</h2>
+        <h2>Движение документа</h2>
         <table class="table">
             <tr>
-                <th>ИНН</th>
-                <th>Название</th>
-                <th>Адрес</th>
-                <th>&nbsp;</th>
+                <th>Название документа</th>
+                <th>Подразделение</th>
+                <th>Дата получения</th>
+                <th>Дата окончания</th>
+                <th>Статус</th>
             </tr>
-            <c:forEach items="${companyList}" var="item">
+            <c:forEach items="${documentLifeCycleList}" var="item">
                 <tr>
-                    <td>${item.innNumber}</td>
-                    <td>${item.name}</td>
-                    <td>${item.address}</td>
-                    <td><a href="/company/${item.id}/edit">Редактировать</a></td>
+                    <td>${item.document.name}</td>
+                    <td>${item.department.name}</td>
+                    <td>${item.startDate}</td>
+                    <td>${item.finishDate}</td>
+                    <td>${item.lifeCycle}</td>
+                    <td><a href="/document/life_cycle/${item.id}/edit">Редактировать</a></td>
                 </tr>
             </c:forEach>
         </table>

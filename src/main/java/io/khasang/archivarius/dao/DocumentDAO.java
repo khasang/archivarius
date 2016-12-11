@@ -1,19 +1,13 @@
 package io.khasang.archivarius.dao;
 
-import io.khasang.archivarius.entity.Company;
+import io.khasang.archivarius.entity.Document;
 import io.khasang.archivarius.entity.DocumentLifeCycle;
 
 import java.util.List;
 
-public interface DocumentLifeCycleDAO {
+public interface DocumentDAO {
 
-    void updateDocumentLifeCycle(DocumentLifeCycle documentLifeCycle);
+    Document getDocumentById(int id);
 
-    void deleteDocumentLifeCycle(DocumentLifeCycle documentLifeCycle);
-
-    void deleteDocumentLifeCycleById(int id);
-
-    DocumentLifeCycle getDocumentLifeCycleById(int id);
-
-    List<DocumentLifeCycle> getDocumentLifeCycleList();
+    List<Document> getDocumentList();
 }

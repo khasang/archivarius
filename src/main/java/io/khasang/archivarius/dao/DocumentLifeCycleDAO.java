@@ -1,21 +1,19 @@
 package io.khasang.archivarius.dao;
 
 import io.khasang.archivarius.entity.Company;
+import io.khasang.archivarius.entity.DocumentLifeCycle;
 
 import java.util.List;
 
-public interface CompanyDAO {
-    void addCompany(Company company);
+public interface DocumentLifeCycleDAO {
 
-    void updateCompany(Company company);
+    void updateDocumentLifeCycle(DocumentLifeCycle documentLifeCycle);
 
-    void deleteCompany(Company company);
+    void deleteDocumentLifeCycle(DocumentLifeCycle documentLifeCycle);
 
-    void deleteCompanyById(int id);
+    void deleteDocumentLifeCycleById(int id);
 
-    Company getCompanyById(int id);
+    DocumentLifeCycle getDocumentLifeCycleById(int id);
 
-    Company getCompanyByName(String name);
-
-    List<Company> getCompanyList();
+    List<DocumentLifeCycle> getDocumentLifeCycleList();
 }

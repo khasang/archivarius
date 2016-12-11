@@ -10,7 +10,7 @@ import java.util.List;
 
 @Component
 @Transactional
-public class DocumentLiveCicleService {
+public class DocumentLifeCicleService {
     @Autowired
     DocumentLifeCycleDAO documentLifeCycleDAO;
 
