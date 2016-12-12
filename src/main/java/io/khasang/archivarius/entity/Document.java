@@ -1,4 +1,8 @@
 package io.khasang.archivarius.entity;
+/**
+ * Model of general document, that uses into
+ * inbox, outbox and internal doc. base
+ */
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +18,6 @@ public class Document {
     private Date dateOfReceive;
     private String author;
     private String title;
-    private String documentType;
     private String status;
     private Date deadline;
     private String destination;
@@ -52,14 +55,6 @@ public class Document {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getDocumentType() {
-        return documentType;
-    }
-
-    public void setDocumentType(String documentType) {
-        this.documentType = documentType;
     }
 
     public String getStatus() {

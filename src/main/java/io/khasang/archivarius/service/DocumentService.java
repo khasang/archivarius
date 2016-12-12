@@ -5,7 +5,6 @@ import io.khasang.archivarius.entity.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Component
@@ -37,7 +36,6 @@ public class DocumentService {
     public void updateDocument(Document document) {
         documentDAO.updateDocument(document);
     }
-
 
     public void deleteDocument(int id) {
         documentDAO.deleteDocument(id);

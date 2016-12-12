@@ -42,7 +42,7 @@ public class DocumentController {
         document.setDestination(document.getDestination());
         document.setStatus(document.getStatus());
         document.setDateOfReceive(document.getDateOfReceive());
-        document.setDocumentType(document.getDocumentType());
+       // document.setDocumentType(document.getDocumentType()); выпилил из модели, потому что в одельной сущности сейчас
         document.setAuthor(document.getAuthor());
         document.setDeadline(document.getDeadline());
         return new ModelAndView("documentForm", "document", document);
@@ -62,7 +62,7 @@ public class DocumentController {
         }
         documentService.updateDocument(document);
         model.addAttribute("title", document.getTitle());
-        model.addAttribute("type", document.getDocumentType());
+     //   model.addAttribute("type", document.getDocumentType());
         model.addAttribute("author", document.getAuthor());
         model.addAttribute("deadline", document.getDeadline());
         model.addAttribute("status", document.getStatus());
