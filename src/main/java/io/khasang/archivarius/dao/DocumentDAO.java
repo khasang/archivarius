@@ -8,15 +8,9 @@ public interface DocumentDAO {
 
     void addDocument(Document document);
 
-    void updateDocumentTitle(Document document);
+    void updateDocument(Document document);
 
-    void updateDocumentStatus(Document document);
-
-    void updateDocumentDeadline(Document document);
-
-    void updateDocumentDestination(Document document);
-
-    void deleteDocument(Document document);
+    void deleteDocument(int id);
 
     Document getDocumentById(int id);
 

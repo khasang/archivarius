@@ -34,24 +34,13 @@ public class DocumentService {
         return documentDAO.getDocumentList();
     }
 
-    public void updateDocumentTitle(Document document) {
-        documentDAO.updateDocumentTitle(document);
+    public void updateDocument(Document document) {
+        documentDAO.updateDocument(document);
     }
 
-    public void updateDocumentStatus(Document document) {
-        documentDAO.updateDocumentStatus(document);
-    }
 
-    public void updateDocumentDeadline(Document document) {
-        documentDAO.updateDocumentDeadline(document);
-    }
-
-    public void updateDocumentDestination(Document document) {
-        documentDAO.updateDocumentDestination(document);
-    }
-
-    public void deleteDocument(Document document) {
-        documentDAO.deleteDocument(document);
+    public void deleteDocument(int id) {
+        documentDAO.deleteDocument(id);
     }
 }
 
