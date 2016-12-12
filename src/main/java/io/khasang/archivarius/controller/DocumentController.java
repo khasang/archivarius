@@ -20,7 +20,7 @@ public class DocumentController {
     private static final Logger log = Logger.getLogger(CompanyController.class);
 
     @RequestMapping("/")
-    public String companyList(Model model) {
+    public String documentList(Model model) {
         model.addAttribute("documentList", documentService.getDocumentList());
         return "documentList";
     }
@@ -48,6 +48,7 @@ public class DocumentController {
         return new ModelAndView("documentForm", "document", document);
     }
 
+    //готов
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView showForm() {
         return new ModelAndView("documentForm", "document", new Document());
