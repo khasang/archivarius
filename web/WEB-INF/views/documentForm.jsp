@@ -76,4 +76,8 @@
             <input type="button" onclick="valid(document.getElementById('form'))" name="submit" value="Отправить" class="formbutton" />
         </form>
     </div>
+    <!-- Include RIGHT SIDEBAR-->
+    <jsp:include page="include/right_sidebar_inside_inbox.jsp"/>
+    <!-- Include FOOTER-->
+    <jsp:include page="include/footer.jsp"/>
 </div>
