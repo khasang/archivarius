@@ -19,6 +19,7 @@ public class DocumentController {
 
     private static final Logger log = Logger.getLogger(CompanyController.class);
 
+    //готов список документов
     @RequestMapping("/")
     public String documentList(Model model) {
         model.addAttribute("documentList", documentService.getDocumentList());
@@ -42,7 +43,7 @@ public class DocumentController {
         document.setDestination(document.getDestination());
         document.setStatus(document.getStatus());
         document.setDateOfReceive(document.getDateOfReceive());
-       // document.setDocumentType(document.getDocumentType()); выпилил из модели, потому что в одельной сущности сейчас
+        document.setDocumentType(document.getDocumentType());
         document.setAuthor(document.getAuthor());
         document.setDeadline(document.getDeadline());
         return new ModelAndView("documentForm", "document", document);
@@ -62,13 +63,13 @@ public class DocumentController {
         }
         documentService.updateDocument(document);
         model.addAttribute("title", document.getTitle());
-     //   model.addAttribute("type", document.getDocumentType());
+        model.addAttribute("type", document.getDocumentType());
         model.addAttribute("author", document.getAuthor());
         model.addAttribute("deadline", document.getDeadline());
         model.addAttribute("status", document.getStatus());
         model.addAttribute("dateOfReceive", document.getDateOfReceive());
         model.addAttribute("destination", document.getDestination());
-        return "resultCompanyFormEdit";
+        return "resultNewDocument";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST, params = {"delete"})

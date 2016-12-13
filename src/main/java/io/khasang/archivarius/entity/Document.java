@@ -4,6 +4,8 @@ package io.khasang.archivarius.entity;
  * inbox, outbox and internal doc. base
  */
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,14 +17,25 @@ public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Type(type="date")
     private Date dateOfReceive;
     private String author;
     private String title;
     private String status;
+    private String documentType;
+    @Type(type="date")
     private Date deadline;
     private String destination;
 
     public Document() {
+    }
+
+    public String getDocumentType() {
+        return documentType;
+    }
+
+    public void setDocumentType(String documentType) {
+        this.documentType = documentType;
     }
 
     public int getId() {
