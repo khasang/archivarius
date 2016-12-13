@@ -62,13 +62,18 @@ public class DocumentController {
             return "error";
         }
         documentService.updateDocument(document);
-        model.addAttribute("title", document.getTitle());
-        model.addAttribute("type", document.getDocumentType());
-        model.addAttribute("author", document.getAuthor());
-        model.addAttribute("deadline", document.getDeadline());
-        model.addAttribute("status", document.getStatus());
-        model.addAttribute("dateOfReceive", document.getDateOfReceive());
-        model.addAttribute("destination", document.getDestination());
+        //можно обратится к полям объекта передав весь объект, не добавляя атрибуты к моделе
+        //модель уже получается содержит все атрибуты (поля класса энтити) потому что передали
+        //всю сущность в documentService.updateDocument(document)
+        // может я и не прав, но все работает (с) Евгений
+
+       // model.addAttribute("title", document.getTitle());
+       // model.addAttribute("type", document.getDocumentType());
+       // model.addAttribute("author", document.getAuthor());
+       // model.addAttribute("deadline", document.getDeadline());
+       // model.addAttribute("status", document.getStatus());
+       // model.addAttribute("dateOfReceive", document.getDateOfReceive());
+       // model.addAttribute("destination", document.getDestination());
         return "resultNewDocument";
     }
 

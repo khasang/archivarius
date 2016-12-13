@@ -9,10 +9,7 @@
     <!-- Include LEFT SIDEBAR -->
     <jsp:include page="include/left_sidebar.jsp"/>
     <div id="content">
-        <h2>Все документы в базе</h2>
-        <br>
-        <br>
-        <h3>Новый документ был успешно добавлен!</h3>
+        <h2>Новый документ был успешно добавлен!</h2>
         <br>
             <table class="table">
                 <tr>
@@ -28,16 +25,18 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>${id}</td>
-                    <td>${dateOfReceive}</td>
-                    <td>${author}</td>
-                    <td>${title}</td>
-                    <td>${documentType}</td>
-                    <td>${status}</td>
-                    <td>${destination}</td>
-                    <td>${deadline}</td>
+                    <td>${document.id}</td>
+                    <td>${document.dateOfReceive}</td>
+                    <td>${document.author}</td>
+                    <td>${document.title}</td>
+                    <td>${document.documentType}</td>
+                    <td>${document.status}</td>
+                    <td>${document.destination}</td>
+                    <td>${document.deadline}</td>
                 </tr>
             </table>
+        <a href="/document/">Вернутся и просмотреть все документы в базе</a>
+
     </div>
     <!-- Include RIGHT SIDEBAR-->
     <jsp:include page="include/right_sidebar.jsp"/>

@@ -37,38 +37,39 @@
             <br>
             <br>
             <label for="datepicker">Дата получения:</label>
-            <input fmt:formatDate type="date"  id="datepicker">
+            <input fmt:formatDate type="date" name="dateOfReceive" id="datepicker">
             <br>
             <br>
             <br>
             <label for="destination">Получатели:</label>
             <select name="destination" id="destination" >
-                <option value="A">А вот сюда</option>
-                <option value="B">нужно добавить</option>
-                <option value="C">отделы или должности</option>
-                <option value="D">получателей документа</option>
-                <option value="E">из сущности БД</option>
+                <option value="сюда">А вот сюда</option>
+                <option value="нужно">нужно добавить</option>
+                <option value="отделы">отделы или должности</option>
+                <option value="получателей">получателей документа</option>
+                <option value="сущности">из сущности БД</option>
             </select>
             <br>
             <br>
             <br>
             <label for="deadline">Контрольный срок:</label>
-            <input type="date" id="deadline">
+            <input type="date" name="deadline" id="deadline">
             <br>
             <br>
             <br>
             <label for="status">Состояние документа:</label>
             <select name="status" id="status" >
-                <option value="A">Получен</option>
-                <option value="B">Подписан</option>
-                <option value="C">Требуется подпись</option>
-                <option value="D">Отказано в согласновании</option>
-                <option value="E">Ошибка в документе</option>
-                <option value="F">Документооборот завершен</option>
+                <option value="Получен">Получен</option>
+                <option value="Подписан">Подписан</option>
+                <option value="Требуется подпись">Требуется подпись</option>
+                <option value="ООтказано в согласновании">Отказано в согласновании</option>
+                <option value="Ошибка в документе">Ошибка в документе</option>
+                <option value="Документооборот завершен">Документооборот завершен</option>
             </select>
             <br>
             <br>
             <br>
+
             <tr>
                 <td><input type="submit" value="Submit"/></td>
                 <td><input type="submit" name="delete" value="Delete"/></td>
