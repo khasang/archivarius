@@ -1,8 +1,10 @@
 package io.khasang.archivarius.controller;
 
+import io.khasang.archivarius.entity.Company;
 import io.khasang.archivarius.model.DatabaseBackup;
 import io.khasang.archivarius.model.Message;
 import io.khasang.archivarius.model.QueryExample;
+import io.khasang.archivarius.service.CompanyService;
 import io.khasang.archivarius.service.ReportService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,10 +29,18 @@ public class AppController {
     DatabaseBackup databaseBackup;
     @Autowired
     ReportService reportService;
+    @Autowired
+    CompanyService companyService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping(value = "/")
     public String index(Model model) {
+        model.addAttribute("companies", companyService.getCompanyList());
         return "index";
+    }
+
+    @GetMapping(value = "/comp/add")
+    public ModelAndView showCompanyForm() {
+        return new ModelAndView("comForm", "company", new Company());
     }
 
     @RequestMapping(value = "/inbox", method = RequestMethod.GET)
