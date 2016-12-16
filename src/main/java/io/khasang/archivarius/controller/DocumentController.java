@@ -1,6 +1,8 @@
 package io.khasang.archivarius.controller;
 
+import io.khasang.archivarius.entity.DocType;
 import io.khasang.archivarius.entity.Document;
+import io.khasang.archivarius.service.DocTypeService;
 import io.khasang.archivarius.service.DocumentService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +13,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @RequestMapping("/document")
 public class DocumentController {
+
     @Autowired
     DocumentService documentService;
+
+    @Autowired
+    DocTypeService docTypeService;
+
 
     private static final Logger log = Logger.getLogger(CompanyController.class);
 
@@ -81,5 +92,15 @@ public class DocumentController {
     public String deny(@RequestParam int id, @RequestParam String delete, Model model) {
         documentService.deleteDocument(id);
         return "redirect:/document/";
+    }
+
+    //выпадающий список документов из типов документов
+    public Map<Integer, String> getDropboxList() {
+        List<DocType> docTypeList = docTypeService.getDocTypeList();
+        Map<Integer, String> documentTypes = new HashMap<>();
+        for(DocType docType: docTypeList) {
+            documentTypes.put(docType.getId(), docType.getDocumentType());
+        }
+        return documentTypes;
     }
 }

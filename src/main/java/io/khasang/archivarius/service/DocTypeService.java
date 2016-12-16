@@ -17,7 +17,7 @@ public class DocTypeService {
         docTypeDAO.addDocType(docType);
     }
 
-    public DocType getDocTypetById(int id) {
+    public DocType getDocTypeById(int id) {
         return docTypeDAO.getDocTypeById(id);
     }
 
