@@ -15,3 +15,4 @@
         <h1><a href="/">Archivarius</a></h1>
         <h2>Documents Workflow System</h2>
     </div>
+</div>
