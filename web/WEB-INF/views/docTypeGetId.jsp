@@ -8,20 +8,18 @@
     <!-- Include LEFT SIDEBAR -->
     <jsp:include page="include/left_sidebar_docType.jsp"/>
     <div id="content">
-        <h2>Справочник типов документов</h2>
+        <h2>Типы документов</h2>
         <table class="table">
             <tr>
                 <th>Тип документа</th>
                 <th>Описание</th>
                 <th>&nbsp;</th>
             </tr>
-            <c:forEach items="${docTypeList}" var="item">
-                <tr>
-                    <td>${item.documentType}</td>
-                    <td>${item.description}</td>
-                    <td><a href="/doctype/${item.id}/edit">Редактировать</a></td>
-                </tr>
-            </c:forEach>
+            <tr>
+                <td>${docTypeGetId.documentType}</td>
+                <td>${docTypeGetId.description}</td>
+                <td><a href="/company/${docTypeGetId.id}/edit">Редактировать</a></td>
+            </tr>
         </table>
     </div>
     <!-- Include RIGHT SIDEBAR-->

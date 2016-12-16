@@ -19,7 +19,7 @@
                 <li><a href="/department/">Департаменты</a></li>
                 <li><a href="#">Сотрудники</a></li>
                 <li><a href="#">Подразделения</a></li>
-                <li><a href="#">Типы документов</a></li>
+                <li><a href="/doctype/">Типы документов</a></li>
             </ul>
             <br>
         </li>

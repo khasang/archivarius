@@ -44,7 +44,7 @@ public class DocTypeController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView showForm() {
-        return new ModelAndView("docTypForm", "docType", new DocType());
+        return new ModelAndView("docTypeForm", "docType", new DocType());
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
