@@ -27,11 +27,11 @@
             <br>
             <label for="documentType">Тип документа:</label>
             <select name="documentType" id="documentType" >
-                <option value="Сюда">Сюда</option>
-                <option value="нужно">нужно</option>
-                <option value="добавить">добавить</option>
-                <option value="получение">получение типов докуменов</option>
-                <option value="базы">из базы данных</option>
+                <option value="Приказ">Приказ</option>
+                <option value="Распоряжение">Распоряжение</option>
+                <option value="Служебная записка">Служебная записка</option>
+                <option value="Рапорт">Рапорт</option>
+                <option value="Предписание">Предписание</option>
             </select>
             <br>
             <br>
@@ -43,11 +43,11 @@
             <br>
             <label for="destination">Получатели:</label>
             <select name="destination" id="destination" >
-                <option value="сюда">А вот сюда</option>
-                <option value="нужно">нужно добавить</option>
-                <option value="отделы">отделы или должности</option>
-                <option value="получателей">получателей документа</option>
-                <option value="сущности">из сущности БД</option>
+                <option value="Бухгалтерия">Бухгалтерия</option>
+                <option value="Служба сервиса">Служба сервиса</option>
+                <option value="Ай Ти депратамент">Ай Ти депратамент</option>
+                <option value="Канцелярия">Канцелярия</option>
+                <option value="Отдел кадров">Отдел кадров</option>
             </select>
             <br>
             <br>

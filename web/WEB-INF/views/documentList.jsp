@@ -17,10 +17,10 @@
                         <th width="10%">Дата получения</th>
                         <th width="12%">Отправитель</th>
                         <th width="25%">Название документа</th>
-                        <th width="12%">Тип документа</th>
+                        <th width="11%">Тип документа</th>
                         <th width="10%">Статус</th>
                         <th width="12%">Получатель</th>
-                        <th width="11%">Срок ответа</th>
+                        <th width="12%">Срок ответа</th>
                     </tr>
                 <c:forEach items="${documentList}" var="document">
                     <tr>
