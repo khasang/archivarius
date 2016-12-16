@@ -62,6 +62,6 @@ public class DocTypeController {
     @RequestMapping(value = "/", method = RequestMethod.POST, params = { "delete" })
     public String deny(@RequestParam int id, @RequestParam String delete, Model model) {
         docTypeService.deleteDocType(id);
-        return "redirect:/docType/";
+        return "redirect:/doctype/";
     }
 }

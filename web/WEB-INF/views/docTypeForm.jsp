@@ -23,8 +23,8 @@
                     <td><form:input path="description"/></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" value="submit"/></td>
-                    <td><input type="submit" name="delete" value="delete"/></td>
+                    <td><input type="submit" value="Сохранить"/></td>
+                    <td><input type="submit" name="delete" value="Удалить"/></td>
                 </tr>
             </table>
         </form:form>
