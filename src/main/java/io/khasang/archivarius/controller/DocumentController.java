@@ -46,14 +46,14 @@ public class DocumentController {
     @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.GET)
     public String documentForm(@PathVariable("id") String id, ModelMap model) {
         Document document = documentService.getDocumentById(Integer.valueOf(id));
-        model.addAttribute("documentType", getDropboxList());
+        model.addAttribute("docType", getDropboxList());
         model.addAttribute("document", document);
         return "documentForm";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String showDocumentForm(ModelMap model) {
-        model.addAttribute("documentType", getDropboxList());
+        model.addAttribute("docType", getDropboxList());
         model.addAttribute("document", new Document());
         return "documentForm";
     }
@@ -91,8 +91,8 @@ public class DocumentController {
     public Map<Integer, String> getDropboxList() {
         List<DocType> docTypeList = docTypeService.getDocTypeList();
         Map<Integer, String> documentTypes = new HashMap<>();
-        for (DocType docType : docTypeList) {
-            documentTypes.put(docType.getId(), docType.getDocumentType());
+        for (DocType doc : docTypeList) {
+            documentTypes.put(doc.getId(), doc.getDocumentType());
         }
         return documentTypes;
     }

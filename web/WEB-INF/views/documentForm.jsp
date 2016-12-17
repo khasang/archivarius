@@ -27,8 +27,8 @@
             <br>
             <label>Тип документа:</label>
             <form:select path="documentType">
-                <form:option value="NONE" label="--- Select ---"/>
-                <form:options items="${doctype}"/>
+                <form:option value="NONE" label="Выбрать"/>
+                <form:options items="${documentTypes}"/>
             </form:select>
             <br>
             <br>

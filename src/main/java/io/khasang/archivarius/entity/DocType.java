@@ -12,12 +12,9 @@ import javax.persistence.*;
 public class DocType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToOne
-    @JoinColumn(name = "director_id",
-            foreignKey = @ForeignKey(name = "DIRECTOR_ID"))
-    private Worker director;
+
     private String documentType;
     private String description;
 
