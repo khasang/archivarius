@@ -6,24 +6,27 @@ package io.khasang.archivarius.entity;
 
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 
 @Entity
 public class Document {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Type(type="date")
     private Date dateOfReceive;
     private String author;
     private String title;
     private String status;
-    private String documentType;
+
+    @ManyToOne
+    @JoinColumn(name = "doctype_id",
+            foreignKey = @ForeignKey(name = "DOCTYPE_ID"))
+    private DocType documentType;
+
     @Type(type="date")
     private Date deadline;
     private String destination;
@@ -31,11 +34,11 @@ public class Document {
     public Document() {
     }
 
-    public String getDocumentType() {
+    public DocType getDocumentType() {
         return documentType;
     }
 
-    public void setDocumentType(String documentType) {
+    public void setDocumentType(DocType documentType) {
         this.documentType = documentType;
     }
 

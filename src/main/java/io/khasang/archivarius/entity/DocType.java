@@ -1,9 +1,6 @@
 package io.khasang.archivarius.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Model of the reference book for document types
@@ -17,6 +14,10 @@ public class DocType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @ManyToOne
+    @JoinColumn(name = "director_id",
+            foreignKey = @ForeignKey(name = "DIRECTOR_ID"))
+    private Worker director;
     private String documentType;
     private String description;
 

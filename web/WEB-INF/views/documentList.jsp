@@ -12,20 +12,18 @@
 
             <table class="table">
                     <tr>
-                        <th width="2%"></th>
-                        <th width="6%">Вх. №</th>
-                        <th width="10%">Дата получения</th>
-                        <th width="12%">Отправитель</th>
-                        <th width="25%">Название документа</th>
-                        <th width="11%">Тип документа</th>
-                        <th width="10%">Статус</th>
-                        <th width="12%">Получатель</th>
-                        <th width="12%">Срок ответа</th>
+                        <th>Вх. №</th>
+                        <th>Дата получения</th>
+                        <th>Отправитель</th>
+                        <th>Название документа</th>
+                        <th>Тип документа</th>
+                        <th>Статус</th>
+                        <th>Получатель</th>
+                        <th>Срок ответа</th>
                     </tr>
                 <c:forEach items="${documentList}" var="document">
                     <tr>
-                        <td><input type="checkbox" /></td>
-                        <td>${document.id}</td>
+                        <td><a href="/document/${document.id}/edit">${document.id}</a></td>
                         <td>${document.dateOfReceive}</td>
                         <td>${document.author}</td>
                         <td>${document.title}</td>

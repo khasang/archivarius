@@ -30,7 +30,6 @@ public class DocumentController {
 
     private static final Logger log = Logger.getLogger(CompanyController.class);
 
-    //готов список документов
     @RequestMapping("/")
     public String documentList(Model model) {
         model.addAttribute("documentList", documentService.getDocumentList());
@@ -45,46 +44,40 @@ public class DocumentController {
     }
 
     @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.GET)
-    public ModelAndView documentForm(@PathVariable("id") String id) {
-        Integer intId = Integer.valueOf(id);
-        Document document = documentService.getDocumentById(intId);
-        document.setId(document.getId());
-        document.setTitle(document.getTitle());
-        document.setAuthor(document.getAuthor());
-        document.setDestination(document.getDestination());
-        document.setStatus(document.getStatus());
-        document.setDateOfReceive(document.getDateOfReceive());
-        document.setDocumentType(document.getDocumentType());
-        document.setAuthor(document.getAuthor());
-        document.setDeadline(document.getDeadline());
-        return new ModelAndView("documentForm", "document", document);
+    public String documentForm(@PathVariable("id") String id, ModelMap model) {
+        Document document = documentService.getDocumentById(Integer.valueOf(id));
+        model.addAttribute("docType", getDropboxList());
+        model.addAttribute("document", document);
+        return "documentForm";
     }
 
-    //готов
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public ModelAndView showForm() {
-        return new ModelAndView("documentForm", "document", new Document());
+    public String showDocumentForm(ModelMap model) {
+        model.addAttribute("docType", getDropboxList());
+        model.addAttribute("document", new Document());
+        return "documentForm";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public String submit(@ModelAttribute("document") Document document,
+    public String submit(@ModelAttribute("document")Document document,
                          BindingResult result, ModelMap model) {
-        if (result.hasErrors()) {
-            return "error";
-        }
-        documentService.updateDocument(document);
-        //можно обратится к полям объекта передав весь объект, не добавляя атрибуты к моделе
-        //модель уже получается содержит все атрибуты (поля класса энтити) потому что передали
-        //всю сущность в documentService.updateDocument(document)
-        // может я и не прав, но все работает (с) Евгений
 
-       // model.addAttribute("title", document.getTitle());
-       // model.addAttribute("type", document.getDocumentType());
-       // model.addAttribute("author", document.getAuthor());
-       // model.addAttribute("deadline", document.getDeadline());
-       // model.addAttribute("status", document.getStatus());
-       // model.addAttribute("dateOfReceive", document.getDateOfReceive());
-       // model.addAttribute("destination", document.getDestination());
+
+        DocType docType;
+        if("NONE".equals(result.getFieldValue("docType"))) {
+            docType = null;
+       } else {
+            docType = docTypeService.getDocTypeById(Integer.valueOf((String)(result.getFieldValue("id"))));
+       }
+        document.setDocumentType(docType);
+        documentService.updateDocument(document);
+        model.addAttribute("title", document.getTitle());
+      //  model.addAttribute("type", document.getDocumentType());
+        model.addAttribute("author", document.getAuthor());
+        model.addAttribute("deadline", document.getDeadline());
+        model.addAttribute("status", document.getStatus());
+        model.addAttribute("dateOfReceive", document.getDateOfReceive());
+        model.addAttribute("destination", document.getDestination());
         return "resultNewDocument";
     }
 
@@ -98,7 +91,7 @@ public class DocumentController {
     public Map<Integer, String> getDropboxList() {
         List<DocType> docTypeList = docTypeService.getDocTypeList();
         Map<Integer, String> documentTypes = new HashMap<>();
-        for(DocType docType: docTypeList) {
+        for (DocType docType : docTypeList) {
             documentTypes.put(docType.getId(), docType.getDocumentType());
         }
         return documentTypes;
