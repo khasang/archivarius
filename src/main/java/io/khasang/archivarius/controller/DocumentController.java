@@ -46,14 +46,14 @@ public class DocumentController {
     @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.GET)
     public String documentForm(@PathVariable("id") String id, ModelMap model) {
         Document document = documentService.getDocumentById(Integer.valueOf(id));
-        model.addAttribute("docType", getDropboxList());
+        model.addAttribute("documentType", getDropboxList());
         model.addAttribute("document", document);
         return "documentForm";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String showDocumentForm(ModelMap model) {
-        model.addAttribute("docType", getDropboxList());
+        model.addAttribute("documentType", getDropboxList());
         model.addAttribute("document", new Document());
         return "documentForm";
     }
@@ -64,7 +64,7 @@ public class DocumentController {
 
 
         DocType docType;
-        if("NONE".equals(result.getFieldValue("docType"))) {
+        if("NONE".equals(result.getFieldValue("documentType"))) {
             docType = null;
        } else {
             docType = docTypeService.getDocTypeById(Integer.valueOf((String)(result.getFieldValue("id"))));

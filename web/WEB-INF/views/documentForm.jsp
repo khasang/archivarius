@@ -25,14 +25,11 @@
             <br>
             <br>
             <br>
-            <label for="documentType">Тип документа:</label>
-            <select name="documentType" id="documentType" >
-                <option value="Приказ">Приказ</option>
-                <option value="Распоряжение">Распоряжение</option>
-                <option value="Служебная записка">Служебная записка</option>
-                <option value="Рапорт">Рапорт</option>
-                <option value="Предписание">Предписание</option>
-            </select>
+            <label>Тип документа:</label>
+            <form:select path="documentType">
+                <form:option value="NONE" label="--- Select ---"/>
+                <form:options items="${doctype}"/>
+            </form:select>
             <br>
             <br>
             <br>
