@@ -67,7 +67,7 @@ public class DocumentController {
         if("NONE".equals(result.getFieldValue("documentType"))) {
             docType = null;
        } else {
-            docType = docTypeService.getDocTypeById(Integer.valueOf((String)(result.getFieldValue("id"))));
+            docType = docTypeService.getDocTypeById(Integer.valueOf((String)(result.getFieldValue("documentType"))));
        }
         document.setDocumentType(docType);
         documentService.updateDocument(document);
