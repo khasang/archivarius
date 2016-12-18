@@ -59,7 +59,7 @@ public class UserController {
         return "userForm";
     }
 
-    @RequestMapping(value = "/user/", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/", method = RequestMethod.POST)
     public String submit(@ModelAttribute("user") User user,
                          BindingResult result, ModelMap model) {
         Set<Role> roles = new HashSet<>();
@@ -71,7 +71,7 @@ public class UserController {
         return "resultUserFormEdit";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST, params = {"delete"})
+    @RequestMapping(value = "/users/", method = RequestMethod.POST, params = {"delete"})
     public String deny(@RequestParam int id, @RequestParam String delete, Model model) {
         userService.deleteUserById(id);
         return "redirect:/users/";

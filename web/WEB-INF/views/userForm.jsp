@@ -11,7 +11,7 @@
     <jsp:include page="include/left_sidebar_user.jsp"/>
     <div id="content">
         <h2>Изменение параметров пользователя</h2>
-        <form:form method="POST" action="/user/" modelAttribute="user">
+        <form:form method="POST" action="/users/" modelAttribute="user">
             <form:hidden path="id"/>
             <table>
                 <tr>
