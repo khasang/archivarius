@@ -63,8 +63,12 @@ public class UserController {
     public String submit(@ModelAttribute("user") User user,
                          BindingResult result, ModelMap model) {
         Set<Role> roles = new HashSet<>();
-        Role role = roleService.getRoleById(Integer.valueOf((String)(result.getFieldValue("roles"))));
-        roles.add(role);
+        String values = (String) result.getFieldValue("roles");
+        String rolesArr[] = values.split(",");
+        for (int i = 0; i < rolesArr.length; i++) {
+            Role role = roleService.getRoleById(Integer.valueOf(rolesArr[i]));
+            roles.add(role);
+        }
         user.setRoles(roles);
         user.setPassword(passwordEncoder.encode((String)result.getFieldValue("password")));
         userService.updateUser(user);
