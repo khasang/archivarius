@@ -16,10 +16,11 @@
             <h4>Справочники</h4>
             <ul>
                 <li><a href="/company/">Организации</a></li>
-                <li><a href="/department/">Департаменты</a></li>
+                <li><a href="/department/">Подразделения</a></li>
                 <li><a href="#">Сотрудники</a></li>
-                <li><a href="#">Подразделения</a></li>
                 <li><a href="#">Типы документов</a></li>
+                <li><a href="/users/">Пользователи</a></li>
+                <li><a href="#">Роли</a></li>
             </ul>
             <br>
         </li>
