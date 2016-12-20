@@ -15,6 +15,7 @@
         <br>
         <br>
         <form:form method="POST" action="/document/" modelAttribute="document" class="contact_form">
+            <form:hidden path="id"/>
             <form:label path="title">Title:</form:label>
             <form:input type="text" path="title" placeholder="Введите название документа" id="title" />
             <br>
@@ -59,7 +60,7 @@
                 <option value="Получен">Получен</option>
                 <option value="Подписан">Подписан</option>
                 <option value="Требуется подпись">Требуется подпись</option>
-                <option value="ООтказано в согласновании">Отказано в согласновании</option>
+                <option value="Отказано в согласновании">Отказано в согласновании</option>
                 <option value="Ошибка в документе">Ошибка в документе</option>
                 <option value="Документооборот завершен">Документооборот завершен</option>
             </select>
