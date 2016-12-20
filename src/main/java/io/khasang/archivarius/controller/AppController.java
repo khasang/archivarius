@@ -3,6 +3,7 @@ package io.khasang.archivarius.controller;
 import io.khasang.archivarius.model.DatabaseBackup;
 import io.khasang.archivarius.model.Message;
 import io.khasang.archivarius.model.QueryExample;
+import io.khasang.archivarius.service.DocumentService;
 import io.khasang.archivarius.service.ReportService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class AppController {
     DatabaseBackup databaseBackup;
     @Autowired
     ReportService reportService;
+    @Autowired
+    DocumentService documentService;
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model) {
