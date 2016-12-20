@@ -18,13 +18,10 @@
                 <li><a href="/company/">Организации</a></li>
                 <li><a href="/department/">Подразделения</a></li>
                 <li><a href="#">Сотрудники</a></li>
-<<<<<<< HEAD
                 <li><a href="#">Подразделения</a></li>
                 <li><a href="/doctype/">Типы документов</a></li>
-=======               
                 <li><a href="/users/">Пользователи</a></li>
                 <li><a href="#">Роли</a></li>
->>>>>>> development
             </ul>
             <br>
         </li>
