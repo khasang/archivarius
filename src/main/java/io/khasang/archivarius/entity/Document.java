@@ -97,4 +97,18 @@ public class Document {
     public void setDestination(String destination) {
         this.destination = destination;
     }
+
+    @Override
+    public String toString() {
+        return "Document{" +
+                "id=" + id +
+                ", dateOfReceive='" + dateOfReceive + '\'' +
+                ", author=" + author +
+                ", title=" + title + '\'' +
+                ", status=" + status +
+                ", documentType=" + documentType + '\'' +
+                ", deadline=" + deadline +
+                ", destination=" + destination +
+                '}';
+    }
 }
