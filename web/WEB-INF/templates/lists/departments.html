@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{base :: common_header(~{::title})}">
+    <title>Список подразделений</title>
+    <link rel="stylesheet" href="../../views/css/styles.css" type="text/css"/>
+</head>
+
+<body>
+<div id="container">
+    <div id="header" th:replace="~{base :: #header}">
+        <h1>Archivarius</h1>
+        <h2>Documents Workflow System</h2>
+    </div>
+
+    <div id="navigation" th:replace="~{base :: #navigation}">
+        <ul>
+            <li><a href="../inbox.html">Входящие документы</a></li>
+        </ul>
+    </div>
+
+    <div id="body">
+        <div class="sidebar sidebar-left" th:replace="~{base :: #sidebar-left}">
+            <ul>
+                <li>
+                    <h4>О программе</h4>
+                </li>
+            </ul>
+        </div>
+
+        <div id="content">
+            <h2>Список подразделений</h2>
+            <table class="table">
+                <tr>
+                    <th th:text="#{table.num}">№</th>
+                    <th th:text="#{table.dep_title}">Название подразделения</th>
+                    <th th:text="#{table.comp_title}">Название организации</th>
+                </tr>
+                <tr th:each="department, stat : ${departments}" th:object="${department}">
+                    <td th:text="${stat.count}">1</td>
+                    <td><a href="/department/1" th:href="@{'/department/' + *{id}}"  th:text="*{name}">Лучшее подразделение</a></td>
+                    <td><a href="/company/1" th:href="@{'/company/' + *{company.id}}" th:text="*{company.name}">Организация</a></td>
+                    <td><a href="/department/1/edit" th:href="@{'/department/' + *{id} + '/edit'}" th:text="#{table.edit}">Редактировать</a></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="sidebar sidebar-right" th:replace="~{base :: #sidebar-right}">
+            <ul>
+                <li>
+                    <h4>Ссылки</h4>
+                </li>
+            </ul>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+    <div id="footer" th:replace="~{base :: #footer}">
+        <p>&copy; Archivarius 2016.</p>
+    </div>
+</div>
+</body>
+</html>

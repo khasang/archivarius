@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{base :: common_header(~{::title})}">
     <title>Список компаний</title>
-    <link rel="stylesheet" href="../views/css/styles.css" type="text/css"/>
+    <link rel="stylesheet" href="../../views/css/styles.css" type="text/css"/>
 </head>
 
 <body>
@@ -15,7 +15,7 @@
 
     <div id="navigation" th:replace="~{base :: #navigation}">
         <ul>
-            <li><a href="inbox.html">Входящие документы</a></li>
+            <li><a href="../inbox.html">Входящие документы</a></li>
         </ul>
     </div>
 
@@ -32,24 +32,17 @@
             <h2>Список компаний</h2>
             <table class="table">
                 <tr>
-                    <th></th>
-                    <th th:text="#{table.doc_number}">Вх. №</th>
-                    <th th:text="#{table.doc_date_recieve}">Дата получения</th>
-                    <th th:text="#{table.doc_sender}">Отправитель</th>
-                    <th th:text="#{table.doc_title}">Название документа</th>
-                    <th th:text="#{table.doc_type}">Тип документа</th>
-                    <th th:text="#{table.doc_status}">Статус</th>
-                    <th th:text="#{table.doc_date_answer}">Срок ответа</th>
+                    <th th:text="#{table.num}">№</th>
+                    <th th:text="#{table.comp_title}">Название организации</th>
+                    <th th:text="#{table.comp_address}">Адрес</th>
+                    <th th:text="#{table.comp_inn}">ИНН</th>
                 </tr>
-                <tr th:each="company : ${companies}">
-                    <td><input type="checkbox" /></td>
-                    <td>16-001</td>
-                    <td>27.11.2016</td>
-                    <td>ОАО "Вторчермет"</td>
-                    <td>Расходный ордер №81754</td>
-                    <td>Расходный ордер</td>
-                    <td>Получен</td>
-                    <td>Не требуется</td>
+                <tr th:each="company, stat : ${companies}" th:object="${company}">
+                    <td th:text="${stat.count}">1</td>
+                    <td><a href="/company/1" th:href="@{'/company/' + *{id}}"  th:text="*{name}">Лучшая организация</a></td>
+                    <td th:text="*{address}">Москва, ул. Авиационная, д, 6</td>
+                    <td th:text="*{innNumber}">12345678910</td>
+                    <td><a href="/company/1/edit" th:href="@{'/company/' + *{id} + '/edit'}" th:text="#{table.edit}">Редактировать</a></td>
                 </tr>
             </table>
         </div>
