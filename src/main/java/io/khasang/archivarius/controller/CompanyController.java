@@ -32,7 +32,7 @@ public class CompanyController {
     @RequestMapping("/")
     public String companyList(Model model) {
         model.addAttribute("companyList", companyService.getCompanyList());
-        return "companyList";
+        return "model/lists/company";
     }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
