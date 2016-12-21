@@ -21,8 +21,8 @@
             <br>
             <br>
             <br>
-            <label for="author">Автор:</label>
-            <input type="text" name="author" placeholder="Введите автора документа" id="author" />
+            <form:label path="author">Автор:</form:label>
+            <form:input path="author" placeholder="Введите автора документа" />
             <br>
             <br>
             <br>
@@ -34,11 +34,12 @@
             <br>
             <br>
             <br>
-            <label for="datepicker">Дата получения:</label>
-            <input fmt:formatDate type="date" name="dateOfReceive" id="datepicker">
+            <form:label path="dateOfReceive">Дата получения:</form:label>
+            <form:input fmt:formatDate = "dd.mm.yyyy" type="date"  path="dateOfReceive" />
             <br>
             <br>
             <br>
+
             <label for="destination">Получатели:</label>
             <select name="destination" id="destination" >
                 <option value="Бухгалтерия">Бухгалтерия</option>
@@ -50,8 +51,8 @@
             <br>
             <br>
             <br>
-            <label for="deadline">Контрольный срок:</label>
-            <input type="date" name="deadline" id="deadline">
+            <form:label path="deadline">Контрольный срок:</form:label>
+            <form:input fmt:formatDate = "dd.mm.yyyy" type="date"  path="deadline" />
             <br>
             <br>
             <br>
