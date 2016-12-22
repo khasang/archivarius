@@ -20,7 +20,7 @@
     </div>
 
     <div id="body">
-        <div class="sidebar sidebar-left" th:replace="~{base :: #sidebar-left}">
+        <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-comp}">
             <ul>
                 <li>
                     <h4>О программе</h4>
@@ -29,7 +29,7 @@
         </div>
 
         <div id="content">
-            <h2 th:text="${company.name}">Компаня</h2>
+            <h2 th:text="${company.name}">Компания</h2>
             <p><strong>Адрес: </strong> <span th:text="${company.address}">г.Москва</span> </p>
             <p><strong>ИНН: </strong> <span th:text="${company.innNumber}">123456786</span> </p>
             <p><button><a href="/company/${company.id}/edit">Редактировать</a></button>

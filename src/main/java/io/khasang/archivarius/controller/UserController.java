@@ -31,15 +31,15 @@ public class UserController {
 
     @RequestMapping("/users/")
     public String userList(Model model) {
-        model.addAttribute("userList", userService.getUserList());
-        return "userList";
+        model.addAttribute("users", userService.getUserList());
+        return "lists/users";
     }
 
     @RequestMapping(value = {"/user/{id}"}, method = RequestMethod.GET)
     public String userGetId(@PathVariable("id") String id, ModelMap model) {
         Integer intId = Integer.valueOf(id);
         model.addAttribute("user", userService.getUserById(intId));
-        return "usergetId";
+        return "lists/user";
     }
 
     @RequestMapping(value = {"user/{id}/edit"}, method = RequestMethod.GET)
@@ -47,16 +47,16 @@ public class UserController {
         Integer intId = Integer.valueOf(id);
         User user = userService.getUserById(intId);
         user.setId(user.getId());
-        model.addAttribute("roles", getDropboxList());
+        model.addAttribute("roles", roleService.getRoleList());
         model.addAttribute("user", user);
-        return "userForm";
+        return "forms/user";
     }
 
     @RequestMapping(value = "/user/register", method = RequestMethod.GET)
     public String showForm(ModelMap model) {
-        model.addAttribute("roles", getDropboxList());
+        model.addAttribute("roles", roleService.getRoleList());
         model.addAttribute("user", new User());
-        return "userForm";
+        return "forms/user";
     }
 
     @RequestMapping(value = "/users/", method = RequestMethod.POST)
@@ -72,21 +72,12 @@ public class UserController {
         user.setRoles(roles);
         user.setPassword(passwordEncoder.encode((String)result.getFieldValue("password")));
         userService.updateUser(user);
-        return "resultUserFormEdit";
+        return "success";
     }
 
     @RequestMapping(value = "/users/", method = RequestMethod.POST, params = {"delete"})
     public String deny(@RequestParam int id, @RequestParam String delete, Model model) {
         userService.deleteUserById(id);
         return "redirect:/users/";
-    }
-
-    public Map<Integer, String> getDropboxList() {
-        List<Role> rolesList = roleService.getRoleList();
-        Map<Integer, String> roles = new HashMap<>();
-        for (Role role : rolesList) {
-            roles.put(role.getId(), role.getName());
-        }
-        return roles;
     }
 }
