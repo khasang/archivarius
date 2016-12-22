@@ -1,54 +1,37 @@
-package io.khasang.archivarius.controller;
-
-import io.khasang.archivarius.entity.Department;
-import io.khasang.archivarius.service.DepartmentService;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
-
-public class DepartmentControllerTest {
-
-    @Mock
-    private DepartmentService departmentService;
-
-    @InjectMocks
-    private DepartmentController departmentController;
-    private MockMvc mockMvc;
-
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(departmentController).build();
-    }
-
-    @Test
-    public void testList() throws Exception {
-        List<Department> deps = new ArrayList<>();
-        deps.add(new Department());
-        deps.add(new Department());
-
-        when(departmentService.getDepartmentList()).thenReturn((List) deps);
-
-     //   mockMvc.perform(get("/departmentList"))
-      //          .andExpect(status().isOk())
-       //         .andExpect(view().name("departmentList"))
-        //        .andExpect(model().attribute("deps", hasSize(2)));
-    }
-
-}
+//package io.khasang.archivarius.controller;
+//
+//import org.junit.Before;
+//import org.junit.runner.RunWith;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.test.context.ContextConfiguration;
+//import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+//import org.springframework.test.context.web.WebAppConfiguration;
+//import org.springframework.test.web.servlet.MockMvc;
+//import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+//import org.springframework.web.context.WebApplicationContext;
+//
+//import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+//import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+//
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration
+//@WebAppConfiguration
+//public class DepartmentControllerTest {
+//
+//    @Autowired
+//    private WebApplicationContext context;
+//
+//    private MockMvc mvc;
+//
+////    @Before
+//    public void setup() {
+////        mvc = MockMvcBuilders
+////                .webAppContextSetup(context)
+////                .defaultRequest(get("/").with(user("user").roles("ADMIN")))
+////                .apply(springSecurity())
+////                .build();
+////    }
+//
+//
+////}
