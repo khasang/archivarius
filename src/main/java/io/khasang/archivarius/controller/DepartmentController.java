@@ -26,35 +26,37 @@ public class DepartmentController {
 
     private static final Logger log = Logger.getLogger(DepartmentController.class);
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String departmentList(Model model) {
-        model.addAttribute("departmentList", departmentService.getDepartmentList());
-        return "departmentList";
+        model.addAttribute("departments", departmentService.getDepartmentList());
+        return "lists/departments";
     }
 
-    @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
+    @GetMapping({"/{id}"})
     public String departmentGetId(@PathVariable("id") String id, ModelMap model) {
         Integer intId = Integer.valueOf(id);
-        model.addAttribute("departmentGetId", departmentService.getDepartmentById(intId));
-        return "departmentGetId";
+        model.addAttribute("department", departmentService.getDepartmentById(intId));
+        return "lists/department";
     }
 
-    @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.GET)
+    @GetMapping({"/{id}/edit"})
     public String departmentForm(@PathVariable("id") String id, ModelMap model) {
         Department department = departmentService.getDepartmentById(Integer.valueOf(id));
-        model.addAttribute("companies", getDropboxList());
+        model.addAttribute("companies", companyService.getCompanyList());
         model.addAttribute("department", department);
-        return "departmentForm";
+        model.addAttribute("selectedCompany", department.getCompany());
+        return "forms/department";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @GetMapping("/add")
     public String showDepartmentForm(ModelMap model) {
-        model.addAttribute("companies", getDropboxList());
+        model.addAttribute("companies", companyService.getCompanyList());
         model.addAttribute("department", new Department());
-        return "departmentForm";
+        model.addAttribute("selectedCompany", null);
+        return "forms/department";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @PostMapping("/")
     public String submit(@ModelAttribute("department")Department department,
                          BindingResult result, ModelMap model) {
         Company company;
@@ -67,10 +69,10 @@ public class DepartmentController {
         departmentService.updateDepartment(department);
         model.addAttribute("name", department.getName());
         model.addAttribute("company", department.getCompany());
-        return "resultDepartmentFormEdit";
+        return "forms/success";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST, params = { "delete" })
+    @PostMapping(value = "/", params = { "delete" })
     public String deny(@RequestParam int id, @RequestParam String delete, Model model) {
         departmentService.deleteDepartmentById(id);
         return "redirect:/department/";

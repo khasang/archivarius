@@ -21,27 +21,27 @@ public class RoleController {
 
     @RequestMapping("/")
     public String roleList(Model model) {
-        model.addAttribute("roleList", roleService.getRoleList());
-        return "roleList";
+        model.addAttribute("roles", roleService.getRoleList());
+        return "lists/roles";
     }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
     public String roleGetId(@PathVariable("id") String id, ModelMap model) {
         Integer intId = Integer.valueOf(id);
         model.addAttribute("role", roleService.getRoleById(intId));
-        return "rolegetId";
+        return "lists/role";
     }
 
     @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.GET)
     public ModelAndView roleForm(@PathVariable("id") String id) {
         Integer intId = Integer.valueOf(id);
         Role role = roleService.getRoleById(intId);
-        return new ModelAndView("roleForm", "role", role);
+        return new ModelAndView("forms/role", "role", role);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView showForm() {
-        return new ModelAndView("roleForm", "role", new Role());
+        return new ModelAndView("forms/role", "role", new Role());
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
@@ -51,8 +51,7 @@ public class RoleController {
             return "error";
         }
         roleService.updateRole(role);
-        model.addAttribute("name", role.getName());
-        return "resultRoleFormEdit";
+        return "forms/success";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST, params = { "delete" })

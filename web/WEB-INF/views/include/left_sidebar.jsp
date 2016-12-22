@@ -22,7 +22,6 @@
                 <li><a href="/users/">Пользователи</a></li>
                 <li><a href="#">Роли</a></li>
             </ul>
-            <br>
         </li>
     </ul>
 </div>

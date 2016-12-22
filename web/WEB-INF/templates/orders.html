@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{base :: common_header(~{::title})}">
+    <title>Archivarius-mn</title>
+    <link rel="stylesheet" href="../views/css/styles.css" type="text/css"/>
+</head>
+
+<body>
+<div id="container">
+    <div id="header" th:replace="~{base :: #header}">
+        <h1>Archivarius</h1>
+        <h2>Documents Workflow System</h2>
+    </div>
+
+    <div id="navigation" th:replace="~{base :: #navigation}">
+        <ul>
+            <li><a href="inbox.html">Входящие документы</a></li>
+        </ul>
+    </div>
+
+    <div id="body">
+        <div class="sidebar sidebar-left" th:replace="~{base :: #sidebar-left}">
+            <ul>
+                <li>
+                    <h4>О программе</h4>
+                </li>
+            </ul>
+        </div>
+
+        <div id="content">
+            <h2>Внутренние документы</h2>
+            <table class="table">
+                <tr>
+                    <th></th>
+                    <th th:text="#{table.doc_number}">Вх. №</th>
+                    <th th:text="#{table.doc_date_recieve}">Дата получения</th>
+                    <th th:text="#{table.doc_sender}">Отправитель</th>
+                    <th th:text="#{table.doc_title}">Название документа</th>
+                    <th th:text="#{table.doc_type}">Тип документа</th>
+                    <th th:text="#{table.doc_status}">Статус</th>
+                    <th th:text="#{table.doc_date_answer}">Срок ответа</th>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>16-001</td>
+                    <td>27.11.2016</td>
+                    <td>ОАО "Вторчермет"</td>
+                    <td>Расходный ордер №81754</td>
+                    <td>Расходный ордер</td>
+                    <td>Получен</td>
+                    <td>Не требуется</td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div class="sidebar sidebar-right" th:replace="~{base :: #sidebar-right}">
+            <ul>
+                <li>
+                    <h4>Ссылки</h4>
+                </li>
+            </ul>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+    <div id="footer" th:replace="~{base :: #footer}">
+        <p>&copy; Archivarius 2016.</p>
+    </div>
+</div>
+</body>
+</html>

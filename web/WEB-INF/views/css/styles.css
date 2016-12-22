@@ -231,7 +231,7 @@ li ol, li ul {
 
 #content {
 	float: left;
-	width: 65%;
+	width: 64%;
 	padding: 10px;
 	background-color: #f0f0f0;
 	margin:0 10px;
@@ -333,26 +333,25 @@ li ol, li ul {
 	float:left;
 	padding:3px;
 }
-.contact_form input {
+.contact_form input[type="text"] {
 	height:20px; 
 	width:300px; 
 	padding:5px 8px;
 }
 .contact_form select {
 	height:30px; 
-	width:220px; 
+	width:320px;
 	padding:5px 8px;
 }
 .contact_form textarea {padding:8px; width:300px;}
 .contact_form button {margin-left:156px;}
 
 	/* form element visual styles */
-	.contact_form input, .contact_form textarea, .contact_form select { 
+	.contact_form input[type="text"], .contact_form textarea, .contact_form select {
 		border:1px solid #aaa;
 		box-shadow: 0px 0px 3px #ccc, 0 10px 15px #eee inset;
 		border-radius:2px;
-		padding-right:30px;
-		-moz-transition: padding .25s; 
+		-moz-transition: padding .25s;
 		-webkit-transition: padding .25s; 
 		-o-transition: padding .25s;
 		transition: padding .25s;
@@ -379,12 +378,17 @@ li ol, li ul {
 	border-color: #b03535
 }
 
+input[type="radio"] {
+	margin: 5px;
+}
+
+
 /* === Form hints === */
 .form_hint {
 	background: #d45252;
 	border-radius: 3px 3px 3px 3px;
 	color: white;
-	margin-left:8px;
+
 	padding: 1px 6px;
 	z-index: 999; /* hints stay above all other elements */
 	position: absolute; /* allows proper formatting if hint is two lines */

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html">
+<head th:replace="~{base :: common_header(~{::title})}">
+    <title>Исходящие документы</title>
+    <link rel="stylesheet" href="../views/css/styles.css" type="text/css"/>
+</head>
+
+<body>
+<div id="container">
+    <div id="header" th:replace="~{base :: #header}">
+        <h1>Archivarius</h1>
+        <h2>Documents Workflow System</h2>
+    </div>
+
+    <div id="navigation" th:replace="~{base :: #navigation}">
+        <ul>
+            <li><a href="inbox.html">Входящие документы</a></li>
+        </ul>
+    </div>
+
+    <div id="body">
+        <div class="sidebar sidebar-left" th:replace="~{base :: #sidebar-left}">
+            <ul>
+                <li>
+                    <h4>О программе</h4>
+                </li>
+            </ul>
+        </div>
+
+        <div id="content">
+            <h2>Исходящие документы</h2>
+            <form action="" method="post" name="outboxForm" id="form" class="contact_form">
+                <label for="documentName">Название документа:</label>
+                <input type="text" name="documentName" placeholder="Введите название документа" id="documentName"/>
+                <br>
+                <br>
+                <label for="documentType">Тип документа:</label>
+                <select name="documentType" id="documentType">
+                    <option value="A">По умолчанию</option>
+                    <option value="B">Предложение</option>
+                    <option value="C">Заявка</option>
+                    <option value="D">Письмо</option>
+                    <option value="E">Справка</option>
+                    <option value="F">Обзор</option>
+                    <option value="G">Договор</option>
+                    <option value="H">Служебная записка</option>
+                    <option value="I">Добровольное сообщение</option>
+                </select>
+                <br>
+                <label for="description">Краткое описание:</label>
+                <textarea rows="8" cols="50" name="description" id="description"></textarea>
+                <br>
+                <br>
+                <label for="additional">Текст сопровождения (по необходимости):</label>
+                <textarea rows="8" cols="50" name="additional" id="additional"></textarea>
+                <br>
+                <label for="senders">Получатели:</label>
+                <fieldset id="senders">
+                    <input type="radio" id="all" value="sendToWholeOrg">вся организация</input><br/>
+                    <input type="radio" id="management" value="sendToManagement">руководство</input><br/>
+                    <input type="radio" id="group" value="sendToGroup">выбранная группа</input><br/>
+                    <input type="radio" id="executor" value="sendToExecutor">конкретное лицо</input>
+                </fieldset>
+                <label for="encloseFile">Прикрепить файл:</label>
+                <br>
+                <input type="file" id="encloseFile" class="formbutton" placeholder=""/>
+                <br/>
+                <input type="submit" value="Отправить" class="formbutton"/>
+            </form>
+        </div>
+
+
+        <div class="sidebar sidebar-right" th:replace="~{base :: #sidebar-right}">
+            <ul>
+                <li>
+                    <h4>Ссылки</h4>
+                </li>
+            </ul>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+    <div id="footer" th:replace="~{base :: #footer}">
+        <p>&copy; Archivarius 2016.</p>
+    </div>
+</div>
+</body>
+</html>
