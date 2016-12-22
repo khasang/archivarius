@@ -61,7 +61,7 @@
         </form>
     </div>
     <!-- Include RIGHT SIDEBAR-->
-    <jsp:include page="include/right_sidebar.jsp"/>
+    <jsp:include page="include/right_sidebar_inbox.jsp"/>
     <!-- Include FOOTER-->
     <jsp:include page="include/footer.jsp"/>
 </div>
