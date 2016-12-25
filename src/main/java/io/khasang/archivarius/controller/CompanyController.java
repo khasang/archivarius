@@ -1,25 +1,15 @@
 package io.khasang.archivarius.controller;
 
 import io.khasang.archivarius.entity.Company;
-import io.khasang.archivarius.model.DatabaseBackup;
-import io.khasang.archivarius.model.Message;
-import io.khasang.archivarius.model.QueryExample;
 import io.khasang.archivarius.service.CompanyService;
-import io.khasang.archivarius.service.ReportService;
 import org.apache.log4j.Logger;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @Controller
 @RequestMapping("/company")
@@ -29,20 +19,20 @@ public class CompanyController {
 
     private static final Logger log = Logger.getLogger(CompanyController.class);
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String companyList(Model model) {
-        model.addAttribute("companyList", companyService.getCompanyList());
-        return "companyList";
+        model.addAttribute("companies", companyService.getCompanyList());
+        return "lists/companies";
     }
 
-    @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/{id}"})
     public String companyGetId(@PathVariable("id") String id, ModelMap model) {
         Integer intId = Integer.valueOf(id);
-        model.addAttribute("companygetId", companyService.getCompanyById(intId));
-        return "companygetId";
+        model.addAttribute("company", companyService.getCompanyById(intId));
+        return "lists/company";
     }
 
-    @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.GET)
+    @GetMapping({"/{id}/edit"})
     public ModelAndView companyForm(@PathVariable("id") String id) {
         Integer intId = Integer.valueOf(id);
         Company company = companyService.getCompanyById(intId);
@@ -50,28 +40,25 @@ public class CompanyController {
         company.setName(company.getName());
         company.setAddress(company.getAddress());
         company.setInnNumber(company.getInnNumber());
-        return new ModelAndView("companyForm", "company", company);
+        return new ModelAndView("forms/company", "company", company);
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @GetMapping("/add")
     public ModelAndView showForm() {
-        return new ModelAndView("companyForm", "company", new Company());
+        return new ModelAndView("forms/company", "company", new Company());
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @PostMapping("/")
     public String submit(@ModelAttribute("company")Company company,
                          BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }
         companyService.updateCompany(company);
-        model.addAttribute("name", company.getName());
-        model.addAttribute("innNumber", company.getInnNumber());
-        model.addAttribute("address", company.getAddress());
-        return "resultCompanyFormEdit";
+        return "forms/success";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST, params = { "delete" })
+    @PostMapping(value = "/", params = { "delete" })
     public String deny(@RequestParam int id, @RequestParam String delete, Model model) {
         companyService.deleteCompanyById(id);
         return "redirect:/company/";

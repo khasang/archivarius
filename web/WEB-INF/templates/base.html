@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common_header(title)">
+    <title th:include="${title}">Archivarius</title>
+    <link rel="stylesheet" href="../views/css/styles.css" type="text/css" th:href="@{/css/styles.css}"/>
+</head>
+
+<body>
+<div id="container">
+    <div id="header">
+        <h1><a href="" th:href="@{/}" th:text="#{overall.title}">Archivarius</a></h1>
+        <h2 th:text="#{overall.subtitle}">Documents Workflow System</h2>
+    </div>
+
+    <div id="navigation">
+        <ul>
+            <li><a href="inbox.html" th:href="@{/inbox}" th:text="#{menu.inbox}">Входящие документы</a></li>
+            <li><a href="outbox.html" th:href="@{/outbox}" th:text="#{menu.outbox}">Исходящие документы</a></li>
+            <li><a href="orders.html" th:href="@{/orders}" th:text="#{menu.enter}">Внутренние документы</a></li>
+            <li><a href="control.html" th:href="@{/control}" th:text="#{menu.control}">Контроль исполнений</a></li>
+            <li><a href="help.html" th:href="@{/help}" th:text="#{menu.help}">Справка</a></li>
+        </ul>
+    </div>
+
+    <div id="body">
+        <div class="sidebar sidebar-left" id="sidebar-left">
+            <ul>
+                <li>
+                    <h4>Поиск документа</h4>
+                    <form id="searchform" method="get" action="NOT IMPELEMNETED!!">
+                        <div>
+                            <input type="text" name="s" id="s" size="15"/>
+                            <input type="submit" value="Найти" class="formbutton"/>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+            <br>
+            <ul>
+                <li>
+                    <h4>Справочники</h4>
+                    <ul>
+                        <li><a href="/company/">Организации</a></li>
+                        <li><a href="/department/">Подразделения</a></li>
+                        <li><a href="#">Сотрудники</a></li>
+                        <li><a href="#">Типы документов</a></li>
+                        <li><a href="/users/">Пользователи</a></li>
+                        <li><a href="/role/">Роли</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div id="content">
+            <h2 th:fragment="common_content_page_title(title)" th:text="${title}">Archivarius</h2>
+            <p>Система <strong>Archivarius</strong> - позволяет автоматизировать документооборот на предприятии.
+                Автоматизация делопроизводства позволяет быстро узнать, на каком этапе обработки находится тот или иной
+                документ, кто является исполнителем и какие резолюции были вынесены по документу.
+                <br>
+                <br>
+                <strong>Входящие документы</strong> - здесь Вы можете получить и определить дальнейшие действия с
+                входящей документацей организации:
+            <ul>
+                <li>ввод документа в систему;</li>
+                <li>вынесение резолюции;</li>
+                <li>распределение задач по исполнителям;</li>
+                <li>исполнение резолюции;</li>
+                <li>контроль исполнения резолюции.</li>
+            </ul>
+            <strong>Исходящие документы</strong> - здесь Вы можете обработать исходящие документы организации, включая
+            ответы на входящие письма, инициативные и информационные документы фирмы (предложения, заявки, письма,
+            справки, обзоры, договоры и т. п.).
+            <br>
+            <br>
+            <ul>
+                <li>подготовка проекта исходящего документа;</li>
+                <li>согласование исходящего документа;</li>
+                <li>утверждение исходящего документа;</li>
+                <li>оформление исходящего документа;</li>
+                <li>отправка исходящего документа</li>
+            </ul>
+            <strong>Распоряжения</strong> - здесь Вы можете обработать внутренние распорядительные документы компании,
+            такие как: приказы по основной деятельности и личному составу, распоряжения, указания, решения, правила,
+            положения, инструкции, регламенты, штатное расписание и т. п.
+            <br>
+            <br>
+            <ul>
+                <li>подготовка проекта распоряжения;</li>
+                <li>согласование распоряжения с заинтересованными лицами, в части их касающейся;</li>
+                <li>утверждение распоряжения;</li>
+                <li>рассылка распоряжения по департаментам.</li>
+            </ul>
+            <strong>Контроль исполнений</strong> - здесь Вы можете отследить сроки и качество выполнения поручений. Для
+            этого необходимо разбить исполнение документа на этапы и назначенить сотрудникам задачи. По окончанию
+            выполения каждого пункта задачи отмечается статус выполнения и дата.
+            <br>
+            <br>
+            <br>
+            <strong>Добровольные сообщения</strong> - здесь любой сотрудник может отправить добровольное сообщение,
+            поставив галочку "анонимное" и остаться неизвестным, если того пожелает. Цель данного модуля получение
+            информации руководством о трудностях в исполнении или имплементации поставленных задач и распоряжений.
+            </p>
+
+        </div>
+
+        <div class="sidebar sidebar-right" id="sidebar-right">
+            <ul>
+                <li>
+                    <h4 th:text="#{sidebar.links}">Ссылки</h4>
+                    <ul>
+                        <li><a href="http://khasang.io/" title="Khasang GeekTeams">Khasang</a></li>
+                        <li><a href="https://vk.com/khasang" title="Khasang группа в ВК">Группа Khasang в VK</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h4 th:text="#{sidebar.contacts}">Контакты</h4>
+                    <ul>
+                        <li><a href="mailto:eugeneshamkin@mail.ru" title="Написать письмо Евгению Шамкину">Евгений
+                            Шамкин</a></li>
+                        <li><a href="mailto:dynamost@dynamost.ru" title="Написать письмо Юрию Корниенко">Юрий
+                            Корниенко</a></li>
+                        <li><a href="mailto:sliver449@gmail.com" title="Написать письмо Петру Станкевичу">Петр
+                            Станкевич</a></li>
+                        <li><a href="mailto:askovin@yandex.ru" title="Написать письмо Артуру Ковину">Артур Ковин</a>
+                        </li>
+                        <li><a href="mailto:dabeatfan@gmail.com" title="Написать письмо Виктору Канунникову">Виктор
+                            Канунников</a></li>
+                        <li><a href="mailto:t.tianav2@gmail.com" title="Написать письмо Татьяне Воробьевой">Татьяна Воробьева
+                            </a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+    <div id="footer">
+        <p th:text="#{footer.copyright}">&copy; Archivarius 2016. OpenSource Documents Workflow System</p>
+    </div>
+</div>
+</body>
+</html>

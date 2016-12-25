@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+<head th:replace="~{base :: common_header(~{::title})}">
+    <title>Параметры организации</title>
+    <link rel="stylesheet" href="../../views/css/styles.css" type="text/css"/>
+</head>
+
+<body>
+<div id="container">
+    <div id="header" th:replace="~{base :: #header}">
+        <h1>Archivarius</h1>
+        <h2>Documents Workflow System</h2>
+    </div>
+
+    <div id="navigation" th:replace="~{base :: #navigation}">
+        <ul>
+            <li><a href="../inbox.html">Входящие документы</a></li>
+        </ul>
+    </div>
+
+    <div id="body">
+        <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-comp}">
+            <ul>
+                <li>
+                    <h4>О программе</h4>
+                </li>
+            </ul>
+        </div>
+
+        <div id="content">
+            <h2>Параметры организации</h2>
+            <ul>
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+            </ul>
+            <form th:action="@{/company/}" action="" method="post">
+                <table>
+                    <tr>
+                        <td><label for="name">Название организации</label></td>
+                        <td><input id="name" name="name" th:placeholder="#{form.company.title}"
+                                   placeholder="Введите название организации" th:value="${company.name}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="address">Адрес</label></td>
+                        <td><input id="address" name="address" th:placeholder="#{form.company.address}"
+                                   placeholder="Введите адрес" th:value="${company.address}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="inn_number">Номер ИНН</label></td>
+                        <td><input id="inn_number" type="number" name="innNumber" th:placeholder="#{form.company.inn}"
+                                   placeholder="Введите номер ИНН" th:value="${company.innNumber}"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" th:value="#{button.submit}" value="Подтвердить"></td>
+                        <td><input type="submit" th:value="#{button.delete}" value="Удалить"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <div class="sidebar sidebar-right" th:replace="~{base :: #sidebar-right}">
+            <ul>
+                <li>
+                    <h4>Ссылки</h4>
+                </li>
+            </ul>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+    <div id="footer" th:replace="~{base :: #footer}">
+        <p>&copy; Archivarius 2016.</p>
+    </div>
+</div>
+</body>
+</html>

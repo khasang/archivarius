@@ -15,13 +15,14 @@
         <br>
         <br>
         <form:form method="POST" action="/document/" modelAttribute="document" class="contact_form">
+            <form:hidden path="id"/>
             <form:label path="title">Title:</form:label>
             <form:input type="text" path="title" placeholder="Введите название документа" id="title" />
             <br>
             <br>
             <br>
-            <label for="author">Автор:</label>
-            <input type="text" name="author" placeholder="Введите автора документа" id="author" />
+            <form:label path="author">Автор:</form:label>
+            <form:input path="author" placeholder="Введите автора документа" />
             <br>
             <br>
             <br>
@@ -33,11 +34,12 @@
             <br>
             <br>
             <br>
-            <label for="datepicker">Дата получения:</label>
-            <input fmt:formatDate type="date" name="dateOfReceive" id="datepicker">
+            <form:label path="dateOfReceive">Дата получения:</form:label>
+            <form:input fmt:formatDate = "dd.mm.yyyy" type="date"  path="dateOfReceive" />
             <br>
             <br>
             <br>
+
             <label for="destination">Получатели:</label>
             <select name="destination" id="destination" >
                 <option value="Бухгалтерия">Бухгалтерия</option>
@@ -49,8 +51,8 @@
             <br>
             <br>
             <br>
-            <label for="deadline">Контрольный срок:</label>
-            <input type="date" name="deadline" id="deadline">
+            <form:label path="deadline">Контрольный срок:</form:label>
+            <form:input fmt:formatDate = "dd.mm.yyyy" type="date"  path="deadline" />
             <br>
             <br>
             <br>
@@ -59,7 +61,7 @@
                 <option value="Получен">Получен</option>
                 <option value="Подписан">Подписан</option>
                 <option value="Требуется подпись">Требуется подпись</option>
-                <option value="ООтказано в согласновании">Отказано в согласновании</option>
+                <option value="Отказано в согласновании">Отказано в согласновании</option>
                 <option value="Ошибка в документе">Ошибка в документе</option>
                 <option value="Документооборот завершен">Документооборот завершен</option>
             </select>
