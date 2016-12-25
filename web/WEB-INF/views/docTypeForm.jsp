@@ -15,8 +15,8 @@
             <form:hidden path="id"/>
             <table>
                 <tr>
-                    <td><form:label path="documentType">Тип документа</form:label></td>
-                    <td><form:input path="documentType"/></td>
+                    <td><form:label path="name">Тип документа</form:label></td>
+                    <td><form:input path="name"/></td>
                 </tr>
                 <tr>
                     <td><form:label path="description">Описание</form:label></td>

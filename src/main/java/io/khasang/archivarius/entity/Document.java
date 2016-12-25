@@ -13,7 +13,7 @@ import java.sql.Date;
 @Entity
 public class Document {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Type(type="date")

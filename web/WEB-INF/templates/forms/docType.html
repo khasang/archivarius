@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{base :: common_header(~{::title})}">
-    <title>Параметры организации</title>
+    <title>Параметры типа документа</title>
     <link rel="stylesheet" href="../../views/css/styles.css" type="text/css"/>
 </head>
 
@@ -20,7 +20,7 @@
     </div>
 
     <div id="body">
-        <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-comp}">
+        <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-doctype}">
             <ul>
                 <li>
                     <h4>О программе</h4>
@@ -29,28 +29,24 @@
         </div>
 
         <div id="content">
-            <h2>Параметры организации</h2>
+            <h2>Параметры типа документа</h2>
             <ul>
                 <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
             </ul>
-            <form th:action="@{/company/}" action="" method="post">
+            <form th:action="@{/doctype/}" action="" method="post">
+                <input type="hidden" name="id" th:value="${docType.id}">
                 <table>
                     <tr>
-                        <td><label for="name">Название организации</label></td>
-                        <td><input id="name" name="name" th:placeholder="#{form.company.title}"
-                                   placeholder="Введите название организации" th:value="${company.name}">
+                        <td><label for="name">Тип документа</label></td>
+                        <td><input id="name" name="name" th:placeholder="#{form.doctype.title}"
+                                   placeholder="Введите название типа документа" th:value="${docType.name}">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label for="address">Адрес</label></td>
-                        <td><input id="address" name="address" th:placeholder="#{form.company.address}"
-                                   placeholder="Введите адрес" th:value="${company.address}"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="inn_number">Номер ИНН</label></td>
-                        <td><input id="inn_number" type="number" name="innNumber" th:placeholder="#{form.company.inn}"
-                                   placeholder="Введите номер ИНН" th:value="${company.innNumber}"></td>
+                            <label for="description">Описание</label></td>
+                        <td><input id="description" name="description" th:placeholder="#{form.doctype.description}"
+                                   placeholder="Введите описание типа документа" th:value="${docType.description}"></td>
                     </tr>
                     <tr>
                         <td><input type="submit" th:value="#{button.submit}" value="Подтвердить"></td>

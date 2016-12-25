@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +25,6 @@ public class DocumentController {
 
     @Autowired
     DocTypeService docTypeService;
-
 
     private static final Logger log = Logger.getLogger(CompanyController.class);
 
@@ -72,7 +70,7 @@ public class DocumentController {
         document.setDocumentType(docType);
         documentService.updateDocument(document);
         model.addAttribute("title", document.getTitle());
-      //  model.addAttribute("type", document.getDocumentType());
+      //  model.addAttribute("type", document.getName());
         model.addAttribute("author", document.getAuthor());
         model.addAttribute("deadline", document.getDeadline());
         model.addAttribute("status", document.getStatus());
@@ -92,7 +90,7 @@ public class DocumentController {
         List<DocType> docTypeList = docTypeService.getDocTypeList();
         Map<Integer, String> documentTypes = new HashMap<>();
         for (DocType doc : docTypeList) {
-            documentTypes.put(doc.getId(), doc.getDocumentType());
+            documentTypes.put(doc.getId(), doc.getName());
         }
         return documentTypes;
     }

@@ -27,7 +27,7 @@
             <br>
             <br>
             <label>Тип документа:</label>
-            <form:select path="documentType">
+            <form:select path="name">
                 <form:option value="NONE" label="Выбрать"/>
                 <form:options items="${docTypeDropBox}"/>
             </form:select>

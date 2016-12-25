@@ -16,7 +16,7 @@
                 <th>&nbsp;</th>
             </tr>
             <tr>
-                <td>${docTypeGetId.documentType}</td>
+                <td>${docTypeGetId.name}</td>
                 <td>${docTypeGetId.description}</td>
                 <td><a href="/company/${docTypeGetId.id}/edit">Редактировать</a></td>
             </tr>

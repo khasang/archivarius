@@ -17,7 +17,7 @@
             </tr>
             <c:forEach items="${docTypeList}" var="item">
                 <tr>
-                    <td>${item.documentType}</td>
+                    <td>${item.name}</td>
                     <td>${item.description}</td>
                     <td><a href="/doctype/${item.id}/edit">Редактировать</a></td>
                 </tr>
