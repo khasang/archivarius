@@ -28,6 +28,7 @@
                         <td>${document.author}</td>
                         <td>${document.title}</td>
                         <td>${document.name}</td>
+                        <td>${document.documentType.name}</td>
                         <td>${document.status}</td>
                         <td>${document.destination}</td>
                         <td>${document.deadline}</td>
