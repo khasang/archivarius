@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{base :: common_header(~{::title})}">
+    <title th:text="${document.title}">Тип документа</title>
+    <link rel="stylesheet" href="../../views/css/styles.css" type="text/css"/>
+</head>
+
+<body>
+<div id="container">
+    <div id="header" th:replace="~{base :: #header}">
+        <h1>Archivarius</h1>
+        <h2>Documents Workflow System</h2>
+    </div>
+
+    <div id="navigation" th:replace="~{base :: #navigation}">
+        <ul>
+            <li><a href="../inbox.html">Входящие документы</a></li>
+        </ul>
+    </div>
+
+    <div id="body">
+        <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-doc}">
+            <ul>
+                <li>
+                    <h4>О программе</h4>
+                </li>
+            </ul>
+        </div>
+
+        <div id="content" th:object="${document}">
+            <h2 th:text="${document.title}">Название документа</h2>
+            <p><strong>Вх №: </strong><span th:object="*{id}"></span></p>
+            <p><strong>Дата получения: </strong><span th:object="*{dateOfReceive}"></span></p>
+            <p><strong>Отправитель : </strong><span th:object="*{author}">Иванов И.И.</span></p>
+            <p><strong>Тип документа: </strong><span th:object="*{documentType.name}">Резолюция</span></p>
+            <p><strong>Статус: </strong><span th:object="*{status}">На подписи</span></p>
+            <p><strong>Получатель: </strong> <span th:text="*{destination}">Бухгалтерия</span> </p>
+            <p><strong>Срок ответа: </strong> <span th:text="*{deadline}">29/03/2016</span> </p>
+            <p><button><a href="/company/${document.id}/edit">Редактировать</a></button>
+        </div>
+
+        <div class="sidebar sidebar-right" th:replace="~{base :: #sidebar-right}">
+            <ul>
+                <li>
+                    <h4>Ссылки</h4>
+                </li>
+            </ul>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+    <div id="footer" th:replace="~{base :: #footer}">
+        <p>&copy; Archivarius 2016.</p>
+    </div>
+</div>
+</body>
+</html>
