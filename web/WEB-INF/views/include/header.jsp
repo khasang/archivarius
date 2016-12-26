@@ -9,7 +9,6 @@
     <link href="/css/styles.css" rel="stylesheet">
 </head>
 <body>
-<body>
 <div id="container">
     <div id="header">
         <h1><a href="/">Archivarius</a></h1>

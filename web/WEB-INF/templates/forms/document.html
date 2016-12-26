@@ -37,6 +37,12 @@
                         </td>
                     </tr>
                     <tr>
+                        <td><label for="author">Автор</label></td>
+                        <td><input id="author" name="title" th:placeholder="#{form.document.author}"
+                                   placeholder="Введите автора документа" th:value="${document.author}">
+                        </td>
+                    </tr>
+                    <tr>
                         <td>
                             <label for="documentType">Тип документа</label></td>
                         <td>
@@ -46,7 +52,24 @@
                                 Option
                                 </option>
                             </select>
-
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="dateOfReceive">Дата получения:</label></td>
+                        <td><input id="dateOfReceive" name="title" th:placeholder="#{form.document.dateOfReceive}"
+                                   type="date" th:value="${document.dateOfReceive}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="destination">Получатель</label></td>
+                        <td>
+                            <select id="destination" name="destination">
+                                <option selected th:value="${document.id}" th:text="${document.destination}">Получатель</option>
+                                <option th:each="docType : ${doctypes}" value="1" th:value="${docType.id}" th:text="${docType.name}">
+                                    Option
+                                </option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
