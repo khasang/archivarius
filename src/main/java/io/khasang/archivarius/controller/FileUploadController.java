@@ -25,7 +25,7 @@ public class FileUploadController {
     /**
      * Upload single file using Spring Controller
      */
-    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+    @RequestMapping(value = "/document/uploadFile", method = RequestMethod.POST)
     public @ResponseBody
     String uploadFileHandler(@RequestParam("name") String name,
                              @RequestParam("file") MultipartFile file) {
