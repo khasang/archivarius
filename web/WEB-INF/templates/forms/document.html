@@ -98,6 +98,11 @@
                     </tr>
                 </table>
             </form>
+            <form method="POST" action="uploadFile" enctype="multipart/form-data">
+                Загрузить файл: <input type="file" name="file">
+                Имя файла: <input type="text" name="name">
+                <input type="submit" value="Загрузить">
+            </form>
         </div>
 
         <div class="sidebar sidebar-right" th:replace="~{base :: #sidebar-right}">
