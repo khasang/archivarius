@@ -56,21 +56,21 @@ public class DocumentController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public @ResponseBody
-    String showDocumentForm(ModelMap model, @RequestParam("file") MultipartFile file) {
+    public String showDocumentForm(ModelMap model) {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("document", new Document());
         return "forms/document";
     }
 
-    /**
-     * Upload single file using Spring Controller
-     */
-    @RequestMapping(value = "/document/uploadFile", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     public @ResponseBody
-    String uploadFileHandler(@RequestParam("name") String name,
-                             @RequestParam("file") MultipartFile file) {
-
+    String submit(@ModelAttribute("document") Document document,
+                         BindingResult result, ModelMap model, RedirectAttributes redirectAttributes,
+                         @RequestParam("name") String name, @RequestParam("file") MultipartFile file) {
+        DocType docType = docTypeService.getDocTypeById(Integer.valueOf((String)result.getFieldValue("documentType")));
+        document.setDocumentType(docType);
+        documentService.updateDocument(document);
+        redirectAttributes.addFlashAttribute("message", "Успешно!");
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
@@ -92,7 +92,7 @@ public class DocumentController {
                 log.info("Server File Location="
                         + serverFile.getAbsolutePath());
 
-                return "You successfully uploaded file=" + name;
+                return "redirect:/document/";
             } catch (Exception e) {
                 return "You failed to upload " + name + " => " + e.getMessage();
             }
@@ -100,16 +100,6 @@ public class DocumentController {
             return "You failed to upload " + name
                     + " because the file was empty.";
         }
-    }
-
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public String submit(@ModelAttribute("document") Document document,
-                         BindingResult result, ModelMap model, RedirectAttributes redirectAttributes) {
-        DocType docType = docTypeService.getDocTypeById(Integer.valueOf((String)result.getFieldValue("documentType")));
-        document.setDocumentType(docType);
-        documentService.updateDocument(document);
-        redirectAttributes.addFlashAttribute("message", "Успешно!");
-        return "redirect:/document/";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST, params = {"delete"})

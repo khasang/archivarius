@@ -27,7 +27,7 @@
             <ul>
                 <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
             </ul>
-            <form th:action="@{/document/}" action="" method="post">
+            <form th:action="@{/document/}" action="uploadFile" enctype="multipart/form-data" method="post">
                 <input type="hidden" name="id" th:value="${document.id}">
                 <table>
                     <tr>
@@ -93,15 +93,18 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>
+                            Загрузить файл: <input type="file" name="file">
+                        </td>
+                        <td>
+                            Имя файла: <input type="text" name="name">
+                        </td>
+                    </tr>
+                    <tr>
                         <td><input type="submit" th:value="#{button.submit}" value="Подтвердить" class="formbutton"></td>
                         <td><input type="submit" th:value="#{button.delete}" value="Удалить" class="formbutton"></td>
                     </tr>
                 </table>
-            </form>
-            <form method="POST" action="uploadFile" enctype="multipart/form-data">
-                Загрузить файл: <input type="file" name="file">
-                Имя файла: <input type="text" name="name">
-                <input type="submit" value="Загрузить">
             </form>
         </div>
 
