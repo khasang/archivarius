@@ -113,6 +113,11 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
         return viewResolver;
     }
 
+    /* **************************************************************** */
+    /*  File uploading to server throw web form                         */
+    /*  setMaxUploadSize(100000000) - size in bytes, meaning about 100mb*/
+    /* **************************************************************** */
+
     @Bean
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();

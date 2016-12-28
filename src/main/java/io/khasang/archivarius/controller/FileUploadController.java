@@ -64,7 +64,7 @@ public class FileUploadController {
     /**
      * Upload multiple file using Spring Controller
      */
-    @RequestMapping(value = "/uploadMultipleFile", method = RequestMethod.POST)
+    @RequestMapping(value = "/document/uploadMultipleFile", method = RequestMethod.POST)
     public @ResponseBody
     String uploadMultipleFileHandler(@RequestParam("name") String[] names,
                                      @RequestParam("file") MultipartFile[] files) {
