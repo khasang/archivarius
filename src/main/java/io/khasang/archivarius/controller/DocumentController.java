@@ -11,12 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedOutputStream;
@@ -63,14 +57,14 @@ public class DocumentController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public @ResponseBody
-    String submit(@ModelAttribute("document") Document document,
-                         BindingResult result, ModelMap model, RedirectAttributes redirectAttributes,
-                         @RequestParam("name") String name, @RequestParam("file") MultipartFile file) {
-        DocType docType = docTypeService.getDocTypeById(Integer.valueOf((String)result.getFieldValue("documentType")));
+    public String submit(@ModelAttribute("document") Document document,
+                         BindingResult result, ModelMap model,
+                         @RequestParam("file") MultipartFile file) {
+        final String fileName = file.getOriginalFilename();
+        DocType docType = docTypeService.getDocTypeById(Integer.valueOf((String) result.getFieldValue("documentType")));
         document.setDocumentType(docType);
+        document.setFileName(fileName);
         documentService.updateDocument(document);
-        redirectAttributes.addFlashAttribute("message", "Успешно!");
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
@@ -83,7 +77,7 @@ public class DocumentController {
 
                 // Create the file on server
                 File serverFile = new File(dir.getAbsolutePath()
-                        + File.separator + name);
+                        + File.separator + fileName);
                 BufferedOutputStream stream = new BufferedOutputStream(
                         new FileOutputStream(serverFile));
                 stream.write(bytes);
@@ -92,12 +86,12 @@ public class DocumentController {
                 log.info("Server File Location="
                         + serverFile.getAbsolutePath());
 
-                return "redirect:/document/";
+                return "forms/success";
             } catch (Exception e) {
-                return "You failed to upload " + name + " => " + e.getMessage();
+                return "You failed to upload " + fileName + " => " + e.getMessage();
             }
         } else {
-            return "You failed to upload " + name
+            return "You failed to upload " + fileName
                     + " because the file was empty.";
         }
     }

@@ -30,7 +30,6 @@
 
         <div id="content">
             <h2>Список документов</h2>
-            <div class="alert alert-success" th:text="${message}"/>
             <table class="table">
                 <tr>
                     <th th:text="#{table.num}">№ п/п</th>
@@ -42,6 +41,7 @@
                     <th th:text="#{table.document_status}">Статус</th>
                     <th th:text="#{table.document_destination}">Получатель</th>
                     <th th:text="#{table.document_date_deadline}">Срок ответа</th>
+                    <th th:text="#{table.document_file_name}">Файл</th>
                 </tr>
                 <tr th:each="document, stat : ${documents}" th:object="${document}">
                     <td th:text="${stat.count}">1</td>
@@ -53,6 +53,7 @@
                     <td th:text="*{status}">На подписи</td>
                     <td th:text="*{destination}">Бухгалтерия</td>
                     <td th:text="*{deadline}">29/03/2016</td>
+                    <td th:text="*{fileName}">123.pdf</td>
                     <td><a href="/document/1/edit" th:href="@{'/document/' + *{id} + '/edit'}" th:text="#{table.edit}">Редактировать</a></td>
                 </tr>
             </table>
