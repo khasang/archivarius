@@ -4,6 +4,7 @@ import io.khasang.archivarius.entity.DocType;
 import io.khasang.archivarius.entity.Document;
 import io.khasang.archivarius.service.DocTypeService;
 import io.khasang.archivarius.service.DocumentService;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,21 +12,24 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedOutputStream;
+import javax.servlet.ServletContext;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/document")
-public class DocumentController {
+public class DocumentController  implements ServletContextAware {
 
     @Autowired
     DocumentService documentService;
 
     @Autowired
     DocTypeService docTypeService;
+
+    private ServletContext servletContext;
 
     private static final Logger log = Logger.getLogger(CompanyController.class);
 
@@ -56,6 +60,8 @@ public class DocumentController {
         return "forms/document";
     }
 
+
+
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String submit(@ModelAttribute("document") Document document,
                          BindingResult result, ModelMap model,
@@ -65,40 +71,27 @@ public class DocumentController {
         document.setDocumentType(docType);
         document.setFileName(fileName);
         documentService.updateDocument(document);
-        if (!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-
-                // Creating the directory to store file
-                String rootPath = System.getProperty("catalina.home");
-                File dir = new File(rootPath + File.separator + "tmpFiles");
-                if (!dir.exists())
-                    dir.mkdirs();
-
-                // Create the file on server
-                File serverFile = new File(dir.getAbsolutePath()
-                        + File.separator + fileName);
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
-
-                log.info("Server File Location="
-                        + serverFile.getAbsolutePath());
-
-                return "forms/success";
-            } catch (Exception e) {
-                return "You failed to upload " + fileName + " => " + e.getMessage();
-            }
-        } else {
-            return "You failed to upload " + fileName
-                    + " because the file was empty.";
+        File fileDest = new File(servletContext.getRealPath("/") + "/"
+                + fileName);
+        try {
+            FileUtils.writeByteArrayToFile(fileDest, file.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        System.out.println("Go to the location:  " + fileDest.toString()
+                + " on your computer and verify that the image has been stored.");
+
+        return "forms/success";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST, params = {"delete"})
     public String deny(@RequestParam int id, @RequestParam String delete, Model model) {
         documentService.deleteDocument(id);
         return "redirect:/document/";
+    }
+
+    @Override
+    public void setServletContext(ServletContext servletContext) {
+        this.servletContext = servletContext;
     }
 }
