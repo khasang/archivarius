@@ -4,7 +4,6 @@ import io.khasang.archivarius.entity.DocType;
 import io.khasang.archivarius.entity.Document;
 import io.khasang.archivarius.service.DocTypeService;
 import io.khasang.archivarius.service.DocumentService;
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,24 +11,20 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
 
 @Controller
 @RequestMapping("/document")
-public class DocumentController  implements ServletContextAware {
+public class DocumentController {
 
     @Autowired
     DocumentService documentService;
 
     @Autowired
     DocTypeService docTypeService;
-
-    private ServletContext servletContext;
 
     private static final Logger log = Logger.getLogger(CompanyController.class);
 
@@ -60,8 +55,6 @@ public class DocumentController  implements ServletContextAware {
         return "forms/document";
     }
 
-
-
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String submit(@ModelAttribute("document") Document document,
                          BindingResult result, ModelMap model,
@@ -71,15 +64,13 @@ public class DocumentController  implements ServletContextAware {
         document.setDocumentType(docType);
         document.setFileName(fileName);
         documentService.updateDocument(document);
-        File fileDest = new File(servletContext.getRealPath("/") + "/"
-                + fileName);
+        String rootPath = System.getProperty("catalina.home");
+        File dir = new File(rootPath + File.separator + "tmpFiles" + File.separator + fileName);
         try {
-            FileUtils.writeByteArrayToFile(fileDest, file.getBytes());
+            file.transferTo(dir);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Go to the location:  " + fileDest.toString()
-                + " on your computer and verify that the image has been stored.");
 
         return "forms/success";
     }
@@ -88,10 +79,5 @@ public class DocumentController  implements ServletContextAware {
     public String deny(@RequestParam int id, @RequestParam String delete, Model model) {
         documentService.deleteDocument(id);
         return "redirect:/document/";
-    }
-
-    @Override
-    public void setServletContext(ServletContext servletContext) {
-        this.servletContext = servletContext;
     }
 }
