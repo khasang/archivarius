@@ -34,6 +34,7 @@
                 <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
             </ul>
             <form th:action="@{/users/}" action="" method="post">
+                <input type="hidden" name="id" th:value="${user.id}">
                 <table>
                     <tr>
                         <td><label for="name">Логин</label></td>

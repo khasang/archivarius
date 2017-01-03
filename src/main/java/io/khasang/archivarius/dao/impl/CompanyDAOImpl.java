@@ -69,11 +69,13 @@ public class CompanyDAOImpl implements CompanyDAO {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<Company> getCompanyList() {
-        Criteria criteria = sessionFactory.
-                getCurrentSession().
-                createCriteria(Company.class);
-        return (List<Company>) criteria.list();
+        final Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Company> criteriaQuery = builder.createQuery(Company.class);
+        Root<Company> company = criteriaQuery.from(Company.class);
+        criteriaQuery.select(company);
+        Query<Company> query = session.createQuery(criteriaQuery);
+        return query.getResultList();
     }
 }
