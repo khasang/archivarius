@@ -15,7 +15,5 @@ public interface CompanyDAO {
 
     Company getCompanyById(int id);
 
-    Company getCompanyByName(String name);
-
     List<Company> getCompanyList();
 }

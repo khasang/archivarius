@@ -2,10 +2,8 @@ package io.khasang.archivarius.dao.impl;
 
 import io.khasang.archivarius.dao.CompanyDAO;
 import io.khasang.archivarius.entity.Company;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -52,20 +50,11 @@ public class CompanyDAOImpl implements CompanyDAO {
         final Session session = sessionFactory.getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Company> query = builder.createQuery(Company.class);
-        Root<Company> game = query.from(Company.class);
-        query.where(builder.equal(game.get("id"), builder.parameter(Integer.class, "id")));
+        Root<Company> root = query.from(Company.class);
+        query.where(builder.equal(root.get("id"), builder.parameter(Integer.class, "id")));
         Query<Company> myQuery = session.createQuery(query);
         myQuery.setParameter("id", id);
         return myQuery.getSingleResult();
-    }
-
-    @Override
-    public Company getCompanyByName(String name) {
-        Criteria criteria = sessionFactory.
-                getCurrentSession().
-                createCriteria(Company.class);
-        criteria.add(Restrictions.eq("name", name));
-        return (Company) criteria.uniqueResult();
     }
 
     @Override
@@ -73,9 +62,9 @@ public class CompanyDAOImpl implements CompanyDAO {
         final Session session = sessionFactory.getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Company> criteriaQuery = builder.createQuery(Company.class);
-        Root<Company> company = criteriaQuery.from(Company.class);
-        criteriaQuery.orderBy(builder.asc(company.get("name")));
-        criteriaQuery.select(company);
+        Root<Company> root = criteriaQuery.from(Company.class);
+        criteriaQuery.orderBy(builder.asc(root.get("name")));
+        criteriaQuery.select(root);
         Query<Company> query = session.createQuery(criteriaQuery);
         return query.getResultList();
     }
