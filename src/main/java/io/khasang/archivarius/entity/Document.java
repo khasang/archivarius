@@ -13,7 +13,7 @@ import java.sql.Date;
 @Entity
 public class Document {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Type(type="date")
@@ -30,6 +30,7 @@ public class Document {
     @Type(type="date")
     private Date deadline;
     private String destination;
+    private String fileName;
 
     public Document() {
     }
@@ -96,6 +97,14 @@ public class Document {
 
     public void setDestination(String destination) {
         this.destination = destination;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     @Override

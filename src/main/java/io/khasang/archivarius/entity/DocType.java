@@ -12,10 +12,10 @@ import javax.persistence.*;
 public class DocType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private String documentType;
+    private String name;
     private String description;
 
     public DocType() {
@@ -29,12 +29,12 @@ public class DocType {
         this.id = id;
     }
 
-    public String getDocumentType() {
-        return documentType;
+    public String getName() {
+        return name;
     }
 
-    public void setDocumentType(String documentType) {
-        this.documentType = documentType;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {

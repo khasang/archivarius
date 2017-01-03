@@ -11,7 +11,7 @@
     <div id="content">
         <h2>Редактирование типа документа</h2>
         <p><b>Изменения успешно произведены!</b></p>
-        <p>${documentType}</p>
+        <p>${name}</p>
         <p>${description}</p>
     </div>
     <!-- Include RIGHT SIDEBAR-->

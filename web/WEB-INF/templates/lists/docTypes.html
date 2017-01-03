@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{base :: common_header(~{::title})}">
+    <title>Список типов документа</title>
+    <link rel="stylesheet" href="../../views/css/styles.css" type="text/css"/>
+</head>
+
+<body>
+<div id="container">
+    <div id="header" th:replace="~{base :: #header}">
+        <h1>Archivarius</h1>
+        <h2>Documents Workflow System</h2>
+    </div>
+
+    <div id="navigation" th:replace="~{base :: #navigation}">
+        <ul>
+            <li><a href="../inbox.html">Входящие документы</a></li>
+        </ul>
+    </div>
+
+    <div id="body">
+        <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-doctype}">
+            <ul>
+                <li>
+                    <h4>О программе</h4>
+                </li>
+            </ul>
+        </div>
+
+        <div id="content">
+            <h2>Список типов документа</h2>
+            <div class="alert alert-success" th:text="${message}"/>
+            <table class="table">
+                <tr>
+                    <th th:text="#{table.num}">№</th>
+                    <th th:text="#{table.doctype_title}">Тип документа</th>
+                    <th th:text="#{table.doctype_desctiption}">Описание</th>
+                </tr>
+                <tr th:each="docType, stat : ${docTypes}" th:object="${docType}">
+                    <td th:text="${stat.count}">1</td>
+                    <td><a href="/doctype/1" th:href="@{'/doctype/' + *{id}}"  th:text="*{name}">Тип документа</a></td>
+                    <td th:text="*{description}">Описание документа</td>
+                    <td><a href="/doctype/1/edit" th:href="@{'/doctype/' + *{id} + '/edit'}" th:text="#{table.edit}">Редактировать</a></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="sidebar sidebar-right" th:replace="~{base :: #sidebar-right}">
+            <ul>
+                <li>
+                    <h4>Ссылки</h4>
+                </li>
+            </ul>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+    <div id="footer" th:replace="~{base :: #footer}">
+        <p>&copy; Archivarius 2016.</p>
+    </div>
+</div>
+</body>
+</html>

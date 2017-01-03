@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{base :: common_header(~{::title})}">
     <title>Параметры организации</title>
     <link rel="stylesheet" href="../../views/css/styles.css" type="text/css"/>
@@ -53,8 +53,8 @@
                                    placeholder="Введите номер ИНН" th:value="${company.innNumber}"></td>
                     </tr>
                     <tr>
-                        <td><input type="submit" th:value="#{button.submit}" value="Подтвердить"></td>
-                        <td><input type="submit" th:value="#{button.delete}" value="Удалить"></td>
+                        <td><input type="submit" th:value="#{button.submit}" value="Подтвердить" class="formbutton"></td>
+                        <td><input type="submit" th:value="#{button.delete}" value="Удалить" class="formbutton"></td>
                     </tr>
                 </table>
             </form>

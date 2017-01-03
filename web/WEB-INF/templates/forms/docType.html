@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{base :: common_header(~{::title})}">
-    <title>Параметры подразделения</title>
+    <title>Параметры типа документа</title>
     <link rel="stylesheet" href="../../views/css/styles.css" type="text/css"/>
 </head>
 
@@ -20,7 +20,7 @@
     </div>
 
     <div id="body">
-        <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-dep}">
+        <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-doctype}">
             <ul>
                 <li>
                     <h4>О программе</h4>
@@ -29,30 +29,24 @@
         </div>
 
         <div id="content">
-            <h2>Параметры подразделения</h2>
+            <h2>Параметры типа документа</h2>
             <ul>
                 <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
             </ul>
-            <form th:action="@{/department/}" action="" method="post">
+            <form th:action="@{/doctype/}" action="" method="post">
+                <input type="hidden" name="id" th:value="${docType.id}">
                 <table>
                     <tr>
-                        <td><label for="name">Название подразделения</label></td>
-                        <td><input id="name" name="name" th:placeholder="#{form.department.title}"
-                                   placeholder="Введите название подразделения" th:value="${department.name}">
+                        <td><label for="name">Тип документа</label></td>
+                        <td><input id="name" name="name" th:placeholder="#{form.doctype.title}"
+                                   placeholder="Введите название типа документа" th:value="${docType.name}">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label for="company">Организация</label></td>
-                        <td>
-                            <select id="company" name="company">
-                                <option selected th:value="${selectedCompany.id}" th:text="${selectedCompany.name}">Выбранное</option>
-                                <option th:each="comp : ${companies}" value="1" th:value="${comp.id}" th:text="${comp.name}">
-                                Option
-                                </option>
-                            </select>
-
-                        </td>
+                            <label for="description">Описание</label></td>
+                        <td><input id="description" name="description" th:placeholder="#{form.doctype.description}"
+                                   placeholder="Введите описание типа документа" th:value="${docType.description}"></td>
                     </tr>
                     <tr>
                         <td><input type="submit" th:value="#{button.submit}" value="Подтвердить" class="formbutton"></td>

@@ -27,7 +27,8 @@
                         <td>${document.dateOfReceive}</td>
                         <td>${document.author}</td>
                         <td>${document.title}</td>
-                        <td>${document.documentType}</td>
+                        <td>${document.name}</td>
+                        <td>${document.documentType.name}</td>
                         <td>${document.status}</td>
                         <td>${document.destination}</td>
                         <td>${document.deadline}</td>

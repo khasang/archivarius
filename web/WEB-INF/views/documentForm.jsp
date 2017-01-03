@@ -22,12 +22,12 @@
             <br>
             <br>
             <form:label path="author">Автор:</form:label>
-            <form:input path="author" placeholder="Введите автора документа" />
+            <form:input type="text" path="author" placeholder="Введите автора документа" />
             <br>
             <br>
             <br>
             <label>Тип документа:</label>
-            <form:select path="documentType">
+            <form:select path="name">
                 <form:option value="NONE" label="Выбрать"/>
                 <form:options items="${docTypeDropBox}"/>
             </form:select>
@@ -68,20 +68,23 @@
             <br>
             <br>
             <br>
-
-            <tr>
-                <td><input type="submit" value="Submit"/></td>
-                <td><input type="submit" name="delete" value="Delete"/></td>
-            </tr>
-        </form:form>
-        <form:form method="POST" action="/document/" modelAttribute="document">
-            <label for="encloseFile">Прикрепить файл:</label>
-            <br>
-            <br>
             <input type="file" name="encloseFile" class="formbutton" />
             <br>
             <br>
-            <input type="button" onclick="valid(document.getElementById('form'))" name="submit" value="Отправить" class="formbutton" />
+            <br>
+            <form method="POST" enctype="multipart/form-data" action="fup.cgi">
+                File to upload: <input type="file" name="upfile"><br/>
+                Notes about the file: <input type="text" name="note"><br/>
+                <br/>
+                <input type="submit" value="Press"> to upload the file!
+            </form>
+            <br>
+            <br>
+            <br>
+            <tr>
+                <td><input type="submit" value="Submit" class="formbutton"/></td>
+                <td><input type="submit" name="delete" value="Delete" class="formbutton"/></td>
+            </tr>
         </form:form>
     </div>
     <!-- Include RIGHT SIDEBAR-->
