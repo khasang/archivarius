@@ -74,6 +74,7 @@ public class CompanyDAOImpl implements CompanyDAO {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Company> criteriaQuery = builder.createQuery(Company.class);
         Root<Company> company = criteriaQuery.from(Company.class);
+        criteriaQuery.orderBy(builder.asc(company.get("name")));
         criteriaQuery.select(company);
         Query<Company> query = session.createQuery(criteriaQuery);
         return query.getResultList();
