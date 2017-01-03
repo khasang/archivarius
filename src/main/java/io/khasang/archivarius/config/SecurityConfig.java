@@ -31,14 +31,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/admin/**").access("hasRole('ADMIN')")
-//                .antMatchers("/user/**").access("hasRole('USER')")
-//                .antMatchers("/api/company/**").access("hasRole('ADMIN')")
-                .and().formLogin().loginPage("/login")
-                .usernameParameter("ssoId").passwordParameter("password")
-                .and().csrf().disable();
+        http
+                .authorizeRequests()
+                    .antMatchers("/css/**").permitAll()
+                    .anyRequest().authenticated()
+                .and()
+                    .formLogin()
+                    .loginPage("/login")
+                    .usernameParameter("ssoId").passwordParameter("password")
+                    .permitAll()
+                .and()
+                    .logout()
+                    .permitAll()
+                .and()
+                    .csrf().disable();
     }
 
     @Bean
