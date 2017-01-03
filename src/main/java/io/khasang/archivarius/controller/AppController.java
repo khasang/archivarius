@@ -3,7 +3,6 @@ package io.khasang.archivarius.controller;
 import io.khasang.archivarius.model.DatabaseBackup;
 import io.khasang.archivarius.model.Message;
 import io.khasang.archivarius.model.QueryExample;
-import io.khasang.archivarius.service.CompanyService;
 import io.khasang.archivarius.service.ReportService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.ViewResolver;
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
 @Controller
 public class AppController {
@@ -137,6 +134,6 @@ public class AppController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
-        return "login";
+        return "forms/login";
     }
 }

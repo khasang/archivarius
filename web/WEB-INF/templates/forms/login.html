@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Login page</title>
+    <link rel="stylesheet" type="text/css" href="../../views/css/styleLogin.css" th:href="@{/css/styleLogin.css}"/>
+</head>
+<div class="container">
+    <div class="login">
+        <h1 class="login-heading">
+            <strong>Archivarius Login Form</strong>
+        </h1>
+        <form action="/login" method="post">
+            <input type="text" class="input-txt" id="username" name="ssoId" placeholder="Enter Username" required>
+            <input type="password" class="input-txt" id="password" name="password" placeholder="Enter Password"
+                   required>
+            <div class="login-footer">
+                <a href="#" class="lnk">
+                    <span class="icon icon--min">Забыли пароль?</span>
+                </a>
+                <button type="submit"
+                        class="btn btn--right">Войти
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<body>
+</body>
+</html>
