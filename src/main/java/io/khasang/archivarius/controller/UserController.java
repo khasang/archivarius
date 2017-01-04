@@ -1,12 +1,10 @@
 package io.khasang.archivarius.controller;
 
-import io.khasang.archivarius.entity.Company;
 import io.khasang.archivarius.entity.Role;
 import io.khasang.archivarius.entity.User;
 import io.khasang.archivarius.service.RoleService;
 import io.khasang.archivarius.service.UserService;
 import org.apache.log4j.Logger;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,9 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class UserController {
@@ -72,7 +70,7 @@ public class UserController {
         user.setRoles(roles);
         user.setPassword(passwordEncoder.encode((String)result.getFieldValue("password")));
         userService.updateUser(user);
-        return "success";
+        return "forms/success";
     }
 
     @RequestMapping(value = "/users/", method = RequestMethod.POST, params = {"delete"})

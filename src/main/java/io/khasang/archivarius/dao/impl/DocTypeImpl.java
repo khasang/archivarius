@@ -1,13 +1,16 @@
 package io.khasang.archivarius.dao.impl;
 
-import org.springframework.stereotype.Repository;
 import io.khasang.archivarius.dao.DocTypeDAO;
 import io.khasang.archivarius.entity.DocType;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
@@ -39,19 +42,26 @@ public class DocTypeImpl implements DocTypeDAO {
 
     @Override
     public DocType getDocTypeById(int id) {
-        Criteria criteria = sessionFactory.
-                getCurrentSession().
-                createCriteria(DocType.class);
-        criteria.add(Restrictions.eq("id", id));
-        return (DocType) criteria.uniqueResult();
+        final Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<DocType> query = builder.createQuery(DocType.class);
+        Root<DocType> root = query.from(DocType.class);
+        query.where(builder.equal(root.get("id"), builder.parameter(Integer.class, "id")));
+        Query<DocType> myQuery = session.createQuery(query);
+        myQuery.setParameter("id", id);
+        return myQuery.getSingleResult();
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<DocType> getDocTypeList() {
-        Criteria criteria = sessionFactory.
-                getCurrentSession().
-                createCriteria(DocType.class);
-        return (List<DocType>) criteria.list();
+        final Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<DocType> criteriaQuery = builder.createQuery(DocType.class);
+        Root<DocType> root = criteriaQuery.from(DocType.class);
+        criteriaQuery.orderBy(builder.asc(root.get("name")));
+        criteriaQuery.select(root);
+        Query<DocType> query = session.createQuery(criteriaQuery);
+        return query.getResultList();
     }
 }

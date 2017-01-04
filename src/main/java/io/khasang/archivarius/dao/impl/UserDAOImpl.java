@@ -2,13 +2,15 @@ package io.khasang.archivarius.dao.impl;
 
 import io.khasang.archivarius.dao.UserDAO;
 import io.khasang.archivarius.entity.User;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
@@ -45,27 +47,37 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User getUserById(int id) {
-        Criteria criteria = sessionFactory.
-                getCurrentSession().
-                createCriteria(User.class);
-        criteria.add(Restrictions.eq("id", id));
-        return (User) criteria.uniqueResult();
+        final Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root<User> root = query.from(User.class);
+        query.where(builder.equal(root.get("id"), builder.parameter(Integer.class, "id")));
+        Query<User> myQuery = session.createQuery(query);
+        myQuery.setParameter("id", id);
+        return myQuery.getSingleResult();
     }
 
     @Override
     public User getUserByName(String name) {
-        Criteria criteria = sessionFactory.
-                getCurrentSession().
-                createCriteria(User.class);
-        criteria.add(Restrictions.eq("login", name));
-        return (User) criteria.uniqueResult();
+        final Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root<User> root = query.from(User.class);
+        query.where(builder.equal(root.get("login"), builder.parameter(Integer.class, "login")));
+        Query<User> myQuery = session.createQuery(query);
+        myQuery.setParameter("login", name);
+        return myQuery.getSingleResult();
     }
 
     @Override
     public List<User> getUserList() {
-        Criteria criteria = sessionFactory.
-                getCurrentSession().
-                createCriteria(User.class);
-        return (List<User>) criteria.list();
+        final Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> criteriaQuery = builder.createQuery(User.class);
+        Root<User> root = criteriaQuery.from(User.class);
+        criteriaQuery.orderBy(builder.asc(root.get("login")));
+        criteriaQuery.select(root);
+        Query<User> query = session.createQuery(criteriaQuery);
+        return query.getResultList();
     }
 }

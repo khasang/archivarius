@@ -6,8 +6,13 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
@@ -39,11 +44,14 @@ public class DocumentDAOImpl implements DocumentDAO {
 
     @Override
     public Document getDocumentById(int id) {
-        Criteria criteria = sessionFactory.
-                getCurrentSession().
-                createCriteria(Document.class);
-        criteria.add(Restrictions.eq("id", id));
-        return (Document) criteria.uniqueResult();
+        final Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Document> query = builder.createQuery(Document.class);
+        Root<Document> root = query.from(Document.class);
+        query.where(builder.equal(root.get("id"), builder.parameter(Integer.class, "id")));
+        Query<Document> myQuery = session.createQuery(query);
+        myQuery.setParameter("id", id);
+        return myQuery.getSingleResult();
     }
 
     @Override
@@ -67,10 +75,14 @@ public class DocumentDAOImpl implements DocumentDAO {
     @Override
     @SuppressWarnings("unchecked")
     public List<Document> getDocumentList() {
-        Criteria criteria = sessionFactory.
-                getCurrentSession().
-                createCriteria(Document.class);
-        return (List<Document>) criteria.list();
+        final Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Document> criteriaQuery = builder.createQuery(Document.class);
+        Root<Document> root = criteriaQuery.from(Document.class);
+        criteriaQuery.orderBy(builder.asc(root.get("id")));
+        criteriaQuery.select(root);
+        Query<Document> query = session.createQuery(criteriaQuery);
+        return query.getResultList();
     }
 }
 

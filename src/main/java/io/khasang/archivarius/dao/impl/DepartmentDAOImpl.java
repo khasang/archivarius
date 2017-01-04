@@ -1,15 +1,16 @@
 package io.khasang.archivarius.dao.impl;
 
 import io.khasang.archivarius.dao.DepartmentDAO;
-import io.khasang.archivarius.entity.Company;
 import io.khasang.archivarius.entity.Department;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
@@ -46,18 +47,25 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
     @Override
     public Department getDepartmentById(int id) {
-        Criteria criteria = sessionFactory.
-                getCurrentSession().
-                createCriteria(Department.class);
-        criteria.add(Restrictions.eq("id", id));
-        return (Department) criteria.uniqueResult();
+        final Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Department> query = builder.createQuery(Department.class);
+        Root<Department> root = query.from(Department.class);
+        query.where(builder.equal(root.get("id"), builder.parameter(Integer.class, "id")));
+        Query<Department> myQuery = session.createQuery(query);
+        myQuery.setParameter("id", id);
+        return myQuery.getSingleResult();
     }
 
     @Override
     public List<Department> getDepartmentList() {
-        Criteria criteria = sessionFactory.
-                getCurrentSession().
-                createCriteria(Department.class);
-        return (List<Department>) criteria.list();
+        final Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Department> criteriaQuery = builder.createQuery(Department.class);
+        Root<Department> root = criteriaQuery.from(Department.class);
+        criteriaQuery.orderBy(builder.asc(root.get("name")));
+        criteriaQuery.select(root);
+        Query<Department> query = session.createQuery(criteriaQuery);
+        return query.getResultList();
     }
 }
