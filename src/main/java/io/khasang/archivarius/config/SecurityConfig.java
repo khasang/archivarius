@@ -34,10 +34,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers("/css/**").permitAll()
-                    .anyRequest().authenticated()
+                    .antMatchers("/hello/admin/**").permitAll()
+                //       .anyRequest().authenticated()
                 .and()
                     .formLogin()
-                    .loginPage("/login")
+//                    .loginPage("/login")
                     .usernameParameter("ssoId").passwordParameter("password")
                     .permitAll()
                 .and()

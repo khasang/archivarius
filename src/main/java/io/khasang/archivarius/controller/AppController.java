@@ -132,8 +132,8 @@ public class AppController {
 
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage() {
-        return "forms/login";
-    }
+//    @RequestMapping(value = "/login", method = RequestMethod.GET)
+//    public String loginPage() {
+//        return "forms/login";
+//    }
 }
