@@ -48,8 +48,20 @@ public class Document {
         return id;
     }
 
-    public int getdocumentKey() {
+    public int getDocumentKey() {
         return documentKey;
+    }
+
+    public int getInboxKey() {
+        return 1;
+    }
+
+    public int getOutboxKey() {
+        return 2;
+    }
+
+    public int getInternalKey() {
+        return 3;
     }
 
     public void setId(int id) {
