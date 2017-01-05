@@ -94,7 +94,7 @@ public class DocumentDAOImpl implements DocumentDAO {
         CriteriaQuery<Document> criteriaQuery = builder.createQuery(Document.class);
         Root<Document> root = criteriaQuery.from(Document.class);
         criteriaQuery.select(root);
-        criteriaQuery.where(builder.equal(root.get("key"), "1"));
+        criteriaQuery.where(builder.equal(root.get("documentKey"), "1"));
         criteriaQuery.orderBy(builder.asc(root.get("id")));
         Query<Document> query = session.createQuery(criteriaQuery);
         return query.getResultList();
@@ -109,7 +109,7 @@ public class DocumentDAOImpl implements DocumentDAO {
         CriteriaQuery<Document> criteriaQuery = builder.createQuery(Document.class);
         Root<Document> root = criteriaQuery.from(Document.class);
         criteriaQuery.select(root);
-        criteriaQuery.where(builder.equal(root.get("key"), "2"));
+        criteriaQuery.where(builder.equal(root.get("documentKey"), "2"));
         criteriaQuery.orderBy(builder.asc(root.get("id")));
         Query<Document> query = session.createQuery(criteriaQuery);
         return query.getResultList();
@@ -124,7 +124,7 @@ public class DocumentDAOImpl implements DocumentDAO {
         CriteriaQuery<Document> criteriaQuery = builder.createQuery(Document.class);
         Root<Document> root = criteriaQuery.from(Document.class);
         criteriaQuery.select(root);
-        criteriaQuery.where(builder.equal(root.get("key"), "3"));
+        criteriaQuery.where(builder.equal(root.get("documentKey"), "3"));
         criteriaQuery.orderBy(builder.asc(root.get("id")));
         Query<Document> query = session.createQuery(criteriaQuery);
         return query.getResultList();

@@ -34,10 +34,22 @@ public class DocumentController {
         return "lists/documents";
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/inbox")
     public String inboxList(Model model) {
         model.addAttribute("inboxList", documentService.getInboxList());
         return "inbox";
+    }
+
+    @RequestMapping("/outbox")
+    public String outboxList(Model model) {
+        model.addAttribute("outboxList", documentService.getOutboxList());
+        return "outbox";
+    }
+
+    @RequestMapping("/internal")
+    public String internalList(Model model) {
+        model.addAttribute("internalList", documentService.getInternalList());
+        return "internal";
     }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
@@ -59,6 +71,27 @@ public class DocumentController {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("document", new Document());
         return "forms/document";
+    }
+
+    @RequestMapping(value = "/inbox/add", method = RequestMethod.GET)
+    public String showInboxDocumentForm(ModelMap model) {
+        model.addAttribute("doctypes", docTypeService.getDocTypeList());
+        model.addAttribute("document", new Document());
+        return "forms/newInbox";
+    }
+
+    @RequestMapping(value = "/outbox/add", method = RequestMethod.GET)
+    public String showOutboxDocumentForm(ModelMap model) {
+        model.addAttribute("doctypes", docTypeService.getDocTypeList());
+        model.addAttribute("document", new Document());
+        return "forms/newOutbox";
+    }
+
+    @RequestMapping(value = "/internal/add", method = RequestMethod.GET)
+    public String showInternalDocumentForm(ModelMap model) {
+        model.addAttribute("doctypes", docTypeService.getDocTypeList());
+        model.addAttribute("document", new Document());
+        return "forms/newInternal";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)

@@ -31,7 +31,7 @@ public class Document {
     private Date deadline;
     private String destination;
     private String fileName;
-    private int key;
+    private int documentKey;
 
     public Document() {
     }
@@ -48,16 +48,16 @@ public class Document {
         return id;
     }
 
-    public int getKey() {
-        return key;
+    public int getdocumentKey() {
+        return documentKey;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    private void setKey(int key) {
-        this.key = key;
+    private void setDocumentKey(int documentKey) {
+        this.documentKey = documentKey;
     }
 
     public Date getDateOfReceive() {
@@ -127,6 +127,7 @@ public class Document {
                 ", documentType=" + documentType + '\'' +
                 ", deadline=" + deadline +
                 ", destination=" + destination +
+                ", documentKey=" + documentKey +
                 '}';
     }
 }
