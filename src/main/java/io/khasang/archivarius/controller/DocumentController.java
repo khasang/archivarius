@@ -34,6 +34,12 @@ public class DocumentController {
         return "lists/documents";
     }
 
+    @RequestMapping("/")
+    public String inboxList(Model model) {
+        model.addAttribute("inboxList", documentService.getInboxList());
+        return "inbox";
+    }
+
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
     public String documentGetId(@PathVariable("id") Integer id, ModelMap model) {
         model.addAttribute("document", documentService.getDocumentById(id));

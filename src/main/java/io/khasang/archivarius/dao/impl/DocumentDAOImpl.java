@@ -84,6 +84,51 @@ public class DocumentDAOImpl implements DocumentDAO {
         Query<Document> query = session.createQuery(criteriaQuery);
         return query.getResultList();
     }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Document> getInboxList() {
+        // 1 is a key for inbox documents
+        final Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Document> criteriaQuery = builder.createQuery(Document.class);
+        Root<Document> root = criteriaQuery.from(Document.class);
+        criteriaQuery.select(root);
+        criteriaQuery.where(builder.equal(root.get("key"), "1"));
+        criteriaQuery.orderBy(builder.asc(root.get("id")));
+        Query<Document> query = session.createQuery(criteriaQuery);
+        return query.getResultList();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Document> getOutboxList() {
+        // 2 is a key for outbox documents
+        final Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Document> criteriaQuery = builder.createQuery(Document.class);
+        Root<Document> root = criteriaQuery.from(Document.class);
+        criteriaQuery.select(root);
+        criteriaQuery.where(builder.equal(root.get("key"), "2"));
+        criteriaQuery.orderBy(builder.asc(root.get("id")));
+        Query<Document> query = session.createQuery(criteriaQuery);
+        return query.getResultList();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Document> getInternalList() {
+        // 3 is a key for internal documents
+        final Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Document> criteriaQuery = builder.createQuery(Document.class);
+        Root<Document> root = criteriaQuery.from(Document.class);
+        criteriaQuery.select(root);
+        criteriaQuery.where(builder.equal(root.get("key"), "3"));
+        criteriaQuery.orderBy(builder.asc(root.get("id")));
+        Query<Document> query = session.createQuery(criteriaQuery);
+        return query.getResultList();
+    }
 }
 
 

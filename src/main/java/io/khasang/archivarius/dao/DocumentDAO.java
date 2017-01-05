@@ -19,5 +19,11 @@ public interface DocumentDAO {
     Document getDocumentByDestination(String destination);
 
     List<Document> getDocumentList();
+
+    List<Document> getInboxList();
+
+    List<Document> getOutboxList();
+
+    List<Document> getInternalList();
 }
 
