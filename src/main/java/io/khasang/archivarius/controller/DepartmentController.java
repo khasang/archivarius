@@ -44,7 +44,6 @@ public class DepartmentController {
         Department department = departmentService.getDepartmentById(Integer.valueOf(id));
         model.addAttribute("companies", companyService.getCompanyList());
         model.addAttribute("department", department);
-        model.addAttribute("selectedCompany", department.getCompany());
         return "forms/department";
     }
 
@@ -52,7 +51,6 @@ public class DepartmentController {
     public String showDepartmentForm(ModelMap model) {
         model.addAttribute("companies", companyService.getCompanyList());
         model.addAttribute("department", new Department());
-        model.addAttribute("selectedCompany", null);
         return "forms/department";
     }
 
