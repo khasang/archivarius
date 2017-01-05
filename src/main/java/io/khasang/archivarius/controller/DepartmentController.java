@@ -57,12 +57,7 @@ public class DepartmentController {
     @PostMapping("/")
     public String submit(@ModelAttribute("department")Department department,
                          BindingResult result, ModelMap model) {
-        Company company;
-        if("NONE".equals(result.getFieldValue("company"))) {
-            company = null;
-        } else {
-            company = companyService.getCompanyById(Integer.valueOf((String)(result.getFieldValue("company"))));
-        }
+        Company company = companyService.getCompanyById(Integer.valueOf((String)(result.getFieldValue("company"))));
         department.setCompany(company);
         departmentService.updateDepartment(department);
         model.addAttribute("name", department.getName());

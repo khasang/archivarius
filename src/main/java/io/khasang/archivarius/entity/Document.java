@@ -29,7 +29,12 @@ public class Document {
 
     @Type(type="date")
     private Date deadline;
-    private String destination;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id",
+            foreignKey = @ForeignKey(name = "DEPARTMENT_ID"))
+    private Department department;
+
     private String fileName;
 
     public Document() {
@@ -91,14 +96,6 @@ public class Document {
         this.deadline = deadline;
     }
 
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
     public String getFileName() {
         return fileName;
     }
@@ -107,17 +104,26 @@ public class Document {
         this.fileName = fileName;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
     @Override
     public String toString() {
         return "Document{" +
                 "id=" + id +
-                ", dateOfReceive='" + dateOfReceive + '\'' +
-                ", author=" + author +
-                ", title=" + title + '\'' +
-                ", status=" + status +
-                ", documentType=" + documentType + '\'' +
+                ", dateOfReceive=" + dateOfReceive +
+                ", author='" + author + '\'' +
+                ", title='" + title + '\'' +
+                ", status='" + status + '\'' +
+                ", documentType=" + documentType +
                 ", deadline=" + deadline +
-                ", destination=" + destination +
+                ", department=" + department +
+                ", fileName='" + fileName + '\'' +
                 '}';
     }
 }

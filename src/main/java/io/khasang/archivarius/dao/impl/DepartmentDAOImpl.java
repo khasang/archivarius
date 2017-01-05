@@ -2,8 +2,10 @@ package io.khasang.archivarius.dao.impl;
 
 import io.khasang.archivarius.dao.DepartmentDAO;
 import io.khasang.archivarius.entity.Department;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -48,13 +50,9 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     @Override
     public Department getDepartmentById(int id) {
         final Session session = sessionFactory.getCurrentSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Department> query = builder.createQuery(Department.class);
-        Root<Department> root = query.from(Department.class);
-        query.where(builder.equal(root.get("id"), builder.parameter(Integer.class, "id")));
-        Query<Department> myQuery = session.createQuery(query);
-        myQuery.setParameter("id", id);
-        return myQuery.getSingleResult();
+        Criteria criteria = session.createCriteria(Department.class);
+        criteria.add(Restrictions.eq("id", id));
+        return (Department) criteria.uniqueResult();
     }
 
     @Override
