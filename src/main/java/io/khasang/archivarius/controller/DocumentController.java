@@ -84,8 +84,8 @@ public class DocumentController {
         return "forms/success";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST, params = {"delete"})
-    public String deny(@RequestParam int id, @RequestParam String delete, Model model) {
+    @PostMapping(value = "/delete")
+    public String delete(@RequestParam int id) {
         documentService.deleteDocument(id);
         return "redirect:/document/";
     }

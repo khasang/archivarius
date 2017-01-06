@@ -73,8 +73,8 @@ public class UserController {
         return "forms/success";
     }
 
-    @RequestMapping(value = "/users/", method = RequestMethod.POST, params = {"delete"})
-    public String deny(@RequestParam int id, @RequestParam String delete, Model model) {
+    @PostMapping(value = "/users/delete")
+    public String delete(@RequestParam int id) {
         userService.deleteUserById(id);
         return "redirect:/users/";
     }

@@ -55,11 +55,17 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="submit" th:value="#{button.submit}" value="Подтвердить" class="formbutton"></td>
-                        <td><input type="submit" th:value="#{button.delete}" value="Удалить" class="formbutton"></td>
-                    </tr>
-                </table>
+                        <td><input type="submit" th:value="#{button.submit}" value="Подтвердить" class="formbutton">
+                        </td>
             </form>
+            <td>
+                <form th:action="@{/department/delete}" method="post">
+                    <input type="hidden" th:field="${department.id}"/>
+                    <input type="submit" th:value="#{button.delete}" value="Удалить" class="formbutton">
+                </form>
+            </td>
+            </tr>
+            </table>
         </div>
 
         <div class="sidebar sidebar-right" th:replace="~{base :: #sidebar-right}">
