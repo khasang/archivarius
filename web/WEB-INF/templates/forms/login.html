@@ -11,6 +11,10 @@
         <h1 class="login-heading">
             <strong>Archivarius Login Form</strong>
         </h1>
+        <div class="logo">
+            <img src="../../views/images/ArchivariusLogo.png" th:src="@{/images/ArchivariusLogo.png}"
+                               alt="Archivarius" title="Archivarius">
+        </div>
         <form action="/login" method="post">
             <input type="text" class="input-txt" id="username" name="ssoId" placeholder="Enter Username" required>
             <input type="password" class="input-txt" id="password" name="password" placeholder="Enter Password"

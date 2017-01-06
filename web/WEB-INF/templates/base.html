@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:fragment="common_header(title)">
     <title th:include="${title}">Archivarius</title>
     <link rel="stylesheet" href="../views/css/styles.css" type="text/css" th:href="@{/css/styles.css}"/>
@@ -11,6 +12,9 @@
     <div id="header">
         <h1><a href="" th:href="@{/}" th:text="#{overall.title}">Archivarius</a></h1>
         <h2 th:text="#{overall.subtitle}">Documents Workflow System</h2>
+        <div class="logo"><img src="../views/images/ArchivariusLogo.png" th:src="@{/images/ArchivariusLogo.png}"
+             alt="Archivarius" title="Archivarius">
+        </div>
     </div>
 
     <div id="navigation">
@@ -21,6 +25,13 @@
             <li><a href="control.html" th:href="@{/control}" th:text="#{menu.control}">Контроль исполнений</a></li>
             <li><a href="help.html" th:href="@{/help}" th:text="#{menu.help}">Справка</a></li>
         </ul>
+        <div>
+            <span  class="hiUser" th:utext="'Добро пожаловать, ' + ${#authentication.name} + '!'">
+            Добро пожаловать, #username!
+            </span>
+            <br/>
+            <a  class="hiUser" href="logout.html" th:href="@{/logout}">Выйти</a>
+        </div>
     </div>
 
     <div id="body">
@@ -37,7 +48,7 @@
                 </li>
             </ul>
             <br>
-            <ul>
+            <ul sec:authorize="hasRole('ROLE_ADMIN')">
                 <li>
                     <h4>Справочники</h4>
                     <ul>
