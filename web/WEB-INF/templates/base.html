@@ -48,7 +48,7 @@
                 </li>
             </ul>
             <br>
-            <ul sec:authorize="hasRole('ROLE_ADMIN')">
+            <ul>
                 <li>
                     <h4>Справочники</h4>
                     <ul>
@@ -57,8 +57,8 @@
                         <li><a href="#">Сотрудники</a></li>
                         <li><a href="/doctype/">Типы документов</a></li>
                         <li><a href="/document/">Все документы</a></li>
-                        <li><a href="/users/">Пользователи</a></li>
-                        <li><a href="/role/">Роли</a></li>
+                        <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/users/">Пользователи</a></li>
+                        <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/role/">Роли</a></li>
                     </ul>
                 </li>
             </ul>

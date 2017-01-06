@@ -6,6 +6,7 @@ import io.khasang.archivarius.service.CompanyService;
 import io.khasang.archivarius.service.DepartmentService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -39,6 +40,7 @@ public class DepartmentController {
         return "lists/department";
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
     @GetMapping({"/{id}/edit"})
     public String departmentForm(@PathVariable("id") String id, ModelMap model) {
         Department department = departmentService.getDepartmentById(Integer.valueOf(id));
@@ -47,6 +49,7 @@ public class DepartmentController {
         return "forms/department";
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
     @GetMapping("/add")
     public String showDepartmentForm(ModelMap model) {
         model.addAttribute("companies", companyService.getCompanyList());
@@ -54,6 +57,7 @@ public class DepartmentController {
         return "forms/department";
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
     @PostMapping("/")
     public String submit(@ModelAttribute("department")Department department,
                          BindingResult result, ModelMap model) {
@@ -65,6 +69,7 @@ public class DepartmentController {
         return "forms/success";
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
     @PostMapping(value = "/delete")
     public String delete(@RequestParam int id) {
         departmentService.deleteDepartmentById(id);
