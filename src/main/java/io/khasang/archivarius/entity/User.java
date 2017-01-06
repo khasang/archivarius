@@ -1,5 +1,8 @@
 package io.khasang.archivarius.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -14,6 +17,7 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Role> roles;
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "department_id",
             foreignKey = @ForeignKey(name = "DEPARTMENT_ID"))
     private Department department;

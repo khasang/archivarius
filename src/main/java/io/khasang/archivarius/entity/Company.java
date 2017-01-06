@@ -1,5 +1,8 @@
 package io.khasang.archivarius.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +18,7 @@ public class Company {
     private String address;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "director_id",
             foreignKey = @ForeignKey(name = "DIRECTOR_ID"))
     private Worker director;

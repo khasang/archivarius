@@ -4,6 +4,8 @@ package io.khasang.archivarius.entity;
  * inbox, outbox and internal doc. base
  */
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -23,6 +25,7 @@ public class Document {
     private String status;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "doctype_id",
             foreignKey = @ForeignKey(name = "DOCTYPE_ID"))
     private DocType documentType;
@@ -31,6 +34,7 @@ public class Document {
     private Date deadline;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "department_id",
             foreignKey = @ForeignKey(name = "DEPARTMENT_ID"))
     private Department department;
