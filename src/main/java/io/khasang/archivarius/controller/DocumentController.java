@@ -77,6 +77,7 @@ public class DocumentController {
     public String showInboxDocumentForm(ModelMap model) {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("document", new Document());
+        model.addAttribute("documentKey", 1);
         return "forms/newInbox";
     }
 
@@ -102,6 +103,7 @@ public class DocumentController {
         DocType docType = docTypeService.getDocTypeById(Integer.valueOf((String) result.getFieldValue("documentType")));
         document.setDocumentType(docType);
         document.setFileName(fileName);
+        document.setDocumentKey(Integer.parseInt(result.getFieldValue("documentKey").toString()));
         documentService.updateDocument(document);
         String rootPath = System.getProperty("catalina.home");
         File dir = new File(rootPath + File.separator + "tmpFiles" + File.separator + fileName);

@@ -47,10 +47,12 @@ public class AppController {
     public String orders(Model model) {
         return "orders";
     }
+
     @RequestMapping(value = "/control", method = RequestMethod.GET)
     public String control(Model model) {
         return "control";
     }
+
     @RequestMapping(value = "/help", method = RequestMethod.GET)
     public String help(Model model) {
         return "index";
@@ -113,15 +115,17 @@ public class AppController {
     }
 
     /**
-    *  Get information about current active session
-    * */
+     * Get information about current active session
+     */
     @RequestMapping(value = "currentUser", method = RequestMethod.GET)
-    public String getCurrentUser(Model model){
+    public String getCurrentUser(Model model) {
         model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getName());
         return "curuser";
-        }
+    }
 
-     /** Get list of 'bad' users, who spent more time in site 'vk.com'
+    /**
+     * Get list of 'bad' users, who spent more time in site 'vk.com'
+     *
      * @param model
      * @return
      */
@@ -132,8 +136,8 @@ public class AppController {
 
     }
 
-//    @RequestMapping(value = "/login", method = RequestMethod.GET)
-//    public String loginPage() {
-//        return "forms/login";
-//    }
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginPage() {
+        return "forms/login";
+    }
 }

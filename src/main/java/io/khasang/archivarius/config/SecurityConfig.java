@@ -34,18 +34,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers("/css/**").permitAll()
-                    .antMatchers("/hello/admin/**").permitAll()
-                //       .anyRequest().authenticated()
-                .and()
-                    .formLogin()
+                    .antMatchers("/hello/**").permitAll()
+                //    .anyRequest().authenticated()
+//                .and()
+//                    .formLogin()
 //                    .loginPage("/login")
-                    .usernameParameter("ssoId").passwordParameter("password")
-                    .permitAll()
+//                    .usernameParameter("ssoId").passwordParameter("password")
+//                    .permitAll()
+//                .and()
+//                    .logout()
+//                    .permitAll()
                 .and()
-                    .logout()
-                    .permitAll()
-                .and()
-                    .csrf().disable();
+                    .csrf().disable()
+                .formLogin().defaultSuccessUrl("/", false);
+
     }
 
     @Bean

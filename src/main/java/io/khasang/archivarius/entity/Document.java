@@ -54,7 +54,7 @@ public class Document {
 
     public int getInboxKey() {
         return 1;
-    }
+}
 
     public int getOutboxKey() {
         return 2;
@@ -68,7 +68,7 @@ public class Document {
         this.id = id;
     }
 
-    private void setDocumentKey(int documentKey) {
+    public void setDocumentKey(int documentKey) {
         this.documentKey = documentKey;
     }
 
