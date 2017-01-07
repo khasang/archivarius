@@ -15,6 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/document")
@@ -55,6 +58,9 @@ public class DocumentController {
     @RequestMapping("/control")
     public String controlList(Model model) {
         model.addAttribute("controlList", documentService.getControlList());
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        model.addAttribute("dateNow", dateFormat.format(date));
         return "control";
     }
 
