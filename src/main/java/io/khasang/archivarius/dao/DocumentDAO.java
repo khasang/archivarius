@@ -25,5 +25,7 @@ public interface DocumentDAO {
     List<Document> getOutboxList();
 
     List<Document> getInternalList();
+
+    List<Document> getControlList();
 }
 

@@ -42,7 +42,7 @@ public class AppController {
     public String outbox(Model model) {
         return "outbox";
     }
-    
+
     @RequestMapping(value = "/control", method = RequestMethod.GET)
     public String control(Model model) {
         return "control";

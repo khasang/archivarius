@@ -52,6 +52,12 @@ public class DocumentController {
         return "internal";
     }
 
+    @RequestMapping("/control")
+    public String controlList(Model model) {
+        model.addAttribute("controlList", documentService.getControlList());
+        return "control";
+    }
+
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
     public String documentGetId(@PathVariable("id") Integer id, ModelMap model) {
         model.addAttribute("document", documentService.getDocumentById(id));

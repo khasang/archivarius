@@ -43,6 +43,7 @@
                     <th th:text="#{table.document_destination}">Получатель</th>
                     <th th:text="#{table.document_date_deadline}">Срок ответа</th>
                     <th th:text="#{table.document_file_name}">Файл</th>
+                    <th th:text="#{table.doc_action}">Действия</th>
                 </tr>
                 <tr th:each="document, stat : ${inboxList}" th:object="${document}">
                     <td th:text="${stat.count}">1</td>

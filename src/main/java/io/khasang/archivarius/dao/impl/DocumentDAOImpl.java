@@ -129,6 +129,21 @@ public class DocumentDAOImpl implements DocumentDAO {
         Query<Document> query = session.createQuery(criteriaQuery);
         return query.getResultList();
     }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Document> getControlList() {
+        final Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Document> criteriaQuery = builder.createQuery(Document.class);
+        Root<Document> root = criteriaQuery.from(Document.class);
+        criteriaQuery.select(root);
+        criteriaQuery.where(builder.isNotNull(root.get("documentKey")));
+        criteriaQuery.orderBy(builder.asc(root.get("deadline")));
+        Query<Document> query = session.createQuery(criteriaQuery);
+        return query.getResultList();
+    }
+
 }
 
 
