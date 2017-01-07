@@ -78,7 +78,7 @@
                 <tr th:each="document, stat : ${controlList}" th:object="${document}">
                     <td th:text="${stat.count}">1</td>
                     <td th:text="*{id}">12345</td>
-                    <td th:datetime="*{deadline}" th:if ="*{deadline} &gt; ${dateNow}" th:class="redRow">29/03/2016</td>
+                    <td th:text="*{deadline}" th:if ="*{deadline} &gt; ${dateNow}" th:class="redRow">29/03/2016</td>
                     <td th:text="*{destination}">Бухгалтерия</td>
                     <td><a href="/document/1" th:href="@{'/document/' + *{id}}"  th:text="*{title}">Название</a></td>
                     <td th:text="${document.documentType} ? ${document.documentType.name} : '&nbsp;'">Тип документа</td>
