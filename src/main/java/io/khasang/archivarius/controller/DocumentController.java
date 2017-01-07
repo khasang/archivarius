@@ -85,6 +85,7 @@ public class DocumentController {
     public String showOutboxDocumentForm(ModelMap model) {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("document", new Document());
+        model.addAttribute("documentKey", 2);
         return "forms/newOutbox";
     }
 
@@ -92,6 +93,7 @@ public class DocumentController {
     public String showInternalDocumentForm(ModelMap model) {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("document", new Document());
+        model.addAttribute("documentKey", 3);
         return "forms/newInternal";
     }
 
