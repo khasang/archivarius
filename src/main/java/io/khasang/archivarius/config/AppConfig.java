@@ -1,8 +1,5 @@
 package io.khasang.archivarius.config;
 
-import io.khasang.archivarius.model.DatabaseBackup;
-import io.khasang.archivarius.model.Message;
-import io.khasang.archivarius.model.QueryExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,9 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 
 @Configuration
-@PropertySource(value = {"classpath:util.properties"})
 @PropertySource(value = {"classpath:auth.properties"})
-@PropertySource(value = {"classpath:backup.properties"})
+@PropertySource(value = {"classpath:hibernate.properties"})
 public class AppConfig {
     @Autowired
     Environment environment;
@@ -28,11 +24,6 @@ public class AppConfig {
         jdbcImpl.setUsersByUsernameQuery(environment.getRequiredProperty("usersByQuery"));
         jdbcImpl.setAuthoritiesByUsernameQuery(environment.getRequiredProperty("rolesByQuery"));
         return jdbcImpl;
-    }
-
-    @Bean
-    public Message message() {
-        return new Message("Welcome to archivarius app!");
     }
 
     @Bean
@@ -50,15 +41,5 @@ public class AppConfig {
         JdbcTemplate jdbcTemplate = new JdbcTemplate();
         jdbcTemplate.setDataSource(dataSource());
         return jdbcTemplate;
-    }
-
-    @Bean
-    public QueryExample queryExample() {
-        return new QueryExample(jdbcTemplate());
-    }
-
-    @Bean
-    public DatabaseBackup databaseBackup() {
-        return new DatabaseBackup();
     }
 }

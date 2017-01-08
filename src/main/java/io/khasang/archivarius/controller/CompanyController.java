@@ -29,17 +29,15 @@ public class CompanyController {
     }
 
     @GetMapping(value = {"/{id}"})
-    public String companyGetId(@PathVariable("id") String id, ModelMap model) {
-        Integer intId = Integer.valueOf(id);
-        model.addAttribute("company", companyService.getCompanyById(intId));
+    public String companyGetId(@PathVariable("id") Integer id, ModelMap model) {
+        model.addAttribute("company", companyService.getCompanyById(id));
         return "lists/company";
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
     @GetMapping({"/{id}/edit"})
-    public ModelAndView companyForm(@PathVariable("id") String id) {
-        Integer intId = Integer.valueOf(id);
-        Company company = companyService.getCompanyById(intId);
+    public ModelAndView companyForm(@PathVariable("id") Integer id) {
+        Company company = companyService.getCompanyById(id);
         company.setId(company.getId());
         company.setName(company.getName());
         company.setAddress(company.getAddress());

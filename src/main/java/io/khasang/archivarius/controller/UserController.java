@@ -28,21 +28,21 @@ public class UserController {
 
     private static final Logger log = Logger.getLogger(UserController.class);
 
-    @RequestMapping("/users/")
+    @GetMapping("/users/")
     public String userList(@ModelAttribute("message") String message, Model model) {
         model.addAttribute("users", userService.getUserList());
         model.addAttribute("message", message);
         return "lists/users";
     }
 
-    @RequestMapping(value = {"/user/{id}"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/user/{id}"})
     public String userGetId(@PathVariable("id") String id, ModelMap model) {
         Integer intId = Integer.valueOf(id);
         model.addAttribute("user", userService.getUserById(intId));
         return "lists/user";
     }
 
-    @RequestMapping(value = {"user/{id}/edit"}, method = RequestMethod.GET)
+    @GetMapping(value = {"user/{id}/edit"})
     public String userForm(@PathVariable("id") String id, ModelMap model) {
         Integer intId = Integer.valueOf(id);
         User user = userService.getUserById(intId);
@@ -52,7 +52,7 @@ public class UserController {
         return "forms/user";
     }
 
-    @RequestMapping(value = "/user/register", method = RequestMethod.GET)
+    @GetMapping(value = "/user/register")
     public String showForm(ModelMap model) {
         model.addAttribute("roles", roleService.getRoleList());
         model.addAttribute("user", new User());

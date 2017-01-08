@@ -20,33 +20,33 @@ public class RoleController {
 
     private static final Logger log = Logger.getLogger(RoleController.class);
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String roleList(@ModelAttribute("message") String message, Model model) {
         model.addAttribute("roles", roleService.getRoleList());
         model.addAttribute("message", message);
         return "lists/roles";
     }
 
-    @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/{id}"})
     public String roleGetId(@PathVariable("id") String id, ModelMap model) {
         Integer intId = Integer.valueOf(id);
         model.addAttribute("role", roleService.getRoleById(intId));
         return "lists/role";
     }
 
-    @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/{id}/edit"})
     public ModelAndView roleForm(@PathVariable("id") String id) {
         Integer intId = Integer.valueOf(id);
         Role role = roleService.getRoleById(intId);
         return new ModelAndView("forms/role", "role", role);
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @GetMapping(value = "/add")
     public ModelAndView showForm() {
         return new ModelAndView("forms/role", "role", new Role());
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @PostMapping(value = "/", params = {"save"})
     public String submit(@ModelAttribute("role")Role role,
                          BindingResult result, ModelMap model,
                          RedirectAttributes redirectAttributes) {

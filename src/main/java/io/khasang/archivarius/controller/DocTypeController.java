@@ -21,29 +21,28 @@ public class DocTypeController {
 
     private static final Logger log = Logger.getLogger(DocTypeController.class);
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String docTypeList(@ModelAttribute("message") String message, Model model) {
         model.addAttribute("docTypes", docTypeService.getDocTypeList());
         model.addAttribute("message", message);
         return "lists/docTypes";
     }
 
-    @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
-    public String docTypeGetId(@PathVariable("id") String id, ModelMap model) {
-        Integer intId = Integer.valueOf(id);
-        model.addAttribute("docType", docTypeService.getDocTypeById(intId));
+    @GetMapping(value = {"/{id}"})
+    public String docTypeGetId(@PathVariable("id") Integer id, ModelMap model) {
+        model.addAttribute("docType", docTypeService.getDocTypeById(id));
         return "lists/docType";
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
-    @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/{id}/edit"})
     public ModelAndView docTypeForm(@PathVariable("id") Integer id) {
         DocType docType = docTypeService.getDocTypeById(id);
         return new ModelAndView("forms/docType", "docType", docType);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @GetMapping(value = "/add")
     public ModelAndView showForm() {
         return new ModelAndView("forms/docType", "docType", new DocType());
     }

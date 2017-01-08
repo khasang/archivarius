@@ -32,16 +32,15 @@ public class DepartmentController {
     }
 
     @GetMapping({"/{id}"})
-    public String departmentGetId(@PathVariable("id") String id, ModelMap model) {
-        Integer intId = Integer.valueOf(id);
-        model.addAttribute("department", departmentService.getDepartmentById(intId));
+    public String departmentGetId(@PathVariable("id") Integer id, ModelMap model) {
+        model.addAttribute("department", departmentService.getDepartmentById(id));
         return "lists/department";
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
     @GetMapping({"/{id}/edit"})
-    public String departmentForm(@PathVariable("id") String id, ModelMap model) {
-        Department department = departmentService.getDepartmentById(Integer.valueOf(id));
+    public String departmentForm(@PathVariable("id") Integer id, ModelMap model) {
+        Department department = departmentService.getDepartmentById(id);
         model.addAttribute("companies", companyService.getCompanyList());
         model.addAttribute("department", department);
         return "forms/department";

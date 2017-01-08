@@ -28,41 +28,39 @@ public class DocumentController {
 
     @Autowired
     DocumentService documentService;
-
     @Autowired
     DocTypeService docTypeService;
-
     @Autowired
     DepartmentService departmentService;
 
     private static final Logger log = Logger.getLogger(CompanyController.class);
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String documentList(@ModelAttribute("message") String message, Model model) {
         model.addAttribute("documents", documentService.getDocumentList());
         model.addAttribute("message", message);
         return "lists/documents";
     }
 
-    @RequestMapping("/inbox")
+    @GetMapping("/inbox")
     public String inboxList(Model model) {
         model.addAttribute("inboxList", documentService.getInboxList());
         return "inbox";
     }
 
-    @RequestMapping("/outbox")
+    @GetMapping("/outbox")
     public String outboxList(Model model) {
         model.addAttribute("outboxList", documentService.getOutboxList());
         return "outbox";
     }
 
-    @RequestMapping("/internal")
+    @GetMapping("/internal")
     public String internalList(Model model) {
         model.addAttribute("internalList", documentService.getInternalList());
         return "internal";
     }
 
-    @RequestMapping("/control")
+    @GetMapping("/control")
     public String controlList(Model model) {
         model.addAttribute("controlList", documentService.getControlList());
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -71,13 +69,13 @@ public class DocumentController {
         return "control";
     }
 
-    @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/{id}"})
     public String documentGetId(@PathVariable("id") Integer id, ModelMap model) {
         model.addAttribute("document", documentService.getDocumentById(id));
         return "lists/document";
     }
 
-    @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/{id}/edit"})
     public String documentForm(@PathVariable("id") Integer id, ModelMap model) {
         Document document = documentService.getDocumentById(id);
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
@@ -86,7 +84,7 @@ public class DocumentController {
         return "forms/document";
     }
 
-    @RequestMapping(value = {"/inbox/{id}/edit"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/inbox/{id}/edit"})
     public String editInboxDocument(@PathVariable("id") Integer id, ModelMap model) {
         Document document = documentService.getDocumentById(id);
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
@@ -96,7 +94,7 @@ public class DocumentController {
         return "forms/editInbox";
     }
 
-    @RequestMapping(value = {"/outbox/{id}/edit"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/outbox/{id}/edit"})
     public String editOutboxDocument(@PathVariable("id") Integer id, ModelMap model) {
         Document document = documentService.getDocumentById(id);
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
@@ -106,7 +104,7 @@ public class DocumentController {
         return "forms/editOutbox";
     }
 
-    @RequestMapping(value = {"/internal/{id}/edit"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/internal/{id}/edit"})
     public String editInternalDocument(@PathVariable("id") Integer id, ModelMap model) {
         Document document = documentService.getDocumentById(id);
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
@@ -116,7 +114,7 @@ public class DocumentController {
         return "forms/editInternal";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @GetMapping(value = "/add")
     public String showDocumentForm(ModelMap model) {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("departs", departmentService.getDepartmentList());
@@ -124,7 +122,7 @@ public class DocumentController {
         return "forms/document";
     }
 
-    @RequestMapping(value = "/inbox/add", method = RequestMethod.GET)
+    @GetMapping(value = "/inbox/add")
     public String showInboxDocumentForm(ModelMap model) {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("departs", departmentService.getDepartmentList());
@@ -133,7 +131,7 @@ public class DocumentController {
         return "forms/newInbox";
     }
 
-    @RequestMapping(value = "/outbox/add", method = RequestMethod.GET)
+    @GetMapping(value = "/outbox/add")
     public String showOutboxDocumentForm(ModelMap model) {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("departs", departmentService.getDepartmentList());
@@ -142,7 +140,7 @@ public class DocumentController {
         return "forms/newOutbox";
     }
 
-    @RequestMapping(value = "/internal/add", method = RequestMethod.GET)
+    @GetMapping(value = "/internal/add")
     public String showInternalDocumentForm(ModelMap model) {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("departs", departmentService.getDepartmentList());
@@ -151,7 +149,7 @@ public class DocumentController {
         return "forms/newInternal";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @PostMapping(value = "/")
     public String submit(@ModelAttribute("document") Document document,
                          BindingResult result, ModelMap model,
                          @RequestParam("file") MultipartFile file,
