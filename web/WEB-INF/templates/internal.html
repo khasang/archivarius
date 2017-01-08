@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{base :: common_header(~{::title})}">
-    <title>Исходящие документы</title>
+    <title>Внутренние документы</title>
     <link rel="stylesheet" href="../views/css/styles.css" type="text/css"/>
 </head>
 
@@ -15,12 +15,12 @@
 
     <div id="navigation" th:replace="~{base :: #navigation}">
         <ul>
-            <li><a href="outbox.html">Исходящие документы</a></li>
+            <li><a href="internal.html">Внутренние документы</a></li>
         </ul>
     </div>
 
     <div id="body">
-        <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-outbox}">
+        <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-internal}">
             <ul>
                 <li>
                     <h4>О программе</h4>
@@ -29,8 +29,8 @@
         </div>
 
         <div id="content">
-            <h2>Исходящие документы</h2>
-            <p>Журнал документов отправленных в пользу контрагентов</p>
+            <h2>Внутренние документы</h2>
+            <p>Документы для изучения персоналом внутри организации</p>
             <table class="table">
                 <tr>
                     <th th:text="#{table.num}">№ п/п</th>
@@ -45,7 +45,7 @@
                     <th th:text="#{table.document_file_name}">Файл</th>
                     <th th:text="#{table.doc_action}">Действия</th>
                 </tr>
-                <tr th:each="document, stat : ${outboxList}" th:object="${document}">
+                <tr th:each="document, stat : ${internalList}" th:object="${document}">
                     <td th:text="${stat.count}">1</td>
                     <td th:text="*{id}">12345</td>
                     <td th:text="*{dateOfReceive}">25/03/2016</td>

@@ -242,6 +242,11 @@ li ol, li ul {
 	margin:0 10px;
 }
 
+#redRow {
+	background-color: #FF0000;
+}
+
+
 .sidebar {
 	width: 16%;
 	padding: 20px 0;

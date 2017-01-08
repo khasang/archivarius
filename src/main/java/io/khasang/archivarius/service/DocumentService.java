@@ -33,6 +33,22 @@ public class DocumentService {
         return documentDAO.getDocumentList();
     }
 
+    public List<Document> getInboxList() {
+        return documentDAO.getInboxList();
+    }
+
+    public List<Document> getOutboxList() {
+        return documentDAO.getOutboxList();
+    }
+
+    public List<Document> getInternalList() {
+        return documentDAO.getInternalList();
+    }
+
+    public List<Document> getControlList() {
+        return documentDAO.getControlList();
+    }
+
     public void updateDocument(Document document) {
         documentDAO.updateDocument(document);
     }

@@ -17,6 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/document")
@@ -37,6 +40,33 @@ public class DocumentController {
     public String documentList(Model model) {
         model.addAttribute("documents", documentService.getDocumentList());
         return "lists/documents";
+    }
+
+    @RequestMapping("/inbox")
+    public String inboxList(Model model) {
+        model.addAttribute("inboxList", documentService.getInboxList());
+        return "inbox";
+    }
+
+    @RequestMapping("/outbox")
+    public String outboxList(Model model) {
+        model.addAttribute("outboxList", documentService.getOutboxList());
+        return "outbox";
+    }
+
+    @RequestMapping("/internal")
+    public String internalList(Model model) {
+        model.addAttribute("internalList", documentService.getInternalList());
+        return "internal";
+    }
+
+    @RequestMapping("/control")
+    public String controlList(Model model) {
+        model.addAttribute("controlList", documentService.getControlList());
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        model.addAttribute("dateNow", dateFormat.format(date));
+        return "control";
     }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
@@ -62,6 +92,30 @@ public class DocumentController {
         return "forms/document";
     }
 
+    @RequestMapping(value = "/inbox/add", method = RequestMethod.GET)
+    public String showInboxDocumentForm(ModelMap model) {
+        model.addAttribute("doctypes", docTypeService.getDocTypeList());
+        model.addAttribute("document", new Document());
+        model.addAttribute("documentKey", 1);
+        return "forms/newInbox";
+    }
+
+    @RequestMapping(value = "/outbox/add", method = RequestMethod.GET)
+    public String showOutboxDocumentForm(ModelMap model) {
+        model.addAttribute("doctypes", docTypeService.getDocTypeList());
+        model.addAttribute("document", new Document());
+        model.addAttribute("documentKey", 2);
+        return "forms/newOutbox";
+    }
+
+    @RequestMapping(value = "/internal/add", method = RequestMethod.GET)
+    public String showInternalDocumentForm(ModelMap model) {
+        model.addAttribute("doctypes", docTypeService.getDocTypeList());
+        model.addAttribute("document", new Document());
+        model.addAttribute("documentKey", 3);
+        return "forms/newInternal";
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String submit(@ModelAttribute("document") Document document,
                          BindingResult result, ModelMap model,
@@ -72,6 +126,7 @@ public class DocumentController {
         document.setDocumentType(docType);
         document.setDepartment(department);
         document.setFileName(fileName);
+        document.setDocumentKey(Integer.parseInt(result.getFieldValue("documentKey").toString()));
         documentService.updateDocument(document);
         String rootPath = System.getProperty("catalina.home");
         File dir = new File(rootPath + File.separator + "tmpFiles" + File.separator + fileName);
