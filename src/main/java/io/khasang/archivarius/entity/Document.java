@@ -4,6 +4,8 @@ package io.khasang.archivarius.entity;
  * inbox, outbox and internal doc. base
  */
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -23,13 +25,20 @@ public class Document {
     private String status;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "doctype_id",
             foreignKey = @ForeignKey(name = "DOCTYPE_ID"))
     private DocType documentType;
 
     @Type(type="date")
     private Date deadline;
-    private String destination;
+
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "department_id",
+            foreignKey = @ForeignKey(name = "DEPARTMENT_ID"))
+    private Department department;
+
     private String fileName;
     private int documentKey;
 
@@ -112,14 +121,6 @@ public class Document {
         this.deadline = deadline;
     }
 
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
     public String getFileName() {
         return fileName;
     }
@@ -128,17 +129,26 @@ public class Document {
         this.fileName = fileName;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
     @Override
     public String toString() {
         return "Document{" +
                 "id=" + id +
-                ", dateOfReceive='" + dateOfReceive + '\'' +
-                ", author=" + author +
-                ", title=" + title + '\'' +
-                ", status=" + status +
-                ", documentType=" + documentType + '\'' +
+                ", dateOfReceive=" + dateOfReceive +
+                ", author='" + author + '\'' +
+                ", title='" + title + '\'' +
+                ", status='" + status + '\'' +
+                ", documentType=" + documentType +
                 ", deadline=" + deadline +
-                ", destination=" + destination +
+                ", department=" + department +
+                ", fileName='" + fileName + '\'' +
                 ", documentKey=" + documentKey +
                 '}';
     }

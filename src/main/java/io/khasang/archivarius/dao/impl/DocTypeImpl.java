@@ -2,8 +2,10 @@ package io.khasang.archivarius.dao.impl;
 
 import io.khasang.archivarius.dao.DocTypeDAO;
 import io.khasang.archivarius.entity.DocType;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -43,13 +45,9 @@ public class DocTypeImpl implements DocTypeDAO {
     @Override
     public DocType getDocTypeById(int id) {
         final Session session = sessionFactory.getCurrentSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<DocType> query = builder.createQuery(DocType.class);
-        Root<DocType> root = query.from(DocType.class);
-        query.where(builder.equal(root.get("id"), builder.parameter(Integer.class, "id")));
-        Query<DocType> myQuery = session.createQuery(query);
-        myQuery.setParameter("id", id);
-        return myQuery.getSingleResult();
+        Criteria criteria = session.createCriteria(DocType.class);
+        criteria.add(Restrictions.eq("id", id));
+        return (DocType) criteria.uniqueResult();
     }
 
     @Override

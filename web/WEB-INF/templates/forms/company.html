@@ -54,11 +54,17 @@
                                    placeholder="Введите номер ИНН" th:value="${company.innNumber}"></td>
                     </tr>
                     <tr>
-                        <td><input type="submit" th:value="#{button.submit}" value="Подтвердить" class="formbutton"></td>
-                        <td><input type="submit" th:value="#{button.delete}" value="Удалить" class="formbutton"></td>
-                    </tr>
-                </table>
-            </form>
+                        <td><input type="submit" th:value="#{button.submit}" value="Подтвердить" class="formbutton">
+                        </td>
+                    </form>
+                    <td>
+                        <form th:action="@{/company/delete}" method="post">
+                            <input type="hidden" th:field="${company.id}"/>
+                            <input type="submit" th:value="#{button.delete}" value="Удалить" class="formbutton">
+                        </form>
+                    </td>
+                </tr>
+            </table>
         </div>
 
         <div class="sidebar sidebar-right" th:replace="~{base :: #sidebar-right}">

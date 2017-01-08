@@ -4,6 +4,7 @@ import io.khasang.archivarius.entity.DocType;
 import io.khasang.archivarius.service.DocTypeService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -33,17 +34,20 @@ public class DocTypeController {
         return "lists/docType";
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
     @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.GET)
     public ModelAndView docTypeForm(@PathVariable("id") Integer id) {
         DocType docType = docTypeService.getDocTypeById(id);
         return new ModelAndView("forms/docType", "docType", docType);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView showForm() {
         return new ModelAndView("forms/docType", "docType", new DocType());
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String submit(@ModelAttribute("docType")DocType docType,
                          BindingResult result, ModelMap model, RedirectAttributes redirectAttributes) {
@@ -55,8 +59,9 @@ public class DocTypeController {
         return "redirect:/doctype/";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST, params = { "delete" })
-    public String deny(@RequestParam int id, @RequestParam String delete, Model model) {
+    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
+    @PostMapping(value = "/delete")
+    public String delete(@RequestParam int id) {
         docTypeService.deleteDocType(id);
         return "redirect:/doctype/";
     }

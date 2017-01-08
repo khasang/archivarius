@@ -1,7 +1,9 @@
 package io.khasang.archivarius.controller;
 
+import io.khasang.archivarius.entity.Department;
 import io.khasang.archivarius.entity.DocType;
 import io.khasang.archivarius.entity.Document;
+import io.khasang.archivarius.service.DepartmentService;
 import io.khasang.archivarius.service.DocTypeService;
 import io.khasang.archivarius.service.DocumentService;
 import org.apache.log4j.Logger;
@@ -28,6 +30,9 @@ public class DocumentController {
 
     @Autowired
     DocTypeService docTypeService;
+
+    @Autowired
+    DepartmentService departmentService;
 
     private static final Logger log = Logger.getLogger(CompanyController.class);
 
@@ -69,11 +74,12 @@ public class DocumentController {
         model.addAttribute("document", documentService.getDocumentById(id));
         return "lists/document";
     }
-
+    
     @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.GET)
     public String documentForm(@PathVariable("id") Integer id, ModelMap model) {
-        Document document = documentService.getDocumentById(Integer.valueOf(id));
+        Document document = documentService.getDocumentById(id);
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
+        model.addAttribute("departments", departmentService.getDepartmentList());
         model.addAttribute("document", document);
         return "forms/document";
     }
@@ -81,6 +87,7 @@ public class DocumentController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String showDocumentForm(ModelMap model) {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
+        model.addAttribute("departments", departmentService.getDepartmentList());
         model.addAttribute("document", new Document());
         return "forms/document";
     }
@@ -114,8 +121,10 @@ public class DocumentController {
                          BindingResult result, ModelMap model,
                          @RequestParam("file") MultipartFile file) {
         final String fileName = file.getOriginalFilename();
+        Department department = departmentService.getDepartmentById((Integer.valueOf((String)(result.getFieldValue("department")))));
         DocType docType = docTypeService.getDocTypeById(Integer.valueOf((String) result.getFieldValue("documentType")));
         document.setDocumentType(docType);
+        document.setDepartment(department);
         document.setFileName(fileName);
         document.setDocumentKey(Integer.parseInt(result.getFieldValue("documentKey").toString()));
         documentService.updateDocument(document);
@@ -130,8 +139,8 @@ public class DocumentController {
         return "forms/success";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST, params = {"delete"})
-    public String deny(@RequestParam int id, @RequestParam String delete, Model model) {
+    @PostMapping(value = "/delete")
+    public String delete(@RequestParam int id) {
         documentService.deleteDocument(id);
         return "redirect:/document/";
     }

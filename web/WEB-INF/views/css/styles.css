@@ -224,6 +224,11 @@ li ol, li ul {
 	text-decoration: underline;
 }
 
+.logo {
+	float: right;
+	margin-top: -100px;
+}
+
 #body {
 	background: #fff;
 	padding: 0 10px; 
@@ -253,6 +258,16 @@ li ol, li ul {
 
 .sidebar-right {
 	float: left;
+}
+
+.hiUser {
+	float: right;
+	color: #fff;
+	padding-right: 10px;
+	font-weight: 700;
+}
+a.hiUser:hover {
+	color: #fff;
 }
 
 .sidebar ul {

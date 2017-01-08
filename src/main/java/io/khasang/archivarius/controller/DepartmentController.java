@@ -6,6 +6,7 @@ import io.khasang.archivarius.service.CompanyService;
 import io.khasang.archivarius.service.DepartmentService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -39,32 +40,28 @@ public class DepartmentController {
         return "lists/department";
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
     @GetMapping({"/{id}/edit"})
     public String departmentForm(@PathVariable("id") String id, ModelMap model) {
         Department department = departmentService.getDepartmentById(Integer.valueOf(id));
         model.addAttribute("companies", companyService.getCompanyList());
         model.addAttribute("department", department);
-        model.addAttribute("selectedCompany", department.getCompany());
         return "forms/department";
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
     @GetMapping("/add")
     public String showDepartmentForm(ModelMap model) {
         model.addAttribute("companies", companyService.getCompanyList());
         model.addAttribute("department", new Department());
-        model.addAttribute("selectedCompany", null);
         return "forms/department";
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
     @PostMapping("/")
     public String submit(@ModelAttribute("department")Department department,
                          BindingResult result, ModelMap model) {
-        Company company;
-        if("NONE".equals(result.getFieldValue("company"))) {
-            company = null;
-        } else {
-            company = companyService.getCompanyById(Integer.valueOf((String)(result.getFieldValue("company"))));
-        }
+        Company company = companyService.getCompanyById(Integer.valueOf((String)(result.getFieldValue("company"))));
         department.setCompany(company);
         departmentService.updateDepartment(department);
         model.addAttribute("name", department.getName());
@@ -72,8 +69,9 @@ public class DepartmentController {
         return "forms/success";
     }
 
-    @PostMapping(value = "/", params = { "delete" })
-    public String deny(@RequestParam int id, @RequestParam String delete, Model model) {
+    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
+    @PostMapping(value = "/delete")
+    public String delete(@RequestParam int id) {
         departmentService.deleteDepartmentById(id);
         return "redirect:/department/";
     }

@@ -37,8 +37,8 @@
                 <input type="hidden" name="id" th:value="${user.id}">
                 <table>
                     <tr>
-                        <td><label for="name">Логин</label></td>
-                        <td><input id="name" name="name" th:placeholder="#{form.user.login}"
+                        <td><label for="login">Логин</label></td>
+                        <td><input id="login" name="login" th:placeholder="#{form.user.login}"
                                    placeholder="Введите имя" th:value="${user.login}">
                         </td>
                     </tr>
@@ -63,10 +63,15 @@
                     </tr>
                     <tr>
                         <td><input type="submit" th:value="#{button.submit}" value="Подтвердить" class="formbutton"></td>
-                        <td><input type="submit" th:value="#{button.delete}" value="Удалить" class="formbutton"></td>
-                    </tr>
-                </table>
             </form>
+            <td>
+                <form th:action="@{/users/delete}" method="post">
+                    <input type="hidden" th:field="${user.id}" />
+                    <input type="submit" th:value="#{button.delete}" value="Удалить" class="formbutton">
+                </form>
+            </td>
+            </tr>
+            </table>
         </div>
 
         <div class="sidebar sidebar-right" th:replace="~{base :: #sidebar-right}">

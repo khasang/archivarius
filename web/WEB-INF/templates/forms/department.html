@@ -34,7 +34,7 @@
                 <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
             </ul>
             <form th:action="@{/department/}" action="" method="post">
-                <input type="hidden" name="id" th:value="${department.id}">
+                <input type="hidden" th:if="${department.id}" name="id" th:value="${department.id}">
                 <table>
                     <tr>
                         <td><label for="name">Название подразделения</label></td>
@@ -47,7 +47,6 @@
                             <label for="company">Организация</label></td>
                         <td>
                             <select id="company" name="company">
-                                <option selected th:value="${selectedCompany.id}" th:text="${selectedCompany.name}">Выбранное</option>
                                 <option th:each="comp : ${companies}" value="1" th:value="${comp.id}" th:text="${comp.name}">
                                 Option
                                 </option>
@@ -56,11 +55,17 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="submit" th:value="#{button.submit}" value="Подтвердить" class="formbutton"></td>
-                        <td><input type="submit" th:value="#{button.delete}" value="Удалить" class="formbutton"></td>
-                    </tr>
-                </table>
+                        <td><input type="submit" th:value="#{button.submit}" value="Подтвердить" class="formbutton">
+                        </td>
             </form>
+            <td>
+                <form th:action="@{/department/delete}" method="post">
+                    <input type="hidden" th:field="${department.id}"/>
+                    <input type="submit" th:value="#{button.delete}" value="Удалить" class="formbutton">
+                </form>
+            </td>
+            </tr>
+            </table>
         </div>
 
         <div class="sidebar sidebar-right" th:replace="~{base :: #sidebar-right}">

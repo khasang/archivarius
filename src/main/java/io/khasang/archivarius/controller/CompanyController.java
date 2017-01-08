@@ -4,6 +4,7 @@ import io.khasang.archivarius.entity.Company;
 import io.khasang.archivarius.service.CompanyService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -32,6 +33,7 @@ public class CompanyController {
         return "lists/company";
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
     @GetMapping({"/{id}/edit"})
     public ModelAndView companyForm(@PathVariable("id") String id) {
         Integer intId = Integer.valueOf(id);
@@ -43,11 +45,13 @@ public class CompanyController {
         return new ModelAndView("forms/company", "company", company);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
     @GetMapping("/add")
     public ModelAndView showForm() {
         return new ModelAndView("forms/company", "company", new Company());
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
     @PostMapping("/")
     public String submit(@ModelAttribute("company")Company company,
                          BindingResult result, ModelMap model) {
@@ -58,8 +62,9 @@ public class CompanyController {
         return "forms/success";
     }
 
-    @PostMapping(value = "/", params = { "delete" })
-    public String deny(@RequestParam int id, @RequestParam String delete, Model model) {
+    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
+    @PostMapping(value = "/delete")
+    public String delete(@RequestParam int id) {
         companyService.deleteCompanyById(id);
         return "redirect:/company/";
     }
