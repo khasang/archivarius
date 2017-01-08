@@ -58,7 +58,7 @@ public class DocumentController {
     @RequestMapping("/control")
     public String controlList(Model model) {
         model.addAttribute("controlList", documentService.getControlList());
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         model.addAttribute("dateNow", dateFormat.format(date));
         return "control";

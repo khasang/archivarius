@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
 <head th:replace="~{base :: common_header(~{::title})}">
     <title>Контроль исполнений</title>
     <link rel="stylesheet" href="../views/css/styles.css" type="text/css"/>
@@ -32,35 +32,34 @@
             <h2>Контроль исполнений</h2>
             <p>Здесь можно отследить срок и статус исполнения документов</p>
             <script type="text/javascript">
-                function getDate()
-                {
+                function getDate() {
                     var today = new Date();
                     var dd = today.getDate();
-                    var mm = today.getMonth()+1; //January is 0!
+                    var mm = today.getMonth() + 1; //January is 0!
                     var yyyy = today.getFullYear();
-                    if(dd<10) {
-                        dd='0'+dd
+                    if (dd < 10) {
+                        dd = '0' + dd
                     }
-                    if(mm<10) {
-                        mm='0'+mm
+                    if (mm < 10) {
+                        mm = '0' + mm
                     }
-                    today = dd+'/'+mm+'/'+yyyy;
+                    today = dd + '/' + mm + '/' + yyyy;
                     document.getElementById('timedisplay').innerHTML = 'Текущая дата: ' + today;
                 }
                 setInterval(getDate, 0);
 
-//                function setDateColor() {
-//                  //  var dt =  document.getElementById("yourDate"); //get your date
-//                    var today = new Date(); //get date today
-//                    var dt = document.getElementById("deadlineDate");
-//                  //  x[0].innerHTML = "i want to change my cell color";
-//                 //   x[0].style.backgroundColor = "yellow";
-//                   // if(dt.value <  today )
-//                 //   {
-//                        dt.style.backgroundColor="red";
-//                //    }
-//                }
-//                setDateColor();
+                //                function setDateColor() {
+                //                  //  var dt =  document.getElementById("yourDate"); //get your date
+                //                    var today = new Date(); //get date today
+                //                    var dt = document.getElementById("deadlineDate");
+                //                  //  x[0].innerHTML = "i want to change my cell color";
+                //                 //   x[0].style.backgroundColor = "yellow";
+                //                   // if(dt.value <  today )
+                //                 //   {
+                //                        dt.style.backgroundColor="red";
+                //                //    }
+                //                }
+                //                setDateColor();
 
             </script>
             <div id="timedisplay"></div>
@@ -78,12 +77,14 @@
                 <tr th:each="document, stat : ${controlList}" th:object="${document}">
                     <td th:text="${stat.count}">1</td>
                     <td th:text="*{id}">12345</td>
-                    <td th:text="*{deadline}" th:if ="*{deadline} &gt; ${dateNow}" th:class="redRow">29/03/2016</td>
+                    <!-- <td th:text="*{deadline}" th:if="*{deadline} &gt; ${dateNow}" th:class="redRow">29/03/2016</td> -->
+                    <td th:text="*{deadline}">29/03/2016</td>
                     <td th:text="*{destination}">Бухгалтерия</td>
-                    <td><a href="/document/1" th:href="@{'/document/' + *{id}}"  th:text="*{title}">Название</a></td>
+                    <td><a href="/document/1" th:href="@{'/document/' + *{id}}" th:text="*{title}">Название</a></td>
                     <td th:text="${document.documentType} ? ${document.documentType.name} : '&nbsp;'">Тип документа</td>
                     <td th:text="*{status}">На подписи</td>
-                    <td><a href="/document/1/edit" th:href="@{'/document/' + *{id} + '/edit'}" th:text="#{table.attention}">Уведомить</a></td>
+                    <td><a href="/document/1/edit" th:href="@{'/document/' + *{id} + '/edit'}"
+                           th:text="#{table.attention}">Уведомить</a></td>
                 </tr>
             </table>
         </div>
