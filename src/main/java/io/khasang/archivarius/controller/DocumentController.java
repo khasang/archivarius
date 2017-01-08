@@ -47,7 +47,6 @@ public class DocumentController {
     @RequestMapping("/inbox")
     public String inboxList(Model model) {
         model.addAttribute("inboxList", documentService.getInboxList());
-        model.addAttribute("deparment", docTypeService.get)
         return "inbox";
     }
 
