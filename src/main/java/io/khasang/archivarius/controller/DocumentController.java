@@ -92,6 +92,7 @@ public class DocumentController {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("departs", departmentService.getDepartmentList());
         model.addAttribute("document", document);
+        model.addAttribute("documentKey", 1);
         return "forms/editInbox";
     }
 
@@ -101,6 +102,7 @@ public class DocumentController {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("departs", departmentService.getDepartmentList());
         model.addAttribute("document", document);
+        model.addAttribute("documentKey", 2);
         return "forms/editOutbox";
     }
 
@@ -110,6 +112,7 @@ public class DocumentController {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("departs", departmentService.getDepartmentList());
         model.addAttribute("document", document);
+        model.addAttribute("documentKey", 3);
         return "forms/editInternal";
     }
 

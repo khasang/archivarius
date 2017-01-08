@@ -27,8 +27,9 @@
             <ul>
                 <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
             </ul>
-            <form th:action="@{/document/}" action="uploadFile" enctype="multipart/form-data" method="post">
+            <form th:action="@{/document/inbox}" action="uploadFile" enctype="multipart/form-data" method="post">
                 <input type="hidden" name="id" th:value="${document.id}">
+                <input type="hidden" name="documentKey" th:value="${documentKey}">
                 <table>
                     <tr>
                         <td><label for="title">Название документа</label></td>
@@ -65,7 +66,6 @@
                             <label for="department">Получатель</label></td>
                         <td>
                             <select id="department" name="department">
-                                <option selected th:value="${document.id}" th:text="${document.department}">Получатель</option>
                                 <option th:each="deps : ${departs}" value="1" th:value="${deps.id}" th:text="${deps.name}">
                                     Option
                                 </option>
