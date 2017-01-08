@@ -48,7 +48,6 @@
                             <label for="documentType">Тип документа</label></td>
                         <td>
                             <select id="documentType" name="documentType">
-                                <option selected th:value="${document.id}" th:text="${document.title}">Выбранное</option>
                                 <option th:each="docType : ${doctypes}" value="1" th:value="${docType.id}" th:text="${docType.name}">
                                     Option
                                 </option>
@@ -94,7 +93,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Загрузить файл:
+                            Заменить файл:
                         </td>
                         <td>
                             <input type="file" name="file">
