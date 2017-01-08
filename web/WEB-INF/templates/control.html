@@ -79,7 +79,7 @@
                     <td th:text="*{id}">12345</td>
                     <!-- <td th:text="*{deadline}" th:if="*{deadline} &gt; ${dateNow}" th:class="redRow">29/03/2016</td> -->
                     <td th:text="*{deadline}">29/03/2016</td>
-                    <td th:text="*{department}">Бухгалтерия</td>
+                    <td th:text="${document.department} ? ${document.department.name} : '&nbsp;'">Получатель</td>
                     <td><a href="/document/1" th:href="@{'/document/' + *{id}}" th:text="*{title}">Название</a></td>
                     <td th:text="${document.documentType} ? ${document.documentType.name} : '&nbsp;'">Тип документа</td>
                     <td th:text="*{status}">На подписи</td>
