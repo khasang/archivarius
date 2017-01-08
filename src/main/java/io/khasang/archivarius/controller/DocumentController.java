@@ -47,6 +47,7 @@ public class DocumentController {
     @RequestMapping("/inbox")
     public String inboxList(Model model) {
         model.addAttribute("inboxList", documentService.getInboxList());
+        model.addAttribute("deparment", docTypeService.get)
         return "inbox";
     }
 
@@ -81,7 +82,7 @@ public class DocumentController {
     public String documentForm(@PathVariable("id") Integer id, ModelMap model) {
         Document document = documentService.getDocumentById(id);
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
-        model.addAttribute("departments", departmentService.getDepartmentList());
+        model.addAttribute("departs", departmentService.getDepartmentList());
         model.addAttribute("document", document);
         return "forms/document";
     }
@@ -89,7 +90,7 @@ public class DocumentController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String showDocumentForm(ModelMap model) {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
-        model.addAttribute("departments", departmentService.getDepartmentList());
+        model.addAttribute("departs", departmentService.getDepartmentList());
         model.addAttribute("document", new Document());
         return "forms/document";
     }
@@ -97,6 +98,7 @@ public class DocumentController {
     @RequestMapping(value = "/inbox/add", method = RequestMethod.GET)
     public String showInboxDocumentForm(ModelMap model) {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
+        model.addAttribute("departs", departmentService.getDepartmentList());
         model.addAttribute("document", new Document());
         model.addAttribute("documentKey", 1);
         return "forms/newInbox";
@@ -105,6 +107,7 @@ public class DocumentController {
     @RequestMapping(value = "/outbox/add", method = RequestMethod.GET)
     public String showOutboxDocumentForm(ModelMap model) {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
+        model.addAttribute("departs", departmentService.getDepartmentList());
         model.addAttribute("document", new Document());
         model.addAttribute("documentKey", 2);
         return "forms/newOutbox";
@@ -113,6 +116,7 @@ public class DocumentController {
     @RequestMapping(value = "/internal/add", method = RequestMethod.GET)
     public String showInternalDocumentForm(ModelMap model) {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
+        model.addAttribute("departs", departmentService.getDepartmentList());
         model.addAttribute("document", new Document());
         model.addAttribute("documentKey", 3);
         return "forms/newInternal";
