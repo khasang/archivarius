@@ -56,7 +56,7 @@
                     <td th:text="${document.department} ? ${document.department.name} : '&nbsp;'">Получатель</td>
                     <td th:text="*{deadline}">29/03/2016</td>
                     <td th:text="*{fileName}">123.pdf</td>
-                    <td><a href="/document/1/edit" th:href="@{'/document/' + *{id} + '/edit'}" th:text="#{table.edit}">Редактировать</a></td>
+                    <td><a href="/document/outbox/1/edit" th:href="@{'/document/outbox/' + *{id} + '/edit'}" th:text="#{table.edit}">Редактировать</a></td>
                 </tr>
             </table>
         </div>

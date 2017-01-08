@@ -86,6 +86,33 @@ public class DocumentController {
         return "forms/document";
     }
 
+    @RequestMapping(value = {"/inbox/{id}/edit"}, method = RequestMethod.GET)
+    public String editInboxDocument(@PathVariable("id") Integer id, ModelMap model) {
+        Document document = documentService.getDocumentById(id);
+        model.addAttribute("doctypes", docTypeService.getDocTypeList());
+        model.addAttribute("departs", departmentService.getDepartmentList());
+        model.addAttribute("document", document);
+        return "forms/editInbox";
+    }
+
+    @RequestMapping(value = {"/outbox/{id}/edit"}, method = RequestMethod.GET)
+    public String editOutboxDocument(@PathVariable("id") Integer id, ModelMap model) {
+        Document document = documentService.getDocumentById(id);
+        model.addAttribute("doctypes", docTypeService.getDocTypeList());
+        model.addAttribute("departs", departmentService.getDepartmentList());
+        model.addAttribute("document", document);
+        return "forms/editOutbox";
+    }
+
+    @RequestMapping(value = {"/internal/{id}/edit"}, method = RequestMethod.GET)
+    public String editInternalDocument(@PathVariable("id") Integer id, ModelMap model) {
+        Document document = documentService.getDocumentById(id);
+        model.addAttribute("doctypes", docTypeService.getDocTypeList());
+        model.addAttribute("departs", departmentService.getDepartmentList());
+        model.addAttribute("document", document);
+        return "forms/editInternal";
+    }
+
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String showDocumentForm(ModelMap model) {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
