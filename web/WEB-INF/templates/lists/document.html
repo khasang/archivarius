@@ -35,7 +35,7 @@
             <p><strong>Отправитель : </strong><span th:object="*{author}">Иванов И.И.</span></p>
             <p><strong>Тип документа: </strong><span th:object="*{documentType.name}">Резолюция</span></p>
             <p><strong>Статус: </strong><span th:object="*{status}">На подписи</span></p>
-            <p><strong>Получатель: </strong> <span th:text="*{destination}">Бухгалтерия</span> </p>
+            <p><strong>Получатель: </strong> <span th:text="*{department}">Бухгалтерия</span> </p>
             <p><strong>Срок ответа: </strong> <span th:text="*{deadline}">29/03/2016</span> </p>
             <p><button><a href="/company/${document.id}/edit">Редактировать</a></button>
         </div>
