@@ -65,7 +65,7 @@ public class DepartmentController {
         departmentService.updateDepartment(department);
         model.addAttribute("name", department.getName());
         model.addAttribute("company", department.getCompany());
-        redirectAttributes.addAttribute("message", "Подразделение " + department.getName() + " создано");
+        redirectAttributes.addFlashAttribute("message", "Подразделение " + department.getName() + " создано");
         return "redirect:/department/";
     }
 

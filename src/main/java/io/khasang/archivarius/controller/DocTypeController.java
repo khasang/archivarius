@@ -22,8 +22,9 @@ public class DocTypeController {
     private static final Logger log = Logger.getLogger(DocTypeController.class);
 
     @RequestMapping("/")
-    public String docTypeList(Model model) {
+    public String docTypeList(@ModelAttribute("message") String message, Model model) {
         model.addAttribute("docTypes", docTypeService.getDocTypeList());
+        model.addAttribute("message", message);
         return "lists/docTypes";
     }
 
@@ -48,21 +49,20 @@ public class DocTypeController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @PostMapping(value = "/", params = {"save"})
     public String submit(@ModelAttribute("docType")DocType docType,
-                         BindingResult result, ModelMap model, RedirectAttributes redirectAttributes) {
-        if (result.hasErrors()) {
-            return "error";
-        }
+                         BindingResult result, ModelMap model,
+                         RedirectAttributes redirectAttributes) {
         docTypeService.updateDocType(docType);
-        redirectAttributes.addFlashAttribute("message", "Успешно!");
+        redirectAttributes.addFlashAttribute("message", "Тип документа " + docType.getName() + " создан");
         return "redirect:/doctype/";
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
-    @PostMapping(value = "/delete")
-    public String delete(@RequestParam int id) {
-        docTypeService.deleteDocType(id);
+    @PostMapping(value="/", params = {"delete"})
+    public String delete(final DocType docType, final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("message", "Тип документа " + docType.getName() + " удален");
+        docTypeService.deleteDocType(docType.getId());
         return "redirect:/doctype/";
     }
 }

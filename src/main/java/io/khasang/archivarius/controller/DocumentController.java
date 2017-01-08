@@ -14,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,8 +38,9 @@ public class DocumentController {
     private static final Logger log = Logger.getLogger(CompanyController.class);
 
     @RequestMapping("/")
-    public String documentList(Model model) {
+    public String documentList(@ModelAttribute("message") String message, Model model) {
         model.addAttribute("documents", documentService.getDocumentList());
+        model.addAttribute("message", message);
         return "lists/documents";
     }
 
@@ -119,7 +121,8 @@ public class DocumentController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String submit(@ModelAttribute("document") Document document,
                          BindingResult result, ModelMap model,
-                         @RequestParam("file") MultipartFile file) {
+                         @RequestParam("file") MultipartFile file,
+                         RedirectAttributes redirectAttributes) {
         final String fileName = file.getOriginalFilename();
         Department department = departmentService.getDepartmentById((Integer.valueOf((String)(result.getFieldValue("department")))));
         DocType docType = docTypeService.getDocTypeById(Integer.valueOf((String) result.getFieldValue("documentType")));
@@ -128,6 +131,7 @@ public class DocumentController {
         document.setFileName(fileName);
         document.setDocumentKey(Integer.parseInt(result.getFieldValue("documentKey").toString()));
         documentService.updateDocument(document);
+
         String rootPath = System.getProperty("catalina.home");
         File dir = new File(rootPath + File.separator + "tmpFiles" + File.separator + fileName);
         try {
@@ -136,12 +140,15 @@ public class DocumentController {
             e.printStackTrace();
         }
 
-        return "forms/success";
+        redirectAttributes.addFlashAttribute("message", "Документ " + document.getTitle() + " добавлен");
+
+        return "redirect:/document/";
     }
 
-    @PostMapping(value = "/delete")
-    public String delete(@RequestParam int id) {
-        documentService.deleteDocument(id);
+    @PostMapping(value="/", params = {"delete"})
+    public String delete(final Document document, final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("message", "Документ " + document.getTitle() + " удален");
+        documentService.deleteDocument(document.getId());
         return "redirect:/document/";
     }
 }
