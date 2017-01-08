@@ -74,7 +74,7 @@ public class DocumentController {
         model.addAttribute("document", documentService.getDocumentById(id));
         return "lists/document";
     }
-    
+
     @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.GET)
     public String documentForm(@PathVariable("id") Integer id, ModelMap model) {
         Document document = documentService.getDocumentById(id);

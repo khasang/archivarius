@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{base :: common_header(~{::title})}">
     <title>Параметры пользователя</title>
     <link rel="stylesheet" href="../../views/css/styles.css" type="text/css"/>
@@ -54,24 +54,24 @@
                         <td>
                             <select id="roles" name="roles">
                                 <!--<option selected th:value="${selectedCompany.id}" th:text="${selectedCompany.name}">Выбранное</option>-->
-                                <option th:each="role : ${roles}" value="1" th:value="${role.id}" th:text="${role.name}">
-                                Option
+                                <option th:each="role : ${roles}" value="1" th:value="${role.id}"
+                                        th:text="${role.name}">
+                                    Option
                                 </option>
                             </select>
 
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="submit" th:value="#{button.submit}" value="Подтвердить" class="formbutton"></td>
+                        <td><input type="submit" name="save" th:value="#{button.submit}" value="Подтвердить"
+                                   class="formbutton">
+                        </td>
+                        <td th:if="${user.id} > 0">
+                            <input type="submit" name="delete" th:value="#{button.delete}" class="formbutton"/>
+                        </td>
+                    </tr>
+                </table>
             </form>
-            <td>
-                <form th:action="@{/users/delete}" method="post">
-                    <input type="hidden" th:field="${user.id}" />
-                    <input type="submit" th:value="#{button.delete}" value="Удалить" class="formbutton">
-                </form>
-            </td>
-            </tr>
-            </table>
         </div>
 
         <div class="sidebar sidebar-right" th:replace="~{base :: #sidebar-right}">

@@ -47,16 +47,19 @@
                             <label for="documentType">Тип документа</label></td>
                         <td>
                             <select id="documentType" name="documentType">
-                                <option selected th:value="${document.id}" th:text="${document.title}">Выбранное</option>
-                                <option th:each="docType : ${doctypes}" value="1" th:value="${docType.id}" th:text="${docType.name}">
-                                Option
+                                <option selected th:value="${document.id}" th:text="${document.title}">Выбранное
+                                </option>
+                                <option th:each="docType : ${doctypes}" value="1" th:value="${docType.id}"
+                                        th:text="${docType.name}">
+                                    Option
                                 </option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td><label for="dateOfReceive">Дата получения:</label></td>
-                        <td><input id="dateOfReceive" name="dateOfReceive" th:placeholder="#{form.document.dateOfReceive}"
+                        <td><input id="dateOfReceive" name="dateOfReceive"
+                                   th:placeholder="#{form.document.dateOfReceive}"
                                    type="date" th:value="${document.dateOfReceive}">
                         </td>
                     </tr>
@@ -65,7 +68,8 @@
                             <label for="department">Получатель</label></td>
                         <td>
                             <select id="department" name="department">
-                                <option th:each="department : ${departments}" value="1" th:value="${department.id}" th:text="${department.name}">
+                                <option th:each="department : ${departments}" value="1" th:value="${department.id}"
+                                        th:text="${department.name}">
                                     Option
                                 </option>
                             </select>
@@ -100,16 +104,18 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="submit" th:value="#{button.submit}" value="Подтвердить" class="formbutton"></td>
+                        <td><input type="submit" th:value="#{button.submit}" value="Подтвердить" class="formbutton">
+                        </td>
+                    <tr>
+                        <td><input type="submit" name="save" th:value="#{button.submit}" value="Подтвердить"
+                                   class="formbutton">
+                        </td>
+                        <td th:if="${document.id} > 0">
+                            <input type="submit" name="delete" th:value="#{button.delete}" class="formbutton"/>
+                        </td>
+                    </tr>
+                </table>
             </form>
-            <td>
-                <form th:action="@{/document/delete}" method="post">
-                    <input type="hidden" th:field="${document.id}" />
-                    <input type="submit" th:value="#{button.delete}" value="Удалить" class="formbutton">
-                </form>
-            </td>
-            </tr>
-            </table>
         </div>
 
         <div class="sidebar sidebar-right" th:replace="~{base :: #sidebar-right}">
