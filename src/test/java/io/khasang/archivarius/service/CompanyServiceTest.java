@@ -16,7 +16,6 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
 public class CompanyServiceTest {
     private static final int ID = 12345;
     private static final String NAME = "Tested Company";
@@ -52,4 +51,5 @@ public class CompanyServiceTest {
         when(companyDAO.getCompanyList()).thenReturn(companies);
         assertEquals(1, companyService.getCompanyList().size());
     }
+
 }
