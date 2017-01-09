@@ -152,15 +152,16 @@ public class DocumentController {
     @PostMapping(value = "/")
     public String submit(@ModelAttribute("document") Document document,
                          BindingResult result, ModelMap model,
+                         @RequestParam("documentKey") Integer docKey,
                          @RequestParam("file") MultipartFile file,
                          RedirectAttributes redirectAttributes) {
         final String fileName = file.getOriginalFilename();
-        Department department = departmentService.getDepartmentById((Integer.valueOf((String)(result.getFieldValue("department")))));
+        Department department = departmentService.getDepartmentById((Integer.valueOf((String) (result.getFieldValue("department")))));
         DocType docType = docTypeService.getDocTypeById(Integer.valueOf((String) result.getFieldValue("documentType")));
         document.setDocumentType(docType);
         document.setDepartment(department);
         document.setFileName(fileName);
-        document.setDocumentKey(Integer.parseInt(result.getFieldValue("documentKey").toString()));
+        document.setDocumentKey(docKey);
         documentService.updateDocument(document);
 
         String rootPath = System.getProperty("catalina.home");
@@ -173,10 +174,19 @@ public class DocumentController {
 
         redirectAttributes.addFlashAttribute("message", "Документ " + document.getTitle() + " добавлен");
 
-        return "redirect:/document/";
+        switch (docKey) {
+            case 1:
+                return "redirect:/document/inbox";
+            case 2:
+                return "redirect:/document/outbox";
+            case 3:
+                return "redirect:/document/internal";
+            default:
+                return "redirect:/document/";
+        }
     }
 
-    @PostMapping(value="/", params = {"delete"})
+    @PostMapping(value = "/", params = {"delete"})
     public String delete(final Document document, final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("message", "Документ " + document.getTitle() + " удален");
         documentService.deleteDocument(document.getId());
