@@ -1,6 +1,7 @@
 package io.khasang.archivarius.service;
 
 import io.khasang.archivarius.dao.DocumentDAO;
+import io.khasang.archivarius.documenting.DocumentSender;
 import io.khasang.archivarius.documenting.InventoryResponse;
 import io.khasang.archivarius.entity.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import java.util.List;
 public class DocumentService {
     @Autowired
     DocumentDAO documentDAO;
+
+    @Autowired
+    DocumentSender documentSender;
 
     public void addDocument(Document document) {
         documentDAO.addDocument(document);
@@ -51,6 +55,7 @@ public class DocumentService {
     }
 
     public void updateDocument(Document document) {
+        documentSender.sendDocument(document);
         documentDAO.updateDocument(document);
     }
 
