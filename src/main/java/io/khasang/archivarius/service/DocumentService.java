@@ -1,6 +1,7 @@
 package io.khasang.archivarius.service;
 
 import io.khasang.archivarius.dao.DocumentDAO;
+import io.khasang.archivarius.documenting.InventoryResponse;
 import io.khasang.archivarius.entity.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -55,6 +56,11 @@ public class DocumentService {
 
     public void deleteDocument(int id) {
         documentDAO.deleteDocument(id);
+    }
+
+    public void updateInventoryResponseDocument(InventoryResponse response) {
+        Document document = documentDAO.getDocumentById(Integer.parseInt(response.getDocumentId()));
+        documentDAO.updateDocument(document);
     }
 }
 
