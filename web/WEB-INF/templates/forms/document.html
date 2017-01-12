@@ -20,7 +20,11 @@
     </div>
 
     <div id="body">
-        <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-doc}"></div>
+        <div class="sidebar sidebar-left" id="sidebar-left-doc">
+            <ul>
+                <li><a href="/document/" th:href="@{'/' + ${docKey} + '/'}">Справочник документов</a></li>
+            </ul>
+        </div>
 
         <div id="content">
             <h2>Зарегистрировать [[${docKey.name}]] документ</h2>

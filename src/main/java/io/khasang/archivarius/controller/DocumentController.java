@@ -37,12 +37,14 @@ public class DocumentController {
     @GetMapping(value = {"/{docKey}", "/{docKey}/"})
     public String docKeyList(@PathVariable("docKey") DocKey docKey, Model model) {
         model.addAttribute("documents", documentService.getDocKeyList(docKey));
+        model.addAttribute("docKey", docKey);
         return "lists/documents";
     }
 
     @GetMapping("/control")
     public String controlList(Model model) {
-        model.addAttribute("controlList", documentService.getDocumentList());
+        model.addAttribute("documents", documentService.getDocumentList());
+        model.addAttribute("docKey", null);
         return "lists/documents";
     }
 

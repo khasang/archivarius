@@ -20,11 +20,9 @@
     </div>
 
     <div id="body">
-        <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-doc}">
+        <div class="sidebar sidebar-left" id="sidebar-left-doc">
             <ul>
-                <li>
-                    <h4>О программе</h4>
-                </li>
+                <li><a href="/document/add" th:if="${docKey} != null" th:href="@{'/document/' + ${docKey} + '/add'}" th:text="'Добавить новый ' + ${docKey.name} + ' документ'">Создать документ</a></li>
             </ul>
         </div>
 
