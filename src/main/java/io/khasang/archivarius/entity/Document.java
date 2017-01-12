@@ -42,6 +42,10 @@ public class Document {
     private String fileName;
     private int documentKey;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "doc_key")
+    private DocKey docKey;
+
     public Document() {
     }
 
@@ -55,6 +59,14 @@ public class Document {
 
     public int getId() {
         return id;
+    }
+
+    public DocKey getDocKey() {
+        return docKey;
+    }
+
+    public void setDocKey(DocKey docKey) {
+        this.docKey = docKey;
     }
 
     public int getDocumentKey() {

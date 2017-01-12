@@ -1,6 +1,7 @@
 package io.khasang.archivarius.service;
 
 import io.khasang.archivarius.dao.DocumentDAO;
+import io.khasang.archivarius.entity.DocKey;
 import io.khasang.archivarius.entity.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,16 +34,8 @@ public class DocumentService {
         return documentDAO.getDocumentList();
     }
 
-    public List<Document> getInboxList() {
-        return documentDAO.getInboxList();
-    }
-
-    public List<Document> getOutboxList() {
-        return documentDAO.getOutboxList();
-    }
-
-    public List<Document> getInternalList() {
-        return documentDAO.getInternalList();
+    public List<Document> getDocKeyList(DocKey docKey) {
+        return documentDAO.getDocKeyList(docKey);
     }
 
     public List<Document> getControlList() {

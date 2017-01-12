@@ -1,6 +1,7 @@
 package io.khasang.archivarius.controller;
 
 import io.khasang.archivarius.entity.Department;
+import io.khasang.archivarius.entity.DocKey;
 import io.khasang.archivarius.entity.DocType;
 import io.khasang.archivarius.entity.Document;
 import io.khasang.archivarius.service.DepartmentService;
@@ -23,7 +24,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/document")
 public class DocumentController {
 
     @Autowired
@@ -35,29 +35,10 @@ public class DocumentController {
 
     private static final Logger log = Logger.getLogger(CompanyController.class);
 
-    @GetMapping("/")
-    public String documentList(@ModelAttribute("message") String message, Model model) {
-        model.addAttribute("documents", documentService.getDocumentList());
-        model.addAttribute("message", message);
+    @GetMapping(value = {"/{docKey}", "/{docKey}/"})
+    public String docKeyList(@PathVariable("docKey") DocKey docKey, Model model) {
+        model.addAttribute("documents", documentService.getDocKeyList(docKey));
         return "lists/documents";
-    }
-
-    @GetMapping("/inbox")
-    public String inboxList(Model model) {
-        model.addAttribute("inboxList", documentService.getInboxList());
-        return "inbox";
-    }
-
-    @GetMapping("/outbox")
-    public String outboxList(Model model) {
-        model.addAttribute("outboxList", documentService.getOutboxList());
-        return "outbox";
-    }
-
-    @GetMapping("/internal")
-    public String internalList(Model model) {
-        model.addAttribute("internalList", documentService.getInternalList());
-        return "internal";
     }
 
     @GetMapping("/control")
@@ -69,13 +50,13 @@ public class DocumentController {
         return "control";
     }
 
-    @GetMapping(value = {"/{id}"})
-    public String documentGetId(@PathVariable("id") Integer id, ModelMap model) {
-        model.addAttribute("document", documentService.getDocumentById(id));
-        return "lists/document";
-    }
+//    @GetMapping(value = {"/{id}"})
+//    public String documentGetId(@PathVariable("id") Integer id, ModelMap model) {
+//        model.addAttribute("document", documentService.getDocumentById(id));
+//        return "lists/document";
+//    }
 
-    @GetMapping(value = {"/{id}/edit"})
+    @GetMapping(value = {"/document/{id}/edit"})
     public String documentForm(@PathVariable("id") Integer id, ModelMap model) {
         Document document = documentService.getDocumentById(id);
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
@@ -84,7 +65,7 @@ public class DocumentController {
         return "forms/document";
     }
 
-    @GetMapping(value = {"/inbox/{id}/edit"})
+    @GetMapping(value = {"/document/inbox/{id}/edit"})
     public String editInboxDocument(@PathVariable("id") Integer id, ModelMap model) {
         Document document = documentService.getDocumentById(id);
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
@@ -94,7 +75,7 @@ public class DocumentController {
         return "forms/editInbox";
     }
 
-    @GetMapping(value = {"/outbox/{id}/edit"})
+    @GetMapping(value = {"/document/outbox/{id}/edit"})
     public String editOutboxDocument(@PathVariable("id") Integer id, ModelMap model) {
         Document document = documentService.getDocumentById(id);
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
@@ -104,7 +85,7 @@ public class DocumentController {
         return "forms/editOutbox";
     }
 
-    @GetMapping(value = {"/internal/{id}/edit"})
+    @GetMapping(value = {"/document/internal/{id}/edit"})
     public String editInternalDocument(@PathVariable("id") Integer id, ModelMap model) {
         Document document = documentService.getDocumentById(id);
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
@@ -114,7 +95,7 @@ public class DocumentController {
         return "forms/editInternal";
     }
 
-    @GetMapping(value = "/add")
+    @GetMapping(value = "/document/add")
     public String showDocumentForm(ModelMap model) {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("departs", departmentService.getDepartmentList());
@@ -122,7 +103,7 @@ public class DocumentController {
         return "forms/document";
     }
 
-    @GetMapping(value = "/inbox/add")
+    @GetMapping(value = "/document/inbox/add")
     public String showInboxDocumentForm(ModelMap model) {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("departs", departmentService.getDepartmentList());
@@ -131,7 +112,7 @@ public class DocumentController {
         return "forms/newInbox";
     }
 
-    @GetMapping(value = "/outbox/add")
+    @GetMapping(value = "/document/outbox/add")
     public String showOutboxDocumentForm(ModelMap model) {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("departs", departmentService.getDepartmentList());
@@ -140,7 +121,7 @@ public class DocumentController {
         return "forms/newOutbox";
     }
 
-    @GetMapping(value = "/internal/add")
+    @GetMapping(value = "/document/internal/add")
     public String showInternalDocumentForm(ModelMap model) {
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("departs", departmentService.getDepartmentList());
@@ -149,7 +130,7 @@ public class DocumentController {
         return "forms/newInternal";
     }
 
-    @PostMapping(value = "/")
+    @PostMapping(value = "/document/")
     public String submit(@ModelAttribute("document") Document document,
                          BindingResult result, ModelMap model,
                          @RequestParam("documentKey") Integer docKey,
@@ -186,7 +167,7 @@ public class DocumentController {
         }
     }
 
-    @PostMapping(value = "/", params = {"delete"})
+    @PostMapping(value = "/document/", params = {"delete"})
     public String delete(final Document document, final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("message", "Документ " + document.getTitle() + " удален");
         documentService.deleteDocument(document.getId());
