@@ -23,7 +23,7 @@
         <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-doc}"></div>
 
         <div id="content">
-            <h2>Добавить новый документ</h2>
+            <h2>Зарегистрировать [[${docKey.name}]] документ</h2>
             <ul>
                 <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
             </ul>
@@ -57,8 +57,9 @@
                             </select>
                         </td>
                     </tr>
-                    <tr>
-                        <td><label for="dateOfReceive">Дата получения:</label></td>
+                    <tr th:switch="${docKey.toString()}">
+                        <td th:case="'OUTBOX'"><label for="dateOfReceive">Дата отправки:</label></td>
+                        <td th:case="*"><label for="dateOfReceive">Дата получения:</label></td>
                         <td><input id="dateOfReceive" name="dateOfReceive"
                                    th:placeholder="#{form.document.dateOfReceive}"
                                    type="date" th:value="${document.dateOfReceive}">
