@@ -40,7 +40,6 @@ public class Document {
     private Department department;
 
     private String fileName;
-    private int documentKey;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "doc_key")
@@ -69,28 +68,8 @@ public class Document {
         this.docKey = docKey;
     }
 
-    public int getDocumentKey() {
-        return documentKey;
-    }
-
-    public int getInboxKey() {
-        return 1;
-}
-
-    public int getOutboxKey() {
-        return 2;
-    }
-
-    public int getInternalKey() {
-        return 3;
-    }
-
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setDocumentKey(int documentKey) {
-        this.documentKey = documentKey;
     }
 
     public Date getDateOfReceive() {
@@ -161,7 +140,7 @@ public class Document {
                 ", deadline=" + deadline +
                 ", department=" + department +
                 ", fileName='" + fileName + '\'' +
-                ", documentKey=" + documentKey +
+                ", documentKey=" + docKey +
                 '}';
     }
 

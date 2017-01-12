@@ -14,20 +14,8 @@ public class DocumentService {
     @Autowired
     DocumentDAO documentDAO;
 
-    public void addDocument(Document document) {
-        documentDAO.addDocument(document);
-    }
-
     public Document getDocumentById(int id) {
         return documentDAO.getDocumentById(id);
-    }
-
-    public Document getDocumentByAuthor(String author) {
-        return documentDAO.getDocumentByAuthor(author);
-    }
-
-    public Document getDocumentByDestination(String destination) {
-        return documentDAO.getDocumentByDestination(destination);
     }
 
     public List<Document> getDocumentList() {
@@ -36,10 +24,6 @@ public class DocumentService {
 
     public List<Document> getDocKeyList(DocKey docKey) {
         return documentDAO.getDocKeyList(docKey);
-    }
-
-    public List<Document> getControlList() {
-        return documentDAO.getControlList();
     }
 
     public void updateDocument(Document document) {

@@ -21,9 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Controller
 public class DocumentController {
@@ -45,11 +42,8 @@ public class DocumentController {
 
     @GetMapping("/control")
     public String controlList(Model model) {
-        model.addAttribute("controlList", documentService.getControlList());
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        model.addAttribute("dateNow", dateFormat.format(date));
-        return "control";
+        model.addAttribute("controlList", documentService.getDocumentList());
+        return "lists/documents";
     }
 
     @GetMapping(value = {"/document/{id}"})
