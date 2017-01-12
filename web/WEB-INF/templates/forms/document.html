@@ -29,6 +29,7 @@
             </ul>
             <form th:action="@{/document/}" action="uploadFile" enctype="multipart/form-data" method="post">
                 <input type="hidden" name="id" th:value="${document.id}">
+                <input type="hidden" name="docKey" th:value="${docKey}">
                 <table>
                     <tr>
                         <td><label for="title">Название документа</label></td>

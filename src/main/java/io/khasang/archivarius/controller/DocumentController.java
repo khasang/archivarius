@@ -61,14 +61,16 @@ public class DocumentController {
     @GetMapping(value = {"/document/{id}/edit"})
     public String documentForm(@PathVariable("id") Integer id, ModelMap model) {
         Document document = documentService.getDocumentById(id);
+        model.addAttribute("docKey", document.getDocKey());
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("departs", departmentService.getDepartmentList());
         model.addAttribute("document", document);
         return "forms/document";
     }
 
-    @GetMapping(value = "/document/add")
-    public String showDocumentForm(ModelMap model) {
+    @GetMapping(value = "/document/{docKey}/add")
+    public String showDocumentForm(@PathVariable("docKey") DocKey docKey, ModelMap model) {
+        model.addAttribute("docKey", docKey);
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("departs", departmentService.getDepartmentList());
         model.addAttribute("document", new Document());
@@ -78,7 +80,6 @@ public class DocumentController {
     @PostMapping(value = "/document/")
     public String submit(@ModelAttribute("document") Document document,
                          BindingResult result, ModelMap model,
-                         @RequestParam("documentKey") Integer docKey,
                          @RequestParam("file") MultipartFile file,
                          RedirectAttributes redirectAttributes) {
         final String fileName = file.getOriginalFilename();
@@ -87,7 +88,6 @@ public class DocumentController {
         document.setDocumentType(docType);
         document.setDepartment(department);
         document.setFileName(fileName);
-        document.setDocumentKey(docKey);
         documentService.updateDocument(document);
 
         String rootPath = System.getProperty("catalina.home");
@@ -100,23 +100,14 @@ public class DocumentController {
 
         redirectAttributes.addFlashAttribute("message", "Документ " + document.getTitle() + " добавлен");
 
-        switch (docKey) {
-            case 1:
-                return "redirect:/inbox";
-            case 2:
-                return "redirect:/outbox";
-            case 3:
-                return "redirect:/internal";
-            default:
-                return "redirect:/document/";
-        }
+        return "redirect:/" + document.getDocKey().toString();
     }
 
     @PostMapping(value = "/document/", params = {"delete"})
     public String delete(final Document document, final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("message", "Документ " + document.getTitle() + " удален");
         documentService.deleteDocument(document.getId());
-        return "redirect:/document/";
+        return "redirect:/" + document.getDocKey().toString();
     }
 
     @InitBinder
