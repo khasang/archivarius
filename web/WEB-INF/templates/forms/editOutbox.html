@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{base :: common_header(~{::title})}">
-    <title>Зарегистрировать исходящий документ</title>
+    <title>Редактировать исходящий документ</title>
     <link rel="stylesheet" href="../../views/css/styles.css" type="text/css"/>
 </head>
 
@@ -23,11 +23,11 @@
         <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-outbox}"></div>
 
         <div id="content">
-            <h2>Зарегистрировать исходящий документ</h2>
+            <h2>Редактировать исходящий документ</h2>
             <ul>
                 <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
             </ul>
-            <form th:action="@{/document/outbox}" action="uploadFile" enctype="multipart/form-data" method="post">
+            <form th:action="@{/document/}" action="uploadFile" enctype="multipart/form-data" method="post">
                 <input type="hidden" name="id" th:value="${document.id}">
                 <input type="hidden" name="documentKey" th:value="${document.getOutboxKey()}">
                 <table>

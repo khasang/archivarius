@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/company")
@@ -21,8 +22,9 @@ public class CompanyController {
     private static final Logger log = Logger.getLogger(CompanyController.class);
 
     @GetMapping("/")
-    public String companyList(Model model) {
+    public String companyList(@ModelAttribute("message") String message, Model model) {
         model.addAttribute("companies", companyService.getCompanyList());
+        model.addAttribute("message", message);
         return "lists/companies";
     }
 
@@ -52,20 +54,23 @@ public class CompanyController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
-    @PostMapping("/")
+    @PostMapping(value = "/", params = {"save"})
     public String submit(@ModelAttribute("company")Company company,
-                         BindingResult result, ModelMap model) {
+                         BindingResult result, ModelMap model, final RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
+            model.addAttribute("errors", result.getAllErrors());
             return "error";
         }
+        redirectAttributes.addFlashAttribute("message", "Организация " + company.getName() + " создана");
         companyService.updateCompany(company);
-        return "forms/success";
+        return "redirect:/company/";
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
-    @PostMapping(value = "/delete")
-    public String delete(@RequestParam int id) {
-        companyService.deleteCompanyById(id);
+    @PostMapping(value="/", params = {"delete"})
+    public String delete(final Company company, final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("message", "Организация " + company.getName() + " удалена");
+        companyService.deleteCompany(company);
         return "redirect:/company/";
     }
 }

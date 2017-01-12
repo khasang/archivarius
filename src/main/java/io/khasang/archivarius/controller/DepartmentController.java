@@ -12,10 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/department")
@@ -28,8 +25,9 @@ public class DepartmentController {
     private static final Logger log = Logger.getLogger(DepartmentController.class);
 
     @GetMapping("/")
-    public String departmentList(Model model) {
+    public String departmentList(@ModelAttribute("message") String message, Model model) {
         model.addAttribute("departments", departmentService.getDepartmentList());
+        model.addAttribute("message", message);
         return "lists/departments";
     }
 
@@ -58,30 +56,24 @@ public class DepartmentController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
-    @PostMapping("/")
+    @PostMapping(value = "/", params = {"save"})
     public String submit(@ModelAttribute("department")Department department,
-                         BindingResult result, ModelMap model) {
+                         BindingResult result, ModelMap model,
+                         final RedirectAttributes redirectAttributes) {
         Company company = companyService.getCompanyById(Integer.valueOf((String)(result.getFieldValue("company"))));
         department.setCompany(company);
         departmentService.updateDepartment(department);
         model.addAttribute("name", department.getName());
         model.addAttribute("company", department.getCompany());
-        return "forms/success";
-    }
-
-    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
-    @PostMapping(value = "/delete")
-    public String delete(@RequestParam int id) {
-        departmentService.deleteDepartmentById(id);
+        redirectAttributes.addFlashAttribute("message", "Подразделение " + department.getName() + " создано");
         return "redirect:/department/";
     }
 
-    public Map<Integer, String> getDropboxList() {
-        List<Company> companiesList = companyService.getCompanyList();
-        Map<Integer, String> companies = new HashMap<>();
-        for(Company comp: companiesList) {
-            companies.put(comp.getId(), comp.getName());
-        }
-        return companies;
+    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
+    @PostMapping(value="/", params = {"delete"})
+    public String delete(final Department department, final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("message", "Подразделение " + department.getName() + " удалено");
+        departmentService.deleteDepartment(department);
+        return "redirect:/department/";
     }
 }

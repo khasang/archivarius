@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,8 +29,9 @@ public class UserController {
     private static final Logger log = Logger.getLogger(UserController.class);
 
     @RequestMapping("/users/")
-    public String userList(Model model) {
+    public String userList(@ModelAttribute("message") String message, Model model) {
         model.addAttribute("users", userService.getUserList());
+        model.addAttribute("message", message);
         return "lists/users";
     }
 
@@ -57,9 +59,10 @@ public class UserController {
         return "forms/user";
     }
 
-    @RequestMapping(value = "/users/", method = RequestMethod.POST)
+    @PostMapping(value = "/users/", params = {"save"})
     public String submit(@ModelAttribute("user") User user,
-                         BindingResult result, ModelMap model) {
+                         BindingResult result, ModelMap model,
+                         RedirectAttributes redirectAttributes) {
         Set<Role> roles = new HashSet<>();
         String values = (String) result.getFieldValue("roles");
         String rolesArr[] = values.split(",");
@@ -70,12 +73,14 @@ public class UserController {
         user.setRoles(roles);
         user.setPassword(passwordEncoder.encode((String)result.getFieldValue("password")));
         userService.updateUser(user);
-        return "forms/success";
+        redirectAttributes.addFlashAttribute("message", "Пользователь с именем " + user.getLogin() + " создан");
+        return "redirect:/users/";
     }
 
-    @PostMapping(value = "/users/delete")
-    public String delete(@RequestParam int id) {
-        userService.deleteUserById(id);
+    @PostMapping(value="/users/", params = {"delete"})
+    public String delete(final User user, final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("message", "Пользователь с именем " + user.getLogin() + " удален");
+        userService.deleteUser(user);
         return "redirect:/users/";
     }
 }

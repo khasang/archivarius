@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/role")
@@ -20,8 +21,9 @@ public class RoleController {
     private static final Logger log = Logger.getLogger(RoleController.class);
 
     @RequestMapping("/")
-    public String roleList(Model model) {
+    public String roleList(@ModelAttribute("message") String message, Model model) {
         model.addAttribute("roles", roleService.getRoleList());
+        model.addAttribute("message", message);
         return "lists/roles";
     }
 
@@ -46,17 +48,17 @@ public class RoleController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String submit(@ModelAttribute("role")Role role,
-                         BindingResult result, ModelMap model) {
-        if (result.hasErrors()) {
-            return "error";
-        }
+                         BindingResult result, ModelMap model,
+                         RedirectAttributes redirectAttributes) {
         roleService.updateRole(role);
-        return "forms/success";
+        redirectAttributes.addFlashAttribute("message", "Роль " + role.getName() + " создана");
+        return "redirect:/role/";
     }
 
-    @PostMapping(value = "/delete")
-    public String delete(@RequestParam int id) {
-        roleService.deleteRoleById(id);
+    @PostMapping(value="/", params = {"delete"})
+    public String delete(final Role role, final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("message", "Роль " + role.getName() + " удалена");
+        roleService.deleteRole(role);
         return "redirect:/role/";
     }
 }

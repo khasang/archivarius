@@ -27,7 +27,7 @@
             <ul>
                 <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
             </ul>
-            <form th:action="@{/document/}" action="uploadFile" enctype="multipart/form-data" method="post">
+            <form th:action="@{/document/internal}" action="uploadFile" enctype="multipart/form-data" method="post">
                 <input type="hidden" name="id" th:value="${document.id}">
                 <input type="hidden" name="documentKey" th:value="${document.getInternalKey()}">
                 <table>
@@ -63,11 +63,11 @@
                     </tr>
                     <tr>
                         <td>
-                            <label for="destination">Получатель</label></td>
+                            <label for="department">Получатель</label></td>
                         <td>
-                            <select id="destination" name="destination">
-                                <option selected th:value="${document.id}" th:text="${document.destination}">Получатель</option>
-                                <option th:each="departments : ${departments}" value="1" th:value="${department.id}" th:text="${department.name}">
+                            <select id="department" name="department">
+                                <option selected th:value="${document.id}" th:text="${document.department}">Получатель</option>
+                                <option th:each="deps : ${departs}" value="1" th:value="${deps.id}" th:text="${deps.name}">
                                     Option
                                 </option>
                             </select>

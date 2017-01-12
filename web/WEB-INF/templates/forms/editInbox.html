@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{base :: common_header(~{::title})}">
-    <title>Зарегистрировать исходящий документ</title>
+    <title>Редактировать входящий документ</title>
     <link rel="stylesheet" href="../../views/css/styles.css" type="text/css"/>
 </head>
 
@@ -15,21 +15,21 @@
 
     <div id="navigation" th:replace="~{base :: #navigation}">
         <ul>
-            <li><a href="../document/outbox.html">Исходящие документы</a></li>
+            <li><a href="../document/inbox.html">Входящие документы</a></li>
         </ul>
     </div>
 
     <div id="body">
-        <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-outbox}"></div>
+        <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-inbox}"></div>
 
         <div id="content">
-            <h2>Зарегистрировать исходящий документ</h2>
+            <h2>Редактировать входящий документ</h2>
             <ul>
                 <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
             </ul>
-            <form th:action="@{/document/outbox}" action="uploadFile" enctype="multipart/form-data" method="post">
+            <form th:action="@{/document/inbox}" action="uploadFile" enctype="multipart/form-data" method="post">
                 <input type="hidden" name="id" th:value="${document.id}">
-                <input type="hidden" name="documentKey" th:value="${document.getOutboxKey()}">
+                <input type="hidden" name="documentKey" th:value="${documentKey}">
                 <table>
                     <tr>
                         <td><label for="title">Название документа</label></td>
@@ -48,7 +48,6 @@
                             <label for="documentType">Тип документа</label></td>
                         <td>
                             <select id="documentType" name="documentType">
-                                <option selected th:value="${document.id}" th:text="${document.title}">Выбранное</option>
                                 <option th:each="docType : ${doctypes}" value="1" th:value="${docType.id}" th:text="${docType.name}">
                                     Option
                                 </option>
@@ -56,7 +55,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="dateOfReceive">Дата отправки:</label></td>
+                        <td><label for="dateOfReceive">Дата получения:</label></td>
                         <td><input id="dateOfReceive" name="dateOfReceive" th:placeholder="#{form.document.dateOfReceive}"
                                    type="date" th:value="${document.dateOfReceive}">
                         </td>
@@ -66,7 +65,6 @@
                             <label for="department">Получатель</label></td>
                         <td>
                             <select id="department" name="department">
-                                <option selected th:value="${document.id}" th:text="${document.department}">Получатель</option>
                                 <option th:each="deps : ${departs}" value="1" th:value="${deps.id}" th:text="${deps.name}">
                                     Option
                                 </option>
@@ -95,7 +93,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Загрузить файл:
+                            Заменить файл:
                         </td>
                         <td>
                             <input type="file" name="file">

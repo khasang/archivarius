@@ -53,10 +53,10 @@
                     <td><a href="/document/1" th:href="@{'/document/' + *{id}}"  th:text="*{title}">Название</a></td>
                     <td th:text="${document.documentType} ? ${document.documentType.name} : '&nbsp;'">Тип документа</td>
                     <td th:text="*{status}">На подписи</td>
-                    <td th:text="*{destination}">Бухгалтерия</td>
+                    <td th:text="${document.department} ? ${document.department.name} : '&nbsp;'">Получатель</td>
                     <td th:text="*{deadline}">29/03/2016</td>
                     <td th:text="*{fileName}">123.pdf</td>
-                    <td><a href="/document/1/edit" th:href="@{'/document/' + *{id} + '/edit'}" th:text="#{table.edit}">Редактировать</a></td>
+                    <td><a href="/document/outbox/1/edit" th:href="@{'/document/outbox/' + *{id} + '/edit'}" th:text="#{table.edit}">Редактировать</a></td>
                 </tr>
             </table>
         </div>
