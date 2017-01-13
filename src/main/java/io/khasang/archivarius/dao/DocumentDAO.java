@@ -13,8 +13,6 @@ public interface DocumentDAO {
 
     Document getDocumentById(int id);
 
-    Document getDocumentByDestination(String destination);
-
     List<Document> getDocumentList();
 
     List<Document> getDocKeyList(DocKey docKey);
