@@ -51,15 +51,6 @@ public class DocumentDAOImpl implements DocumentDAO {
     }
 
     @Override
-    public Document getDocumentByDestination(String destination) {
-        Criteria criteria = sessionFactory.
-                getCurrentSession().
-                createCriteria(Document.class);
-        criteria.add(Restrictions.eq("destination", destination));
-        return (Document) criteria.uniqueResult();
-    }
-
-    @Override
     public List<Document> getDocumentList() {
         final Session session = sessionFactory.getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
