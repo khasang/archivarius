@@ -31,6 +31,12 @@ public class Document implements Serializable {
             foreignKey = @ForeignKey(name = "DOCTYPE_ID"))
     private DocType documentType;
 
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "worker_id",
+            foreignKey = @ForeignKey(name = "WORKER_ID"))
+    private Worker worker;
+
     @Type(type="date")
     private Date deadline;
 
@@ -127,6 +133,14 @@ public class Document implements Serializable {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public Worker getWorker() {
+        return worker;
+    }
+
+    public void setWorker(Worker worker) {
+        this.worker = worker;
     }
 
     @Override

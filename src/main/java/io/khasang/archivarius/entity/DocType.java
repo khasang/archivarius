@@ -1,6 +1,7 @@
 package io.khasang.archivarius.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Model of the reference book for document types
@@ -9,7 +10,7 @@ import javax.persistence.*;
  */
 
 @Entity
-public class DocType {
+public class DocType implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

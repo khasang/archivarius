@@ -46,7 +46,7 @@
                     <td th:text="${stat.count}">1</td>
                     <td th:text="*{id}">12345</td>
                     <td th:text="*{dateOfReceive}">25/03/2016</td>
-                    <td th:text="*{author}">Иванов И.И.</td>
+                    <td th:text="${document.worker} ? ${document.worker.lastName} + ' ' + ${document.worker.firstAndMiddleName} : '&nbsp;'">Иванов И.И.</td>
                     <td><a href="/document/1" th:href="@{'/document/' + *{id}}"  th:text="*{title}">Название</a></td>
                     <td th:text="${document.documentType} ? ${document.documentType.name} : '&nbsp;'">Тип документа</td>
                     <td th:text="*{status}">На подписи</td>

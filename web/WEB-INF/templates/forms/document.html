@@ -42,9 +42,15 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="author">Автор</label></td>
-                        <td><input id="author" name="author" th:placeholder="#{form.document.author}"
-                                   placeholder="Введите автора документа" th:value="${document.author}">
+                        <td>
+                            <label for="author">Автор</label></td>
+                        <td>
+                            <select id="author" name="worker">
+                                <option th:each="worker : ${workers}" value="1" th:value="${worker.id}"
+                                        th:text="${worker.lastName} + ' ' + ${worker.firstAndMiddleName}">
+                                    Option
+                                </option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
@@ -52,8 +58,6 @@
                             <label for="documentType">Тип документа</label></td>
                         <td>
                             <select id="documentType" name="documentType">
-                                <option selected th:value="${document.id}" th:text="${document.title}">Выбранное
-                                </option>
                                 <option th:each="docType : ${doctypes}" value="1" th:value="${docType.id}"
                                         th:text="${docType.name}">
                                     Option

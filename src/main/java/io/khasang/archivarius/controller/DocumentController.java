@@ -1,13 +1,11 @@
 package io.khasang.archivarius.controller;
 
 import io.khasang.archivarius.convertor.CaseInsensitiveConverter;
-import io.khasang.archivarius.entity.Department;
-import io.khasang.archivarius.entity.DocKey;
-import io.khasang.archivarius.entity.DocType;
-import io.khasang.archivarius.entity.Document;
+import io.khasang.archivarius.entity.*;
 import io.khasang.archivarius.service.DepartmentService;
 import io.khasang.archivarius.service.DocTypeService;
 import io.khasang.archivarius.service.DocumentService;
+import io.khasang.archivarius.service.WorkerService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +29,8 @@ public class DocumentController {
     DocTypeService docTypeService;
     @Autowired
     DepartmentService departmentService;
+    @Autowired
+    WorkerService workerService;
 
     private static final Logger log = Logger.getLogger(CompanyController.class);
 
@@ -59,6 +59,7 @@ public class DocumentController {
         Document document = documentService.getDocumentById(id);
         model.addAttribute("docKey", document.getDocKey());
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
+        model.addAttribute("workers", workerService.getWorkerList());
         model.addAttribute("departs", departmentService.getDepartmentList());
         model.addAttribute("document", document);
         return "forms/document";
@@ -69,6 +70,7 @@ public class DocumentController {
         model.addAttribute("docKey", docKey);
         model.addAttribute("doctypes", docTypeService.getDocTypeList());
         model.addAttribute("departs", departmentService.getDepartmentList());
+        model.addAttribute("workers", workerService.getWorkerList());
         model.addAttribute("document", new Document());
         return "forms/document";
     }
@@ -81,7 +83,9 @@ public class DocumentController {
         final String fileName = file.getOriginalFilename();
         Department department = departmentService.getDepartmentById((Integer.valueOf((String) (result.getFieldValue("department")))));
         DocType docType = docTypeService.getDocTypeById(Integer.valueOf((String) result.getFieldValue("documentType")));
+        Worker worker = workerService.getWorkerById(Integer.valueOf((String) result.getFieldValue("worker")));
         document.setDocumentType(docType);
+        document.setWorker(worker);
         document.setDepartment(department);
         document.setFileName(fileName);
         documentService.updateDocument(document);
