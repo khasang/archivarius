@@ -63,6 +63,18 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>
+                            <label for="worker">Сотрудник</label></td>
+                        <td>
+                            <select id="worker" name="worker">
+                                <option th:each="worker : ${workers}" value="1" th:value="${worker.id}"
+                                        th:text="${worker.lastName} + ' ' + ${worker.firstAndMiddleName}">
+                                    Option
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
                         <td><input type="submit" name="save" th:value="#{button.submit}" value="Подтвердить" class="formbutton">
                         </td>
                         <td th:if="${user.id} > 0">

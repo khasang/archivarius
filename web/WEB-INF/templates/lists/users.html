@@ -34,11 +34,13 @@
             <table class="table">
                 <tr>
                     <th th:text="#{table.num}">№</th>
-                    <th th:text="#{table.user_name}">Название подразделения</th>
+                    <th th:text="#{table.user_name}">Имя пользователя</th>
+                    <th th:text="#{table.worker}">Сотрудник</th>
                 </tr>
                 <tr th:each="user, stat : ${users}" th:object="${user}">
                     <td th:text="${stat.count}">1</td>
                     <td><a href="/user/1" th:href="@{'/user/' + *{id}}"  th:text="*{login}">Имя пользователя</a></td>
+                    <td th:text="${user.worker} ? ${user.worker.lastName} + ' ' + ${user.worker.firstAndMiddleName} : '&nbsp;'">Сотрудник</td>
                     <td><a href="/user/1/edit" th:href="@{'/user/' + *{id} + '/edit'}" th:text="#{table.edit}">Редактировать</a></td>
                 </tr>
             </table>
