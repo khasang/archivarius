@@ -14,13 +14,15 @@ public class User {
     private int id;
     private String login;
     private String password;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Role> roles;
+
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "department_id",
-            foreignKey = @ForeignKey(name = "DEPARTMENT_ID"))
-    private Department department;
+    @JoinColumn(name = "worker_id",
+            foreignKey = @ForeignKey(name = "WORKER_ID"))
+    private Worker worker;
 
     public User() {
     }
@@ -57,11 +59,11 @@ public class User {
         this.roles = roles;
     }
 
-    public Department getDepartment() {
-        return department;
+    public Worker getWorker() {
+        return worker;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setWorker(Worker worker) {
+        this.worker = worker;
     }
 }
