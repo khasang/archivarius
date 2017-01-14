@@ -2,8 +2,10 @@ package io.khasang.archivarius.controller;
 
 import io.khasang.archivarius.entity.Role;
 import io.khasang.archivarius.entity.User;
+import io.khasang.archivarius.entity.Worker;
 import io.khasang.archivarius.service.RoleService;
 import io.khasang.archivarius.service.UserService;
+import io.khasang.archivarius.service.WorkerService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,7 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashSet;
@@ -25,6 +30,8 @@ public class UserController {
     RoleService roleService;
     @Autowired
     PasswordEncoder passwordEncoder;
+    @Autowired
+    WorkerService workerService;
 
     private static final Logger log = Logger.getLogger(UserController.class);
 
@@ -48,6 +55,7 @@ public class UserController {
         User user = userService.getUserById(intId);
         user.setId(user.getId());
         model.addAttribute("roles", roleService.getRoleList());
+        model.addAttribute("workers", workerService.getWorkerList());
         model.addAttribute("user", user);
         return "forms/user";
     }
@@ -55,6 +63,7 @@ public class UserController {
     @GetMapping(value = "/user/register")
     public String showForm(ModelMap model) {
         model.addAttribute("roles", roleService.getRoleList());
+        model.addAttribute("workers", workerService.getWorkerList());
         model.addAttribute("user", new User());
         return "forms/user";
     }
@@ -72,6 +81,8 @@ public class UserController {
         }
         user.setRoles(roles);
         user.setPassword(passwordEncoder.encode((String)result.getFieldValue("password")));
+        Worker worker = workerService.getWorkerById(Integer.valueOf((String)(result.getFieldValue("worker"))));
+        user.setWorker(worker);
         userService.updateUser(user);
         redirectAttributes.addFlashAttribute("message", "Пользователь с именем " + user.getLogin() + " создан");
         return "redirect:/users/";

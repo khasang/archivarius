@@ -1,12 +1,11 @@
 package io.khasang.archivarius.dao;
 
+import io.khasang.archivarius.entity.DocKey;
 import io.khasang.archivarius.entity.Document;
 
 import java.util.List;
 
 public interface DocumentDAO {
-
-    void addDocument(Document document);
 
     void updateDocument(Document document);
 
@@ -14,18 +13,8 @@ public interface DocumentDAO {
 
     Document getDocumentById(int id);
 
-    Document getDocumentByAuthor(String author);
-
-    Document getDocumentByDestination(String destination);
-
     List<Document> getDocumentList();
 
-    List<Document> getInboxList();
-
-    List<Document> getOutboxList();
-
-    List<Document> getInternalList();
-
-    List<Document> getControlList();
+    List<Document> getDocKeyList(DocKey docKey);
 }
 

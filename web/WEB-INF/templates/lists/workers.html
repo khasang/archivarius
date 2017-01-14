@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{base :: common_header(~{::title})}">
-    <title>Список пользователей</title>
+    <title>Список сотрудников</title>
     <link rel="stylesheet" href="../../views/css/styles.css" type="text/css"/>
 </head>
 
@@ -20,7 +20,7 @@
     </div>
 
     <div id="body">
-        <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-user}">
+        <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-wrk}">
             <ul>
                 <li>
                     <h4>О программе</h4>
@@ -29,19 +29,21 @@
         </div>
 
         <div id="content">
-            <h2>Список пользователей</h2>
-            <div class="message" th:text="${message}"></div>
+            <h2>Список сотрудников</h2>
+            <div th:text="${message}" class="message"></div>
             <table class="table">
                 <tr>
                     <th th:text="#{table.num}">№</th>
-                    <th th:text="#{table.user_name}">Имя пользователя</th>
-                    <th th:text="#{table.worker}">Сотрудник</th>
+                    <th th:text="#{table.work_title}">Сотрудник</th>
+                    <th th:text="#{table.dep_title}">Название подразделения</th>
+                    <th th:text="#{table.position_title}">Должность</th>
                 </tr>
-                <tr th:each="user, stat : ${users}" th:object="${user}">
+                <tr th:each="worker, stat : ${workers}" th:object="${worker}">
                     <td th:text="${stat.count}">1</td>
-                    <td><a href="/user/1" th:href="@{'/user/' + *{id}}"  th:text="*{login}">Имя пользователя</a></td>
-                    <td th:text="${user.worker} ? ${user.worker.lastName} + ' ' + ${user.worker.firstAndMiddleName} : '&nbsp;'">Сотрудник</td>
-                    <td><a href="/user/1/edit" th:href="@{'/user/' + *{id} + '/edit'}" th:text="#{table.edit}">Редактировать</a></td>
+                    <td><a href="/worker/1" th:href="@{'/worker/' + *{id}}"  th:text="*{lastName} + ' ' + *{firstAndMiddleName}">Иванов Иван Иванович</a></td>
+                    <td><a href="/department/1" th:href="@{'/department/' + *{department.id}}" th:text="*{department.name}">Подразделения</a></td>
+                    <td th:text="*{position}">Директор</td>
+                    <td><a href="/worker/1/edit" th:href="@{'/worker/' + *{id} + '/edit'}" th:text="#{table.edit}">Редактировать</a></td>
                 </tr>
             </table>
         </div>

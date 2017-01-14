@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{base :: common_header(~{::title})}">
-    <title>Список пользователей</title>
+    <title th:text="${worker.lastName}">Сотрудник</title>
     <link rel="stylesheet" href="../../views/css/styles.css" type="text/css"/>
 </head>
 
@@ -20,7 +20,7 @@
     </div>
 
     <div id="body">
-        <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-user}">
+        <div class="sidebar sidebar-left" th:replace="~{sidebars :: #sidebar-left-wrk}">
             <ul>
                 <li>
                     <h4>О программе</h4>
@@ -29,21 +29,9 @@
         </div>
 
         <div id="content">
-            <h2>Список пользователей</h2>
-            <div class="message" th:text="${message}"></div>
-            <table class="table">
-                <tr>
-                    <th th:text="#{table.num}">№</th>
-                    <th th:text="#{table.user_name}">Имя пользователя</th>
-                    <th th:text="#{table.worker}">Сотрудник</th>
-                </tr>
-                <tr th:each="user, stat : ${users}" th:object="${user}">
-                    <td th:text="${stat.count}">1</td>
-                    <td><a href="/user/1" th:href="@{'/user/' + *{id}}"  th:text="*{login}">Имя пользователя</a></td>
-                    <td th:text="${user.worker} ? ${user.worker.lastName} + ' ' + ${user.worker.firstAndMiddleName} : '&nbsp;'">Сотрудник</td>
-                    <td><a href="/user/1/edit" th:href="@{'/user/' + *{id} + '/edit'}" th:text="#{table.edit}">Редактировать</a></td>
-                </tr>
-            </table>
+            <h2 th:text="${worker.lastName} + ' ' + ${worker.firstAndMiddleName}">Иванов Иван Иванович</h2>
+            <p><strong>Подразделение: </strong> <span th:text="${worker.department.name}">Бухгалтерия</span> </p>
+            <p><button><a href="/worker/${worker.id}/edit">Редактировать</a></button>
         </div>
 
         <div class="sidebar sidebar-right" th:replace="~{base :: #sidebar-right}">

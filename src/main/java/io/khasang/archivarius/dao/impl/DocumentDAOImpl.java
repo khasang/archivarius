@@ -1,6 +1,7 @@
 package io.khasang.archivarius.dao.impl;
 
 import io.khasang.archivarius.dao.DocumentDAO;
+import io.khasang.archivarius.entity.DocKey;
 import io.khasang.archivarius.entity.Document;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -19,11 +20,6 @@ import java.util.List;
 public class DocumentDAOImpl implements DocumentDAO {
     @Autowired
     SessionFactory sessionFactory;
-
-    @Override
-    public void addDocument(Document document) {
-        sessionFactory.getCurrentSession().save(document);
-    }
 
     @Override
     public void updateDocument(Document document) {
@@ -55,25 +51,6 @@ public class DocumentDAOImpl implements DocumentDAO {
     }
 
     @Override
-    public Document getDocumentByAuthor(String author) {
-        Criteria criteria = sessionFactory.
-                getCurrentSession().
-                createCriteria(Document.class);
-        criteria.add(Restrictions.eq("author", author));
-        return (Document) criteria.uniqueResult();
-    }
-
-    @Override
-    public Document getDocumentByDestination(String destination) {
-        Criteria criteria = sessionFactory.
-                getCurrentSession().
-                createCriteria(Document.class);
-        criteria.add(Restrictions.eq("destination", destination));
-        return (Document) criteria.uniqueResult();
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
     public List<Document> getDocumentList() {
         final Session session = sessionFactory.getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -86,64 +63,13 @@ public class DocumentDAOImpl implements DocumentDAO {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public List<Document> getInboxList() {
-        // 1 is a key for inbox documents
-        final Session session = sessionFactory.getCurrentSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Document> criteriaQuery = builder.createQuery(Document.class);
-        Root<Document> root = criteriaQuery.from(Document.class);
-        criteriaQuery.select(root);
-        criteriaQuery.where(builder.equal(root.get("documentKey"), "1"));
-        criteriaQuery.orderBy(builder.asc(root.get("id")));
-        Query<Document> query = session.createQuery(criteriaQuery);
-        return query.getResultList();
+    public List<Document> getDocKeyList(DocKey docKey) {
+        Criteria criteria = sessionFactory.
+                getCurrentSession().
+                createCriteria(Document.class)
+                .add(Restrictions.eq("docKey", docKey));
+        return (List<Document>) criteria.list();
     }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Document> getOutboxList() {
-        // 2 is a key for outbox documents
-        final Session session = sessionFactory.getCurrentSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Document> criteriaQuery = builder.createQuery(Document.class);
-        Root<Document> root = criteriaQuery.from(Document.class);
-        criteriaQuery.select(root);
-        criteriaQuery.where(builder.equal(root.get("documentKey"), "2"));
-        criteriaQuery.orderBy(builder.asc(root.get("id")));
-        Query<Document> query = session.createQuery(criteriaQuery);
-        return query.getResultList();
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Document> getInternalList() {
-        // 3 is a key for internal documents
-        final Session session = sessionFactory.getCurrentSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Document> criteriaQuery = builder.createQuery(Document.class);
-        Root<Document> root = criteriaQuery.from(Document.class);
-        criteriaQuery.select(root);
-        criteriaQuery.where(builder.equal(root.get("documentKey"), "3"));
-        criteriaQuery.orderBy(builder.asc(root.get("id")));
-        Query<Document> query = session.createQuery(criteriaQuery);
-        return query.getResultList();
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Document> getControlList() {
-        final Session session = sessionFactory.getCurrentSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Document> criteriaQuery = builder.createQuery(Document.class);
-        Root<Document> root = criteriaQuery.from(Document.class);
-        criteriaQuery.select(root);
-        criteriaQuery.where(builder.isNotNull(root.get("documentKey")));
-        criteriaQuery.orderBy(builder.asc(root.get("deadline")));
-        Query<Document> query = session.createQuery(criteriaQuery);
-        return query.getResultList();
-    }
-
 }
 
 

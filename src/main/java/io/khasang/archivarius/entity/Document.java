@@ -9,11 +9,12 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 
 @Entity
-public class Document {
+public class Document implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -30,6 +31,12 @@ public class Document {
             foreignKey = @ForeignKey(name = "DOCTYPE_ID"))
     private DocType documentType;
 
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "worker_id",
+            foreignKey = @ForeignKey(name = "WORKER_ID"))
+    private Worker worker;
+
     @Type(type="date")
     private Date deadline;
 
@@ -40,7 +47,10 @@ public class Document {
     private Department department;
 
     private String fileName;
-    private int documentKey;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "doc_key")
+    private DocKey docKey;
 
     public Document() {
     }
@@ -57,28 +67,16 @@ public class Document {
         return id;
     }
 
-    public int getDocumentKey() {
-        return documentKey;
+    public DocKey getDocKey() {
+        return docKey;
     }
 
-    public int getInboxKey() {
-        return 1;
-}
-
-    public int getOutboxKey() {
-        return 2;
-    }
-
-    public int getInternalKey() {
-        return 3;
+    public void setDocKey(DocKey docKey) {
+        this.docKey = docKey;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setDocumentKey(int documentKey) {
-        this.documentKey = documentKey;
     }
 
     public Date getDateOfReceive() {
@@ -137,6 +135,14 @@ public class Document {
         this.department = department;
     }
 
+    public Worker getWorker() {
+        return worker;
+    }
+
+    public void setWorker(Worker worker) {
+        this.worker = worker;
+    }
+
     @Override
     public String toString() {
         return "Document{" +
@@ -149,7 +155,9 @@ public class Document {
                 ", deadline=" + deadline +
                 ", department=" + department +
                 ", fileName='" + fileName + '\'' +
-                ", documentKey=" + documentKey +
+                ", documentKey=" + docKey +
                 '}';
     }
+
+
 }
