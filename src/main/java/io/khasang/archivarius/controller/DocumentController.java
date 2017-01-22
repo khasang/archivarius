@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
@@ -113,5 +114,15 @@ public class DocumentController {
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(DocKey.class, new CaseInsensitiveConverter<>(DocKey.class));
+    }
+
+    @RequestMapping(value="/search/{searchTerm}")
+    public ModelAndView Search(@PathVariable("searchTerm") String documentSearchTerm) {
+        ModelAndView mav = new ModelAndView("search");
+
+        mav.addObject("searchTerm", documentSearchTerm);
+        mav.addObject("searchResult", documentService.searchDocument(documentSearchTerm));
+
+        return mav;
     }
 }

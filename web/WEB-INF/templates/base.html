@@ -43,9 +43,9 @@
             <ul>
                 <li>
                     <h4>Поиск документа</h4>
-                    <form id="searchform" method="get" action="NOT IMPELEMNETED!!">
+                    <form id="searchform" th:action="@{/search}" action="/search/" method="get">
                         <div>
-                            <input type="text" name="s" id="s" size="15"/>
+                            <input type="text" id="s" size="15" name="searchTerm"/>
                             <input type="submit" value="Найти" class="formbutton"/>
                         </div>
                     </form>

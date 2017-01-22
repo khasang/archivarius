@@ -6,6 +6,7 @@ import io.khasang.archivarius.entity.Document;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,15 @@ public class DocumentDAOImpl implements DocumentDAO {
                 getCurrentSession().
                 createCriteria(Document.class)
                 .add(Restrictions.eq("docKey", docKey));
+        return (List<Document>) criteria.list();
+    }
+
+    @Override
+    public List<Document> searchDocument(String searchRequest) {
+        Criteria criteria = sessionFactory.
+                getCurrentSession().
+                createCriteria(Document.class)
+                .add(Restrictions.like("searchRequest", searchRequest, MatchMode.ANYWHERE));
         return (List<Document>) criteria.list();
     }
 }

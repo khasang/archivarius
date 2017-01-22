@@ -44,5 +44,9 @@ public class DocumentService {
     public void deleteDocument(int id) {
         documentDAO.deleteDocument(id);
     }
+
+    public List<Document> searchDocument(String searchRequest) {
+        return documentDAO.searchDocument(searchRequest);
+    }
 }
 

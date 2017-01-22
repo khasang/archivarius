@@ -16,5 +16,7 @@ public interface DocumentDAO {
     List<Document> getDocumentList();
 
     List<Document> getDocKeyList(DocKey docKey);
+
+    List<Document> searchDocument(String searchRequest);
 }
 
