@@ -2,7 +2,6 @@ package io.khasang.archivarius.service;
 
 import io.khasang.archivarius.entity.DocKey;
 import io.khasang.archivarius.entity.Document;
-import io.khasang.archivarius.messaging.MessageSender;
 import io.khasang.archivarius.repository.DocumentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +16,6 @@ import java.util.List;
 public class DocumentService {
     @Autowired
     DocumentRepository documentRepository;
-
-    @Autowired
-    MessageSender messageSender;
 
     static final Logger LOG = LoggerFactory.getLogger(DocumentService.class);
 
@@ -36,8 +32,6 @@ public class DocumentService {
     }
 
     public void updateDocument(Document document) {
-        LOG.debug("Application : sending order request {}", document);
-        messageSender.sendMessage(document);
         documentRepository.save(document);
     }
 
