@@ -22,7 +22,13 @@ public class Document implements Serializable {
 
     @Type(type="date")
     private Date dateOfReceive;
-    private String author;
+
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "author_id",
+            foreignKey = @ForeignKey(name = "AUTHOR_ID"))
+    private User author;
+
     private String title;
     private String status;
 

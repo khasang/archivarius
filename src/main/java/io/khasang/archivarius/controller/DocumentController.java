@@ -2,12 +2,11 @@ package io.khasang.archivarius.controller;
 
 import io.khasang.archivarius.convertor.CaseInsensitiveConverter;
 import io.khasang.archivarius.entity.*;
-import io.khasang.archivarius.service.DepartmentService;
-import io.khasang.archivarius.service.DocTypeService;
-import io.khasang.archivarius.service.DocumentService;
-import io.khasang.archivarius.service.WorkerService;
+import io.khasang.archivarius.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -32,6 +31,8 @@ public class DocumentController {
     DepartmentService departmentService;
     @Autowired
     WorkerService workerService;
+    @Autowired
+    UserService userService;
 
     private static final Logger log = Logger.getLogger(CompanyController.class);
 
@@ -82,10 +83,14 @@ public class DocumentController {
                          @RequestParam("file") MultipartFile file,
                          RedirectAttributes redirectAttributes) {
         final String fileName = file.getOriginalFilename();
+        final Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        final User author = userService.getUserByUsername(((UserDetails) principal).getUsername());
+
         Department department = departmentService.getDepartmentById((Integer.valueOf((String) (result.getFieldValue("department")))));
         DocType docType = docTypeService.getDocTypeById(Integer.valueOf((String) result.getFieldValue("documentType")));
         Worker worker = workerService.getWorkerById(Integer.valueOf((String) result.getFieldValue("worker")));
         document.setDocumentType(docType);
+        document.setAuthor(author);
         document.setWorker(worker);
         document.setDepartment(department);
         document.setFileName(fileName);
