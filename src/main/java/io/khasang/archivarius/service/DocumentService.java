@@ -2,10 +2,14 @@ package io.khasang.archivarius.service;
 
 import io.khasang.archivarius.entity.DocKey;
 import io.khasang.archivarius.entity.Document;
+import io.khasang.archivarius.entity.User;
 import io.khasang.archivarius.repository.DocumentRepository;
+import io.khasang.archivarius.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +20,8 @@ import java.util.List;
 public class DocumentService {
     @Autowired
     DocumentRepository documentRepository;
+    @Autowired
+    UserRepository userRepository;
 
     static final Logger LOG = LoggerFactory.getLogger(DocumentService.class);
 
@@ -24,11 +30,11 @@ public class DocumentService {
     }
 
     public List<Document> getDocumentList() {
-        return documentRepository.findAll();
+        return documentRepository.findByAuthor(findUserForAccess());
     }
 
     public List<Document> getDocKeyList(DocKey docKey) {
-        return documentRepository.findByDocKey(docKey);
+        return documentRepository.findByDocKeyAndAuthor(docKey, findUserForAccess());
     }
 
     public void updateDocument(Document document) {
@@ -41,6 +47,11 @@ public class DocumentService {
 
     public List<Document> searchDocument(String searchRequest) {
         return documentRepository.findByTitleContaining(searchRequest);
+    }
+
+    public User findUserForAccess() {
+        final Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userRepository.findByLogin(((UserDetails) principal).getUsername());
     }
 }
 
