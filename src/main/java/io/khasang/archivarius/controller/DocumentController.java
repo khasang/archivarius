@@ -5,6 +5,7 @@ import io.khasang.archivarius.entity.*;
 import io.khasang.archivarius.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -43,8 +44,9 @@ public class DocumentController {
         return "lists/documents";
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'DOCUMENTOVED')")
     @GetMapping("/control")
-    public String controlList(Model model) {
+    public String controlListing(Model model) {
         model.addAttribute("documents", documentService.getDocumentList());
         model.addAttribute("docKey", null);
         return "lists/documents";

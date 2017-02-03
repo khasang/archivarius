@@ -28,7 +28,11 @@ public class DocumentService {
     }
 
     public List<Document> getDocumentList() {
-        return documentRepository.findByAuthor(findUserForAccess());
+        return documentRepository.findAll();
+    }
+
+    public List<Document> getDocumentListForUser() {
+        return documentRepository.findByAuthorOrWorkerOrDepartment(findUserForAccess(), findWorkerByUser(), findDepartmentByUser());
     }
 
     public List<Document> getDocKeyList(DocKey docKey) {

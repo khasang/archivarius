@@ -25,7 +25,7 @@
             <li><a href="inbox.html" th:href="@{/inbox}" th:text="#{menu.inbox}">Входящие документы</a></li>
             <li><a href="outbox.html" th:href="@{/outbox}" th:text="#{menu.outbox}">Исходящие документы</a></li>
             <li><a href="internal.html" th:href="@{/internal}" th:text="#{menu.enter}">Внутренние документы</a></li>
-            <li><a href="control.html" th:href="@{/control}" th:text="#{menu.control}">Контроль исполнений</a></li>
+            <li><a sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_DOCUMENTOVED')" href="control.html" th:href="@{/control}" th:text="#{menu.control}">Контроль исполнений</a></li>
             <li><a href="help.html" th:href="@{/help}" th:text="#{menu.help}">Справка</a></li>
         </ul>
         <div>
@@ -60,7 +60,6 @@
                         <li><a href="/department/">Подразделения</a></li>
                         <li><a href="/worker/">Сотрудники</a></li>
                         <li><a href="/doctype/">Типы документов</a></li>
-                        <li><a href="/document/">Все документы</a></li>
                         <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/users/">Пользователи</a></li>
                         <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/role/">Роли</a></li>
                     </ul>
