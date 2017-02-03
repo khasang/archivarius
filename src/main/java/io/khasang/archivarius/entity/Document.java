@@ -4,6 +4,7 @@ package io.khasang.archivarius.entity;
  * inbox, outbox and internal doc. base
  */
 
+import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 
-
+@Data
 @Entity
 public class Document implements Serializable {
     @Id
@@ -51,113 +52,4 @@ public class Document implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "doc_key")
     private DocKey docKey;
-
-    public Document() {
-    }
-
-    public DocType getDocumentType() {
-        return documentType;
-    }
-
-    public void setDocumentType(DocType documentType) {
-        this.documentType = documentType;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public DocKey getDocKey() {
-        return docKey;
-    }
-
-    public void setDocKey(DocKey docKey) {
-        this.docKey = docKey;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Date getDateOfReceive() {
-        return dateOfReceive;
-    }
-
-    public void setDateOfReceive(Date dateOfReceive) {
-        this.dateOfReceive = dateOfReceive;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Date getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public Worker getWorker() {
-        return worker;
-    }
-
-    public void setWorker(Worker worker) {
-        this.worker = worker;
-    }
-
-    @Override
-    public String toString() {
-        return "Document{" +
-                "id=" + id +
-                ", dateOfReceive=" + dateOfReceive +
-                ", author='" + author + '\'' +
-                ", title='" + title + '\'' +
-                ", status='" + status + '\'' +
-                ", documentType=" + documentType +
-                ", deadline=" + deadline +
-                ", department=" + department +
-                ", fileName='" + fileName + '\'' +
-                ", documentKey=" + docKey +
-                '}';
-    }
-
-
 }

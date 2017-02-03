@@ -1,5 +1,7 @@
 package io.khasang.archivarius.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -9,6 +11,7 @@ import java.io.Serializable;
  * used document types in organization's field of responsibility
  */
 
+@Data
 @Entity
 public class DocType implements Serializable {
 
@@ -17,32 +20,6 @@ public class DocType implements Serializable {
     private int id;
 
     private String name;
+
     private String description;
-
-    public DocType() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

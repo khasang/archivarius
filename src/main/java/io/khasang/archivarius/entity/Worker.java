@@ -1,11 +1,13 @@
 package io.khasang.archivarius.entity;
 
+import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Data
 @Entity
 public class Worker implements Serializable {
 
@@ -26,55 +28,4 @@ public class Worker implements Serializable {
     private String position;
 
     private boolean companyWorker;
-
-    public Worker() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstAndMiddleName() {
-        return firstAndMiddleName;
-    }
-
-    public void setFirstAndMiddleName(String firstAndMiddleName) {
-        this.firstAndMiddleName = firstAndMiddleName;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public boolean isCompanyWorker() {
-        return companyWorker;
-    }
-
-    public void setCompanyWorker(boolean companyWorker) {
-        this.companyWorker = companyWorker;
-    }
 }
