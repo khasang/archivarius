@@ -1,7 +1,7 @@
 package io.khasang.archivarius.service;
 
-import io.khasang.archivarius.dao.DepartmentDAO;
 import io.khasang.archivarius.entity.Department;
+import io.khasang.archivarius.repository.DepartmentRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -21,7 +21,7 @@ public class DepartmentServiceTest {
     DepartmentService departmentService = new DepartmentService();
 
     @Mock
-    DepartmentDAO departmentDAO;
+    DepartmentRepository departmentRepository;
 
     @Before
     public void setup() {
@@ -33,7 +33,7 @@ public class DepartmentServiceTest {
         Department departmentToSave = new Department();
         departmentToSave.setName(NAME);
         departmentToSave.setId(ID);
-        when(departmentDAO.getDepartmentById(ID)).thenReturn(departmentToSave);
+        when(departmentRepository.findOne(ID)).thenReturn(departmentToSave);
         Department departmentById = departmentService.getDepartmentById(ID);
         assertEquals(NAME, departmentById.getName());
     }
@@ -46,7 +46,7 @@ public class DepartmentServiceTest {
         departmentToSave.setId(ID);
         departments.add(departmentToSave);
 
-        when(departmentDAO.getDepartmentList()).thenReturn(departments);
+        when(departmentRepository.findAll()).thenReturn(departments);
         assertEquals(1, departmentService.getDepartmentList().size());
     }
 

@@ -1,7 +1,7 @@
 package io.khasang.archivarius.service;
 
-import io.khasang.archivarius.dao.UserDAO;
 import io.khasang.archivarius.entity.User;
+import io.khasang.archivarius.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,29 +12,21 @@ import java.util.List;
 @Transactional
 public class UserService {
     @Autowired
-    UserDAO userDAO;
-
-    public void addUser(User user) {
-        userDAO.addUser(user);
-    }
+    UserRepository userRepository;
 
     public User getUserById(int id) {
-        return userDAO.getUserById(id);
+        return userRepository.findOne(id);
     }
 
     public List<User> getUserList() {
-        return userDAO.getUserList();
+        return userRepository.findAll();
     }
 
     public void updateUser(User user) {
-        userDAO.updateUser(user);
+        userRepository.save(user);
     }
 
     public void deleteUser(User user) {
-        userDAO.deleteUser(user);
-    }
-
-    public void deleteUserById(int id) {
-        userDAO.deleteUserById(id);
+        userRepository.delete(user);
     }
 }

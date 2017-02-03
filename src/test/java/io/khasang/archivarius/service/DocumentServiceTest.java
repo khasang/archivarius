@@ -1,8 +1,8 @@
 package io.khasang.archivarius.service;
 
 
-import io.khasang.archivarius.dao.DocumentDAO;
 import io.khasang.archivarius.entity.Document;
+import io.khasang.archivarius.repository.DocumentRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -22,7 +22,7 @@ public class DocumentServiceTest {
     DocumentService documentService = new DocumentService();
 
     @Mock
-    DocumentDAO documentDAO;
+    DocumentRepository documentRepository;
 
     @Before
     public void setup() {
@@ -34,7 +34,7 @@ public class DocumentServiceTest {
         Document documentToSave = new Document();
         documentToSave.setTitle(NAME);
         documentToSave.setId(ID);
-        when(documentDAO.getDocumentById(ID)).thenReturn(documentToSave);
+        when(documentRepository.findOne(ID)).thenReturn(documentToSave);
         Document documentById = documentService.getDocumentById(ID);
         assertEquals(NAME, documentById.getTitle());
     }
@@ -47,7 +47,7 @@ public class DocumentServiceTest {
         documentToSave.setId(ID);
         documents.add(documentToSave);
 
-        when(documentDAO.getDocumentList()).thenReturn(documents);
+        when(documentRepository.findAll()).thenReturn(documents);
         assertEquals(1, documentService.getDocumentList().size());
     }
 

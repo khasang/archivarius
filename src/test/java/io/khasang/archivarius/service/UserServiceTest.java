@@ -1,7 +1,7 @@
 package io.khasang.archivarius.service;
 
-import io.khasang.archivarius.dao.UserDAO;
 import io.khasang.archivarius.entity.User;
+import io.khasang.archivarius.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -21,7 +21,7 @@ public class UserServiceTest {
     UserService userService = new UserService();
 
     @Mock
-    UserDAO userDAO;
+    UserRepository userRepository;
 
     @Before
     public void setup() {
@@ -33,7 +33,7 @@ public class UserServiceTest {
         User userToSave = new User();
         userToSave.setLogin(NAME);
         userToSave.setId(ID);
-        when(userDAO.getUserById(ID)).thenReturn(userToSave);
+        when(userRepository.findOne(ID)).thenReturn(userToSave);
         User userById = userService.getUserById(ID);
         assertEquals(NAME, userById.getLogin());
     }
@@ -46,7 +46,7 @@ public class UserServiceTest {
         userToSave.setId(ID);
         companies.add(userToSave);
 
-        when(userDAO.getUserList()).thenReturn(companies);
+        when(userRepository.findAll()).thenReturn(companies);
         assertEquals(1, userService.getUserList().size());
     }
 

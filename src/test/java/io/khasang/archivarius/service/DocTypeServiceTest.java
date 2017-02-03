@@ -1,7 +1,7 @@
 package io.khasang.archivarius.service;
 
-import io.khasang.archivarius.dao.DocTypeDAO;
 import io.khasang.archivarius.entity.DocType;
+import io.khasang.archivarius.repository.DocTypeRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -21,7 +21,7 @@ public class DocTypeServiceTest {
     DocTypeService docTypeService = new DocTypeService();
 
     @Mock
-    DocTypeDAO docTypeDAO;
+    DocTypeRepository docTypeRepository;
 
     @Before
     public void setup() {
@@ -33,7 +33,7 @@ public class DocTypeServiceTest {
         DocType docTypeToSave = new DocType();
         docTypeToSave.setName(NAME);
         docTypeToSave.setId(ID);
-        when(docTypeDAO.getDocTypeById(ID)).thenReturn(docTypeToSave);
+        when(docTypeRepository.findOne(ID)).thenReturn(docTypeToSave);
         DocType docTypeById = docTypeService.getDocTypeById(ID);
         assertEquals(NAME, docTypeById.getName());
     }
@@ -46,7 +46,7 @@ public class DocTypeServiceTest {
         docTypeToSave.setId(ID);
         companies.add(docTypeToSave);
 
-        when(docTypeDAO.getDocTypeList()).thenReturn(companies);
+        when(docTypeRepository.findAll()).thenReturn(companies);
         assertEquals(1, docTypeService.getDocTypeList().size());
     }
 

@@ -1,7 +1,7 @@
 package io.khasang.archivarius.service;
 
-import io.khasang.archivarius.dao.RoleDAO;
 import io.khasang.archivarius.entity.Role;
+import io.khasang.archivarius.repository.RoleRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -21,7 +21,7 @@ public class RoleServiceTest {
     RoleService roleService = new RoleService();
 
     @Mock
-    RoleDAO roleDAO;
+    RoleRepository roleRepository;
 
     @Before
     public void setup() {
@@ -33,7 +33,7 @@ public class RoleServiceTest {
         Role roleToSave = new Role();
         roleToSave.setName(NAME);
         roleToSave.setId(ID);
-        when(roleDAO.getRoleById(ID)).thenReturn(roleToSave);
+        when(roleRepository.findOne(ID)).thenReturn(roleToSave);
         Role roleById = roleService.getRoleById(ID);
         assertEquals(NAME, roleById.getName());
     }
@@ -46,7 +46,7 @@ public class RoleServiceTest {
         roleToSave.setId(ID);
         companies.add(roleToSave);
 
-        when(roleDAO.getRoleList()).thenReturn(companies);
+        when(roleRepository.findAll()).thenReturn(companies);
         assertEquals(1, roleService.getRoleList().size());
     }
 

@@ -1,14 +1,12 @@
 package io.khasang.archivarius.service;
 
-import io.khasang.archivarius.dao.CompanyDAO;
 import io.khasang.archivarius.entity.Company;
+import io.khasang.archivarius.repository.CompanyRepository;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +21,7 @@ public class CompanyServiceTest {
     CompanyService companyService = new CompanyService();
 
     @Mock
-    CompanyDAO companyDAO;
+    CompanyRepository companyRepository;
 
     @Before
     public void setup() {
@@ -35,7 +33,7 @@ public class CompanyServiceTest {
         Company companyToSave = new Company();
         companyToSave.setName(NAME);
         companyToSave.setId(ID);
-        when(companyDAO.getCompanyById(ID)).thenReturn(companyToSave);
+        when(companyRepository.findOne(ID)).thenReturn(companyToSave);
         Company companyById = companyService.getCompanyById(ID);
         assertEquals(NAME, companyById.getName());
     }
@@ -48,7 +46,7 @@ public class CompanyServiceTest {
         companyToSave.setId(ID);
         companies.add(companyToSave);
 
-        when(companyDAO.getCompanyList()).thenReturn(companies);
+        when(companyRepository.findAll()).thenReturn(companies);
         assertEquals(1, companyService.getCompanyList().size());
     }
 
