@@ -3,6 +3,7 @@ package io.khasang.archivarius.service;
 import io.khasang.archivarius.entity.DocKey;
 import io.khasang.archivarius.entity.Document;
 import io.khasang.archivarius.entity.User;
+import io.khasang.archivarius.entity.Worker;
 import io.khasang.archivarius.repository.DocumentRepository;
 import io.khasang.archivarius.repository.UserRepository;
 import org.slf4j.Logger;
@@ -34,7 +35,7 @@ public class DocumentService {
     }
 
     public List<Document> getDocKeyList(DocKey docKey) {
-        return documentRepository.findByDocKeyAndAuthor(docKey, findUserForAccess());
+        return documentRepository.findByDocKeyAndAuthorOrWorker(docKey, findUserForAccess(), findWorkerByUser());
     }
 
     public void updateDocument(Document document) {
@@ -49,9 +50,14 @@ public class DocumentService {
         return documentRepository.findByTitleContaining(searchRequest);
     }
 
-    public User findUserForAccess() {
+    private User findUserForAccess() {
         final Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userRepository.findByLogin(((UserDetails) principal).getUsername());
+    }
+
+    private Worker findWorkerByUser() {
+        User user = findUserForAccess();
+        return user.getWorker();
     }
 }
 
