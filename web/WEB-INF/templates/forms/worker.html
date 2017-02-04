@@ -37,22 +37,22 @@
                 <input type="hidden" th:if="${worker.id}" name="id" th:value="${worker.id}">
                 <table>
                     <tr>
-                        <td><label for="name">Фамилия</label></td>
+                        <td><label for="name">Фамилия*</label></td>
                         <td><input id="lastname" name="lastName" th:placeholder="#{form.worker.lastName}"
-                                   placeholder="Введите фамилию" th:value="${worker.lastName}">
+                                   placeholder="Введите фамилию" th:value="${worker.lastName}" required>
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="name">Имя Отчество</label></td>
+                        <td><label for="name">Имя Отчество*</label></td>
                         <td><input id="name" name="firstAndMiddleName" th:placeholder="#{form.worker.firstAndMiddleName}"
-                                   placeholder="Введите имя-отчество" th:value="${worker.firstAndMiddleName}">
+                                   placeholder="Введите имя-отчество" th:value="${worker.firstAndMiddleName}" required>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label for="department">Подразделение</label></td>
+                            <label for="department">Подразделение*</label></td>
                         <td>
-                            <select id="department" name="department">
+                            <select id="department" name="department" required>
                                 <option th:each="dep : ${departments}" value="1" th:value="${dep.id}" th:text="${dep.name}">
                                     Option
                                 </option>

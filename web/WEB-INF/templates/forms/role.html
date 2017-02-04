@@ -39,9 +39,9 @@
                     <input type="hidden" name="id" th:value="${role.id}">
                     <table>
                         <tr>
-                            <td><label for="name">Название роли</label></td>
+                            <td><label for="name">Название роли*</label></td>
                             <td><input id="name" name="name" th:placeholder="#{form.role.title}"
-                                       placeholder="Введите название роли" th:value="${role.name}">
+                                       placeholder="Введите название роли" th:value="${role.name}" required>
                             </td>
                         </tr>
                         <tr>

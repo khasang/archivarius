@@ -36,16 +36,16 @@
                 <input type="hidden" name="docKey" th:value="${docKey}">
                 <table>
                     <tr>
-                        <td><label for="title">Название документа</label></td>
+                        <td><label for="title">Название документа*</label></td>
                         <td><input id="title" name="title" th:placeholder="#{form.document.title}"
-                                   placeholder="Введите название документа" th:value="${document.title}">
+                                   placeholder="Введите название документа" th:value="${document.title}" required>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label for="author">Автор</label></td>
+                            <label for="author">Автор*</label></td>
                         <td>
-                            <select id="author" name="worker">
+                            <select id="author" name="worker" required>
                                 <option th:each="worker : ${workers}" value="1" th:value="${worker.id}"
                                         th:text="${worker.lastName} + ' ' + ${worker.firstAndMiddleName}">
                                     Option
@@ -55,9 +55,9 @@
                     </tr>
                     <tr>
                         <td>
-                            <label for="documentType">Тип документа</label></td>
+                            <label for="documentType">Тип документа*</label></td>
                         <td>
-                            <select id="documentType" name="documentType">
+                            <select id="documentType" name="documentType" required>
                                 <option th:each="docType : ${doctypes}" value="1" th:value="${docType.id}"
                                         th:text="${docType.name}">
                                     Option
@@ -66,18 +66,18 @@
                         </td>
                     </tr>
                     <tr th:switch="${docKey.toString()}">
-                        <td th:case="'OUTBOX'"><label for="dateOfReceive">Дата отправки:</label></td>
-                        <td th:case="*"><label for="dateOfReceive">Дата получения:</label></td>
+                        <td th:case="'OUTBOX'"><label for="dateOfReceive">Дата отправки:*</label></td>
+                        <td th:case="*"><label for="dateOfReceive">Дата получения:*</label></td>
                         <td><input id="dateOfReceive" name="dateOfReceive"
                                    th:placeholder="#{form.document.dateOfReceive}"
-                                   type="date" th:value="${document.dateOfReceive}">
+                                   type="date" th:value="${document.dateOfReceive}" required>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label for="department">Получатель</label></td>
+                            <label for="department">Получатель*</label></td>
                         <td>
-                            <select id="department" name="department">
+                            <select id="department" name="department" required>
                                 <option th:each="deps : ${departs}" value="1" th:value="${deps.id}" th:text="${deps.name}">
                                     Option
                                 </option>
@@ -85,16 +85,16 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="deadline">Срок ответа:</label></td>
+                        <td><label for="deadline">Срок ответа:*</label></td>
                         <td><input id="deadline" name="deadline" th:placeholder="#{form.document.deadline}"
-                                   type="date" th:value="${document.deadline}">
+                                   type="date" th:value="${document.deadline}" required>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label for="status">Состояние документа:</label></td>
+                            <label for="status">Состояние документа:*</label></td>
                         <td>
-                            <select id="status" name="status">
+                            <select id="status" name="status" required>
                                 <option value="Получен">Получен</option>
                                 <option value="Подписан">Подписан</option>
                                 <option value="Требуется подпись">Требуется подпись</option>
@@ -106,10 +106,10 @@
                     </tr>
                     <tr>
                         <td>
-                            Загрузить файл:
+                            Загрузить файл:*
                         </td>
                         <td>
-                            <input type="file" name="file">
+                            <input type="file" name="file" required>
                         </td>
                     </tr>
                     <tr>

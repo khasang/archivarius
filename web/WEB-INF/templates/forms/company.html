@@ -37,9 +37,9 @@
                 <input type="hidden" name="id" th:value="${company.id}">
                 <table>
                     <tr>
-                        <td><label for="name">Название организации</label></td>
+                        <td><label for="name">Название организации*</label></td>
                         <td><input id="name" name="name" th:placeholder="#{form.company.title}"
-                                   placeholder="Введите название организации" th:value="${company.name}">
+                                   placeholder="Введите название организации" th:value="${company.name}" required>
                         </td>
                     </tr>
                     <tr>

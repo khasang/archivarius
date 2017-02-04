@@ -39,7 +39,7 @@
                     <tr>
                         <td><label for="name">Тип документа</label></td>
                         <td><input id="name" name="name" th:placeholder="#{form.doctype.title}"
-                                   placeholder="Введите название типа документа" th:value="${docType.name}">
+                                   placeholder="Введите название типа документа*" th:value="${docType.name}" required>
                         </td>
                     </tr>
                     <tr>

@@ -37,22 +37,22 @@
                 <input type="hidden" name="id" th:value="${user.id}">
                 <table>
                     <tr>
-                        <td><label for="login">Логин</label></td>
+                        <td><label for="login">Логин*</label></td>
                         <td><input id="login" name="login" th:placeholder="#{form.user.login}"
-                                   placeholder="Введите имя" th:value="${user.login}">
+                                   placeholder="Введите имя" th:value="${user.login}" required>
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="password">Пароль</label></td>
+                        <td><label for="password">Пароль*</label></td>
                         <td><input type="password" id="password" name="password" th:placeholder="#{form.user.password}"
-                                   placeholder="Введите пароль">
+                                   placeholder="Введите пароль" required>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label for="roles">Роли</label></td>
+                            <label for="roles">Роли*/label></td>
                         <td>
-                            <select id="roles" name="roles">
+                            <select id="roles" name="roles" required>
                                 <!--<option selected th:value="${selectedCompany.id}" th:text="${selectedCompany.name}">Выбранное</option>-->
                                 <option th:each="role : ${roles}" value="1" th:value="${role.id}"
                                         th:text="${role.name}">

@@ -37,16 +37,16 @@
                 <input type="hidden" th:if="${department.id}" name="id" th:value="${department.id}">
                 <table>
                     <tr>
-                        <td><label for="name">Название подразделения</label></td>
+                        <td><label for="name">Название подразделения*</label></td>
                         <td><input id="name" name="name" th:placeholder="#{form.department.title}"
-                                   placeholder="Введите название подразделения" th:value="${department.name}">
+                                   placeholder="Введите название подразделения" th:value="${department.name}" required>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label for="company">Организация</label></td>
+                            <label for="company">Организация*</label></td>
                         <td>
-                            <select id="company" name="company">
+                            <select id="company" name="company" required>
                                 <option th:each="comp : ${companies}" value="1" th:value="${comp.id}" th:text="${comp.name}">
                                 Option
                                 </option>
