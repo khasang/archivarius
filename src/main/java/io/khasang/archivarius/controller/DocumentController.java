@@ -123,12 +123,13 @@ public class DocumentController {
         binder.registerCustomEditor(DocKey.class, new CaseInsensitiveConverter<>(DocKey.class));
     }
 
-    @RequestMapping(value="/search/{searchTerm}")
-    public ModelAndView Search(@PathVariable("searchTerm") String documentSearchTerm) {
-        ModelAndView mav = new ModelAndView("search");
+    @RequestMapping(value="/search")
+    public ModelAndView Search(@RequestParam("searchTerm") String documentSearchTerm) {
+        ModelAndView mav = new ModelAndView("lists/documents");
 
         mav.addObject("searchTerm", documentSearchTerm);
-        mav.addObject("searchResult", documentService.searchDocument(documentSearchTerm));
+     //   mav.addObject("docKey", null);
+        mav.addObject("documents", documentService.searchDocument(documentSearchTerm));
 
         return mav;
     }
