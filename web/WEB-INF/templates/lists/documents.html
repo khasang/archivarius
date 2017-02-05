@@ -45,8 +45,8 @@
                     <th th:text="#{table.document_file_name}">Файл</th>
                 </tr>
                 </thead>
-                <tr th:each="document, stat : ${documents}" th:object="${document}"
-                    th:class="*{#dates.format(deadline,'yyyyMMdd')} == ${#dates.format(#dates.createToday(), 'yyyyMMdd')} ? 'yellow' : (*{#dates.format(deadline,'yyyyMMdd')} &lt; ${#dates.format(#dates.createToday(), 'yyyyMMdd')} ? 'red' : 'green')">
+                <tr th:each="document, stat : ${documents}" th:object="${document}">
+
                     <td th:text="${stat.count}">1</td>
                     <td th:text="*{id}">12345</td>
                     <td th:text="*{dateOfReceive}">25/03/2016</td>
@@ -57,7 +57,7 @@
                     <td th:text="${document.documentType} ? ${document.documentType.name} : '&nbsp;'">Тип документа</td>
                     <td th:text="*{status}">На подписи</td>
                     <td th:text="${document.department} ? ${document.department.name} : '&nbsp;'">Бухгалтерия</td>
-                    <td th:text="*{#dates.format(deadline,'dd/MM/yyyy')}">
+                    <td th:text="*{#dates.format(deadline,'dd/MM/yyyy')}" th:class="*{#dates.format(deadline,'yyyyMMdd')} == ${#dates.format(#dates.createToday(), 'yyyyMMdd')} ? 'yellow' : (*{#dates.format(deadline,'yyyyMMdd')} &lt; ${#dates.format(#dates.createToday(), 'yyyyMMdd')} ? 'red' : 'green')">
                         29/03/2016
                     </td>
                     <td th:text="*{fileName}">123.pdf</td>
