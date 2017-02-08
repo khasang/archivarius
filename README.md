@@ -57,6 +57,8 @@ Basically the ```Inbox``` and ```Outbox``` documents are company log, where comp
 
 **Outbox Documents** page contains documents that was prepared as answer for some requests in the company. All documents flow are stored in the ```Inbox``` and ```Outbox``` within the database so that they can be re-read or used at any time.
 
+![Main](https://github.com/khasang/archivarius/blob/development/src/main/resources/main.png)
+
 
 -------------
 Internal documents
@@ -71,6 +73,8 @@ Control of documents execution
 ===================
 
 Controlling documents status and deadlines make possible to identify, evaluate and propose preventative actions giving  **Archivarius** users the tools necessary to meet their objectives, no matter what problems are encountered.
+
+![Control](https://github.com/khasang/archivarius/blob/development/src/main/resources/control.png)
 
 **Control** page contains documents that have deadlines for execution and their status. After work status changes the document changes it's status. Deadline fields in document table have the colored backgrounds depended on renaining time for visual help.
  
