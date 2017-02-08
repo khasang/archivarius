@@ -1,22 +1,79 @@
-# Archivarius - Documents Workflow System
+# Archivarius - Documents Workflow System 
+###Open Source Training Project of Khasang Geekteams
 
-![picture](https://github.com/khasang-incubator/archivarius/blob/development/src/main/resources/ArchivariusLogo.png)
-
-## OpenSource Training Project
+![picture](https://github.com/khasang-incubator/archivarius/blob/development/src/main/resources/ArchivariusLogo.png?raw=true)
 
 
-###*artifiner*
+
+Archivarius developers team
 -------------
-## Как заливать картинки на GitHub
-Загрузка картинок для документации непосредственно в ресурсы проекта приведёт к замусориванию репозитория ненужными файлами и коммитами.
-Лучше грузить картинки так, как показано в [этой статье](http://www.devbug.info/2014/11/github.html)
+###Team lead
+**Sergey Kuznetsov** Education and assistance - [Khasang.io][4]
 
-### Database insert example
-Добавил пример вставки в базу данных. Сразу с подключенными логами.
+###Developers
+**Yuriy Kornienko** Back-end and front-end [dynamost@dynamost.ru][1]
+
+**Eugene Shamkin** Back-end and front-end [eugeneshamkin@mail.ru][2]
+
+**Tatiana Vorobieva** Back-end [t.tianav2@gmail.com][3]
 
 
+-------------
+General description
+=================== 
+A workflow consists of an orchestrated and repeatable pattern of business activity enabled by the systematic organization of resources into processes that transform materials, provide services, or process information. It can be depicted as a sequence of operations, declared as work of a person or group, an organization of staff, or one or more simple or complex mechanisms.
+From a more abstract or higher-level perspective, workflow may be considered a view or representation of real work. The flow being described may refer to a document, service or product that is being transferred from one step to another.
 
-###*Eugene NeocortexF*
+The ```main objective```  is ensuring that the status of work with documents in which each specialist (as head of the company and its ordinary employee) may to obtain at any time without great effort to the necessary documents and necessary information.
+
+Substantially **Archivarius** consist of several modules that it's prefer to user, that will be described below.
+
+-------------
+Only secured operations!
+=================== 
+
+The security of **Archivarius** project is provided by proven technology - ```Spring Security```. It is a framework of Java that focuses on providing both authentication and authorization to Java applications. Like all Spring projects, the real power of Spring Security is found in how easily it can be extended to meet custom requirements
+
+![Spring Security](https://github.com/khasang/archivarius/blob/development/src/main/resources/Spring-Security-logo.png) 
+
+
+> **Features:**
+> 
+> - Comprehensive and extensible support for both Authentication and Authorization
+> - Protection against attacks like session fixation, clickjacking, cross site request forgery, etc
+> - Servlet API integration
+> - Optional integration with Spring Web MVC and much more…
+
+Every person who logged in should be ancored to his personnel data, department and prosition at company, that will helps to restict the access in case of necessaty. 
+
+![Login](https://github.com/khasang/archivarius/blob/development/src/main/resources/login.png) 
+
+-------------
+Inbox and outbox documents
+=================== 
+Basically the ```Inbox``` and ```Outbox``` documents are company log, where company can keep track of what is necessary to prepare for response, and also register a response with attachments for sending it to the appropriate persons.
+
+**Inbox Documents** page contains documents that other people have created for to your attention. You access this list by clicking Inbox Documents in the navigation bar. To view a document, ```just click its name```.
+
+**Outbox Documents** page contains documents that was prepared as answer for some requests in the company. All documents flow are stored in the ```Inbox``` and ```Outbox``` within the database so that they can be re-read or used at any time.
+
+
+-------------
+Internal documents
+=================== 
+
+**Internal Documents** page contains documents only for company inside usage. It can be various orders, holiday and vacations schedules, rewarding employees letters and etc.
+
+The main objective is to every employee can access to reliable documentation at every time. Employees receive only the documentation that is designed for them.
+ 
+-------------
+Control of documents execution
+===================
+
+Controlling documents status and deadlines make possible to identify, evaluate and propose preventative actions giving  **Archivarius** users the tools necessary to meet their objectives, no matter what problems are encountered.
+
+**Control** page contains documents that have deadlines for execution and their status. After work status changes the document changes it's status. Deadline fields in document table have the colored backgrounds depended on renaining time for visual help.
+ 
 -------------
 Backup your PostrgeSQL database using Archivarius!
 =================== 
@@ -59,3 +116,8 @@ The possibility to backup your files at Linux opearting system is represented by
 ```Something goes wrong:``` with log error for tracing root couses.
 
 After usage method will put dumped copy of database at ```c:\backup\``` folder.
+
+ [1]: mailto:dynamost@dynamost.ru
+ [2]: mailto:eugeneshamkin@mail.ru
+ [3]: mailto:t.tianav2@gmail.com
+ [4]: Khasang.io
