@@ -37,7 +37,7 @@
             <p><strong>Статус: </strong><span th:object="*{status}">На подписи</span></p>
             <p><strong>Получатель: </strong> <span th:text="*{department}">Бухгалтерия</span> </p>
             <p><strong>Срок ответа: </strong> <span th:text="*{deadline}">29/03/2016</span> </p>
-            <p><button><a href="/company/${document.id}/edit">Редактировать</a></button>
+            <p><button><a href="/document/1/edit"  th:href="@{'/document/' + *{id} + '/edit'}">Редактировать</a></button>
         </div>
 
         <div class="sidebar sidebar-right" th:replace="~{base :: #sidebar-right}">
